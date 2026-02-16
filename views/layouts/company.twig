@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{title}}</title>
+	</head>
+	<body>
+		{% include "../partials/companyHeader.twig" %}
+		{% block main %}{% endblock %}
+		{% include "../partials/companyFooter.twig" %}
+        {% block script %}{% endblock %}
+	</body>
+</html>
