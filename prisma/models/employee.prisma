@@ -6,14 +6,14 @@ model Employee {
     password String
     birthday DateTime?
     // i.e. new Date('1998-12-24')
-    genre Genre?
+    gender Gender
     companyId Int
     company Company @relation(fields:[companyId], references: [id])
     car Car?
 }
 
-enum Genre {
-    Homme
-    Femme
-    Autre
+enum Gender {
+    male
+    female
+    other
 }

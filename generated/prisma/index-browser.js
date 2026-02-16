@@ -142,7 +142,7 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   mail: 'mail',
   password: 'password',
   birthday: 'birthday',
-  genre: 'genre',
+  gender: 'gender',
   companyId: 'companyId'
 };
 
@@ -177,10 +177,10 @@ exports.Prisma.EmployeeOrderByRelevanceFieldEnum = {
   mail: 'mail',
   password: 'password'
 };
-exports.Genre = exports.$Enums.Genre = {
-  Homme: 'Homme',
-  Femme: 'Femme',
-  Autre: 'Autre'
+exports.Gender = exports.$Enums.Gender = {
+  male: 'male',
+  female: 'female',
+  other: 'other'
 };
 
 exports.Prisma.ModelName = {

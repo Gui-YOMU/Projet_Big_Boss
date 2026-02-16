@@ -38,19 +38,19 @@ export type Patient = $Result.DefaultSelection<Prisma.$PatientPayload>
  * Enums
  */
 export namespace $Enums {
-  export const Genre: {
-  Homme: 'Homme',
-  Femme: 'Femme',
-  Autre: 'Autre'
+  export const Gender: {
+  male: 'male',
+  female: 'female',
+  other: 'other'
 };
 
-export type Genre = (typeof Genre)[keyof typeof Genre]
+export type Gender = (typeof Gender)[keyof typeof Gender]
 
 }
 
-export type Genre = $Enums.Genre
+export type Gender = $Enums.Gender
 
-export const Genre: typeof $Enums.Genre
+export const Gender: typeof $Enums.Gender
 
 /**
  * ##  Prisma Client ʲˢ
@@ -3189,7 +3189,7 @@ export namespace Prisma {
     mail: string | null
     password: string | null
     birthday: Date | null
-    genre: $Enums.Genre | null
+    gender: $Enums.Gender | null
     companyId: number | null
   }
 
@@ -3200,7 +3200,7 @@ export namespace Prisma {
     mail: string | null
     password: string | null
     birthday: Date | null
-    genre: $Enums.Genre | null
+    gender: $Enums.Gender | null
     companyId: number | null
   }
 
@@ -3211,7 +3211,7 @@ export namespace Prisma {
     mail: number
     password: number
     birthday: number
-    genre: number
+    gender: number
     companyId: number
     _all: number
   }
@@ -3234,7 +3234,7 @@ export namespace Prisma {
     mail?: true
     password?: true
     birthday?: true
-    genre?: true
+    gender?: true
     companyId?: true
   }
 
@@ -3245,7 +3245,7 @@ export namespace Prisma {
     mail?: true
     password?: true
     birthday?: true
-    genre?: true
+    gender?: true
     companyId?: true
   }
 
@@ -3256,7 +3256,7 @@ export namespace Prisma {
     mail?: true
     password?: true
     birthday?: true
-    genre?: true
+    gender?: true
     companyId?: true
     _all?: true
   }
@@ -3354,7 +3354,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday: Date | null
-    genre: $Enums.Genre | null
+    gender: $Enums.Gender
     companyId: number
     _count: EmployeeCountAggregateOutputType | null
     _avg: EmployeeAvgAggregateOutputType | null
@@ -3384,7 +3384,7 @@ export namespace Prisma {
     mail?: boolean
     password?: boolean
     birthday?: boolean
-    genre?: boolean
+    gender?: boolean
     companyId?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     car?: boolean | Employee$carArgs<ExtArgs>
@@ -3399,11 +3399,11 @@ export namespace Prisma {
     mail?: boolean
     password?: boolean
     birthday?: boolean
-    genre?: boolean
+    gender?: boolean
     companyId?: boolean
   }
 
-  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "lastName" | "firstName" | "mail" | "password" | "birthday" | "genre" | "companyId", ExtArgs["result"]["employee"]>
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "lastName" | "firstName" | "mail" | "password" | "birthday" | "gender" | "companyId", ExtArgs["result"]["employee"]>
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     car?: boolean | Employee$carArgs<ExtArgs>
@@ -3422,7 +3422,7 @@ export namespace Prisma {
       mail: string
       password: string
       birthday: Date | null
-      genre: $Enums.Genre | null
+      gender: $Enums.Gender
       companyId: number
     }, ExtArgs["result"]["employee"]>
     composites: {}
@@ -3801,7 +3801,7 @@ export namespace Prisma {
     readonly mail: FieldRef<"Employee", 'String'>
     readonly password: FieldRef<"Employee", 'String'>
     readonly birthday: FieldRef<"Employee", 'DateTime'>
-    readonly genre: FieldRef<"Employee", 'Genre'>
+    readonly gender: FieldRef<"Employee", 'Gender'>
     readonly companyId: FieldRef<"Employee", 'Int'>
   }
     
@@ -5097,7 +5097,7 @@ export namespace Prisma {
     mail: 'mail',
     password: 'password',
     birthday: 'birthday',
-    genre: 'genre',
+    gender: 'gender',
     companyId: 'companyId'
   };
 
@@ -5181,9 +5181,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Genre'
+   * Reference to a field of type 'Gender'
    */
-  export type EnumGenreFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Genre'>
+  export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
     
 
 
@@ -5324,7 +5324,7 @@ export namespace Prisma {
     mail?: StringFilter<"Employee"> | string
     password?: StringFilter<"Employee"> | string
     birthday?: DateTimeNullableFilter<"Employee"> | Date | string | null
-    genre?: EnumGenreNullableFilter<"Employee"> | $Enums.Genre | null
+    gender?: EnumGenderFilter<"Employee"> | $Enums.Gender
     companyId?: IntFilter<"Employee"> | number
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     car?: XOR<CarNullableScalarRelationFilter, CarWhereInput> | null
@@ -5337,7 +5337,7 @@ export namespace Prisma {
     mail?: SortOrder
     password?: SortOrder
     birthday?: SortOrderInput | SortOrder
-    genre?: SortOrderInput | SortOrder
+    gender?: SortOrder
     companyId?: SortOrder
     company?: CompanyOrderByWithRelationInput
     car?: CarOrderByWithRelationInput
@@ -5354,7 +5354,7 @@ export namespace Prisma {
     firstName?: StringFilter<"Employee"> | string
     password?: StringFilter<"Employee"> | string
     birthday?: DateTimeNullableFilter<"Employee"> | Date | string | null
-    genre?: EnumGenreNullableFilter<"Employee"> | $Enums.Genre | null
+    gender?: EnumGenderFilter<"Employee"> | $Enums.Gender
     companyId?: IntFilter<"Employee"> | number
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     car?: XOR<CarNullableScalarRelationFilter, CarWhereInput> | null
@@ -5367,7 +5367,7 @@ export namespace Prisma {
     mail?: SortOrder
     password?: SortOrder
     birthday?: SortOrderInput | SortOrder
-    genre?: SortOrderInput | SortOrder
+    gender?: SortOrder
     companyId?: SortOrder
     _count?: EmployeeCountOrderByAggregateInput
     _avg?: EmployeeAvgOrderByAggregateInput
@@ -5386,7 +5386,7 @@ export namespace Prisma {
     mail?: StringWithAggregatesFilter<"Employee"> | string
     password?: StringWithAggregatesFilter<"Employee"> | string
     birthday?: DateTimeNullableWithAggregatesFilter<"Employee"> | Date | string | null
-    genre?: EnumGenreNullableWithAggregatesFilter<"Employee"> | $Enums.Genre | null
+    gender?: EnumGenderWithAggregatesFilter<"Employee"> | $Enums.Gender
     companyId?: IntWithAggregatesFilter<"Employee"> | number
   }
 
@@ -5535,7 +5535,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday?: Date | string | null
-    genre?: $Enums.Genre | null
+    gender: $Enums.Gender
     company: CompanyCreateNestedOneWithoutEmployeesInput
     car?: CarCreateNestedOneWithoutEmployeeInput
   }
@@ -5547,7 +5547,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday?: Date | string | null
-    genre?: $Enums.Genre | null
+    gender: $Enums.Gender
     companyId: number
     car?: CarUncheckedCreateNestedOneWithoutEmployeeInput
   }
@@ -5558,7 +5558,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     company?: CompanyUpdateOneRequiredWithoutEmployeesNestedInput
     car?: CarUpdateOneWithoutEmployeeNestedInput
   }
@@ -5570,7 +5570,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     companyId?: IntFieldUpdateOperationsInput | number
     car?: CarUncheckedUpdateOneWithoutEmployeeNestedInput
   }
@@ -5582,7 +5582,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday?: Date | string | null
-    genre?: $Enums.Genre | null
+    gender: $Enums.Gender
     companyId: number
   }
 
@@ -5592,7 +5592,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   }
 
   export type EmployeeUncheckedUpdateManyInput = {
@@ -5602,7 +5602,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -5877,11 +5877,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type EnumGenreNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Genre | EnumGenreFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Genre[] | null
-    notIn?: $Enums.Genre[] | null
-    not?: NestedEnumGenreNullableFilter<$PrismaModel> | $Enums.Genre | null
+  export type EnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[]
+    notIn?: $Enums.Gender[]
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
   }
 
   export type CarNullableScalarRelationFilter = {
@@ -5902,7 +5902,7 @@ export namespace Prisma {
     mail?: SortOrder
     password?: SortOrder
     birthday?: SortOrder
-    genre?: SortOrder
+    gender?: SortOrder
     companyId?: SortOrder
   }
 
@@ -5918,7 +5918,7 @@ export namespace Prisma {
     mail?: SortOrder
     password?: SortOrder
     birthday?: SortOrder
-    genre?: SortOrder
+    gender?: SortOrder
     companyId?: SortOrder
   }
 
@@ -5929,7 +5929,7 @@ export namespace Prisma {
     mail?: SortOrder
     password?: SortOrder
     birthday?: SortOrder
-    genre?: SortOrder
+    gender?: SortOrder
     companyId?: SortOrder
   }
 
@@ -5952,14 +5952,14 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type EnumGenreNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Genre | EnumGenreFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Genre[] | null
-    notIn?: $Enums.Genre[] | null
-    not?: NestedEnumGenreNullableWithAggregatesFilter<$PrismaModel> | $Enums.Genre | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumGenreNullableFilter<$PrismaModel>
-    _max?: NestedEnumGenreNullableFilter<$PrismaModel>
+  export type EnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[]
+    notIn?: $Enums.Gender[]
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
   }
 
   export type PatientCountOrderByAggregateInput = {
@@ -6142,8 +6142,8 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type NullableEnumGenreFieldUpdateOperationsInput = {
-    set?: $Enums.Genre | null
+  export type EnumGenderFieldUpdateOperationsInput = {
+    set?: $Enums.Gender
   }
 
   export type CompanyUpdateOneRequiredWithoutEmployeesNestedInput = {
@@ -6327,11 +6327,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type NestedEnumGenreNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Genre | EnumGenreFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Genre[] | null
-    notIn?: $Enums.Genre[] | null
-    not?: NestedEnumGenreNullableFilter<$PrismaModel> | $Enums.Genre | null
+  export type NestedEnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[]
+    notIn?: $Enums.Gender[]
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6348,14 +6348,14 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedEnumGenreNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Genre | EnumGenreFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Genre[] | null
-    notIn?: $Enums.Genre[] | null
-    not?: NestedEnumGenreNullableWithAggregatesFilter<$PrismaModel> | $Enums.Genre | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumGenreNullableFilter<$PrismaModel>
-    _max?: NestedEnumGenreNullableFilter<$PrismaModel>
+  export type NestedEnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[]
+    notIn?: $Enums.Gender[]
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
   }
 
   export type CompanyCreateWithoutCarsInput = {
@@ -6386,7 +6386,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday?: Date | string | null
-    genre?: $Enums.Genre | null
+    gender: $Enums.Gender
     company: CompanyCreateNestedOneWithoutEmployeesInput
   }
 
@@ -6397,7 +6397,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday?: Date | string | null
-    genre?: $Enums.Genre | null
+    gender: $Enums.Gender
     companyId: number
   }
 
@@ -6451,7 +6451,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     company?: CompanyUpdateOneRequiredWithoutEmployeesNestedInput
   }
 
@@ -6462,7 +6462,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -6472,7 +6472,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday?: Date | string | null
-    genre?: $Enums.Genre | null
+    gender: $Enums.Gender
     car?: CarCreateNestedOneWithoutEmployeeInput
   }
 
@@ -6483,7 +6483,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday?: Date | string | null
-    genre?: $Enums.Genre | null
+    gender: $Enums.Gender
     car?: CarUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
@@ -6544,7 +6544,7 @@ export namespace Prisma {
     mail?: StringFilter<"Employee"> | string
     password?: StringFilter<"Employee"> | string
     birthday?: DateTimeNullableFilter<"Employee"> | Date | string | null
-    genre?: EnumGenreNullableFilter<"Employee"> | $Enums.Genre | null
+    gender?: EnumGenderFilter<"Employee"> | $Enums.Gender
     companyId?: IntFilter<"Employee"> | number
   }
 
@@ -6669,7 +6669,7 @@ export namespace Prisma {
     mail: string
     password: string
     birthday?: Date | string | null
-    genre?: $Enums.Genre | null
+    gender: $Enums.Gender
   }
 
   export type CarCreateManyCompanyInput = {
@@ -6684,7 +6684,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     car?: CarUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -6695,7 +6695,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
     car?: CarUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
@@ -6706,7 +6706,7 @@ export namespace Prisma {
     mail?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    genre?: NullableEnumGenreFieldUpdateOperationsInput | $Enums.Genre | null
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   }
 
   export type CarUpdateWithoutCompanyInput = {
