@@ -1,0 +1,34 @@
+{
+  "name": "projet_big_boss",
+  "version": "1.0.0",
+  "description": "Projet RH HAD",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gui-YOMU/Projet_Big_Boss.git"
+  },
+  "author": "Gui-YOMU",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Gui-YOMU/Projet_Big_Boss/issues"
+  },
+  "homepage": "https://github.com/Gui-YOMU/Projet_Big_Boss#readme",
+  "dependencies": {
+    "@prisma/adapter-mariadb": "^7.4.0",
+    "@prisma/client": "^7.4.0",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "twig": "^1.17.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "prisma": "^7.4.0"
+  }
+}
