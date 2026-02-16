@@ -1,6 +1,5 @@
 import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
-import bcrypt from "bcrypt";
 import { hashPasswordExtension } from "../../prisma/extensions/hashPasswordExtension.js";
 
 const prisma = new PrismaClient({ adapter }).$extends(hashPasswordExtension);

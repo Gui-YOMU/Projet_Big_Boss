@@ -122,6 +122,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.CarScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   plate: 'plate',
   companyId: 'companyId',
   employeeId: 'employeeId'
@@ -161,6 +162,7 @@ exports.Prisma.NullsOrder = {
 };
 
 exports.Prisma.CarOrderByRelevanceFieldEnum = {
+  name: 'name',
   plate: 'plate'
 };
 

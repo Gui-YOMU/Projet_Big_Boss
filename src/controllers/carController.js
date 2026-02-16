@@ -4,10 +4,11 @@ import { adapter } from "../../prisma/adapter.js";
 const prisma = new PrismaClient({ adapter });
 
 export async function addCar(req, res) {
-    const { plate } = req.body;
+    const { name, plate } = req.body;
     try {
         await prisma.car.create({
             data: {
+                name: name,
                 plate: plate,
                 companyId: req.company.id
             }

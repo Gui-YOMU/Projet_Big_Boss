@@ -1186,6 +1186,7 @@ export namespace Prisma {
 
   export type CarMinAggregateOutputType = {
     id: number | null
+    name: string | null
     plate: string | null
     companyId: number | null
     employeeId: number | null
@@ -1193,6 +1194,7 @@ export namespace Prisma {
 
   export type CarMaxAggregateOutputType = {
     id: number | null
+    name: string | null
     plate: string | null
     companyId: number | null
     employeeId: number | null
@@ -1200,6 +1202,7 @@ export namespace Prisma {
 
   export type CarCountAggregateOutputType = {
     id: number
+    name: number
     plate: number
     companyId: number
     employeeId: number
@@ -1221,6 +1224,7 @@ export namespace Prisma {
 
   export type CarMinAggregateInputType = {
     id?: true
+    name?: true
     plate?: true
     companyId?: true
     employeeId?: true
@@ -1228,6 +1232,7 @@ export namespace Prisma {
 
   export type CarMaxAggregateInputType = {
     id?: true
+    name?: true
     plate?: true
     companyId?: true
     employeeId?: true
@@ -1235,6 +1240,7 @@ export namespace Prisma {
 
   export type CarCountAggregateInputType = {
     id?: true
+    name?: true
     plate?: true
     companyId?: true
     employeeId?: true
@@ -1329,6 +1335,7 @@ export namespace Prisma {
 
   export type CarGroupByOutputType = {
     id: number
+    name: string
     plate: string
     companyId: number
     employeeId: number | null
@@ -1355,6 +1362,7 @@ export namespace Prisma {
 
   export type CarSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     plate?: boolean
     companyId?: boolean
     employeeId?: boolean
@@ -1366,12 +1374,13 @@ export namespace Prisma {
 
   export type CarSelectScalar = {
     id?: boolean
+    name?: boolean
     plate?: boolean
     companyId?: boolean
     employeeId?: boolean
   }
 
-  export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "plate" | "companyId" | "employeeId", ExtArgs["result"]["car"]>
+  export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "plate" | "companyId" | "employeeId", ExtArgs["result"]["car"]>
   export type CarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     employee?: boolean | Car$employeeArgs<ExtArgs>
@@ -1385,6 +1394,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      name: string
       plate: string
       companyId: number
       employeeId: number | null
@@ -1760,6 +1770,7 @@ export namespace Prisma {
    */
   interface CarFieldRefs {
     readonly id: FieldRef<"Car", 'Int'>
+    readonly name: FieldRef<"Car", 'String'>
     readonly plate: FieldRef<"Car", 'String'>
     readonly companyId: FieldRef<"Car", 'Int'>
     readonly employeeId: FieldRef<"Car", 'Int'>
@@ -5071,6 +5082,7 @@ export namespace Prisma {
 
   export const CarScalarFieldEnum: {
     id: 'id',
+    name: 'name',
     plate: 'plate',
     companyId: 'companyId',
     employeeId: 'employeeId'
@@ -5128,6 +5140,7 @@ export namespace Prisma {
 
 
   export const CarOrderByRelevanceFieldEnum: {
+    name: 'name',
     plate: 'plate'
   };
 
@@ -5202,6 +5215,7 @@ export namespace Prisma {
     OR?: CarWhereInput[]
     NOT?: CarWhereInput | CarWhereInput[]
     id?: IntFilter<"Car"> | number
+    name?: StringFilter<"Car"> | string
     plate?: StringFilter<"Car"> | string
     companyId?: IntFilter<"Car"> | number
     employeeId?: IntNullableFilter<"Car"> | number | null
@@ -5211,6 +5225,7 @@ export namespace Prisma {
 
   export type CarOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
     employeeId?: SortOrderInput | SortOrder
@@ -5226,6 +5241,7 @@ export namespace Prisma {
     AND?: CarWhereInput | CarWhereInput[]
     OR?: CarWhereInput[]
     NOT?: CarWhereInput | CarWhereInput[]
+    name?: StringFilter<"Car"> | string
     companyId?: IntFilter<"Car"> | number
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     employee?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
@@ -5233,6 +5249,7 @@ export namespace Prisma {
 
   export type CarOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
     employeeId?: SortOrderInput | SortOrder
@@ -5248,6 +5265,7 @@ export namespace Prisma {
     OR?: CarScalarWhereWithAggregatesInput[]
     NOT?: CarScalarWhereWithAggregatesInput | CarScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Car"> | number
+    name?: StringWithAggregatesFilter<"Car"> | string
     plate?: StringWithAggregatesFilter<"Car"> | string
     companyId?: IntWithAggregatesFilter<"Car"> | number
     employeeId?: IntNullableWithAggregatesFilter<"Car"> | number | null
@@ -5425,6 +5443,7 @@ export namespace Prisma {
   }
 
   export type CarCreateInput = {
+    name: string
     plate: string
     company: CompanyCreateNestedOneWithoutCarsInput
     employee?: EmployeeCreateNestedOneWithoutCarInput
@@ -5432,12 +5451,14 @@ export namespace Prisma {
 
   export type CarUncheckedCreateInput = {
     id?: number
+    name: string
     plate: string
     companyId: number
     employeeId?: number | null
   }
 
   export type CarUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutCarsNestedInput
     employee?: EmployeeUpdateOneWithoutCarNestedInput
@@ -5445,6 +5466,7 @@ export namespace Prisma {
 
   export type CarUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
     employeeId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5452,17 +5474,20 @@ export namespace Prisma {
 
   export type CarCreateManyInput = {
     id?: number
+    name: string
     plate: string
     companyId: number
     employeeId?: number | null
   }
 
   export type CarUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
   }
 
   export type CarUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
     employeeId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -5694,6 +5719,7 @@ export namespace Prisma {
 
   export type CarCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
     employeeId?: SortOrder
@@ -5707,6 +5733,7 @@ export namespace Prisma {
 
   export type CarMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
     employeeId?: SortOrder
@@ -5714,6 +5741,7 @@ export namespace Prisma {
 
   export type CarMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
     employeeId?: SortOrder
@@ -6498,12 +6526,14 @@ export namespace Prisma {
   }
 
   export type CarCreateWithoutCompanyInput = {
+    name: string
     plate: string
     employee?: EmployeeCreateNestedOneWithoutCarInput
   }
 
   export type CarUncheckedCreateWithoutCompanyInput = {
     id?: number
+    name: string
     plate: string
     employeeId?: number | null
   }
@@ -6569,6 +6599,7 @@ export namespace Prisma {
     OR?: CarScalarWhereInput[]
     NOT?: CarScalarWhereInput | CarScalarWhereInput[]
     id?: IntFilter<"Car"> | number
+    name?: StringFilter<"Car"> | string
     plate?: StringFilter<"Car"> | string
     companyId?: IntFilter<"Car"> | number
     employeeId?: IntNullableFilter<"Car"> | number | null
@@ -6597,12 +6628,14 @@ export namespace Prisma {
   }
 
   export type CarCreateWithoutEmployeeInput = {
+    name: string
     plate: string
     company: CompanyCreateNestedOneWithoutCarsInput
   }
 
   export type CarUncheckedCreateWithoutEmployeeInput = {
     id?: number
+    name: string
     plate: string
     companyId: number
   }
@@ -6652,12 +6685,14 @@ export namespace Prisma {
   }
 
   export type CarUpdateWithoutEmployeeInput = {
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutCarsNestedInput
   }
 
   export type CarUncheckedUpdateWithoutEmployeeInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
   }
@@ -6674,6 +6709,7 @@ export namespace Prisma {
 
   export type CarCreateManyCompanyInput = {
     id?: number
+    name: string
     plate: string
     employeeId?: number | null
   }
@@ -6710,18 +6746,21 @@ export namespace Prisma {
   }
 
   export type CarUpdateWithoutCompanyInput = {
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     employee?: EmployeeUpdateOneWithoutCarNestedInput
   }
 
   export type CarUncheckedUpdateWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     employeeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CarUncheckedUpdateManyWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     employeeId?: NullableIntFieldUpdateOperationsInput | number | null
   }

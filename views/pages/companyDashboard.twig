@@ -1,13 +1,26 @@
 {% extends "../layouts/company.twig" %}
 
+{% block style %}
+	<link rel="stylesheet" href="./styles/companyDashboard.css">
+{% endblock %}
+
 {% block main %}
 	{# <section>
-									    <h2>Patients</h2>
-									</section> #}
+														    <h2>Patients</h2>
+														</section> #}
 	<section>
 		<h2>Mes employés</h2>
 		<button id="addEmployee">+</button>
-		<div class="modal">
+
+		{% for employee in employees %}
+			<article>
+				<h3>{{ employee.lastName }}
+					{{ employee.firstName }}</h3>
+			</article>
+		{% endfor %}
+
+		<dialog id="employeeModal" class="modal">
+			<button class="closeModal">X</button>
 			<form action="/employee/add" method="post">
 				<label for="lastName">Nom de famille de l'employé</label>
 				<input type="text" id="lastName" name="lastName" placeholder="Nom de famille">
@@ -30,17 +43,32 @@
 				<button type="reset">Effacer les champs</button>
 				<button>Ajouter l'employé</button>
 			</form>
-		</div>
+		</dialog>
 	</section>
 	<section>
 		<h2>Mes véhicules</h2>
 		<button id="addCar">+</button>
-		<div class="modal">
+
+		{% for car in cars %}
+			<article>
+				<h3>{{ car.name }}
+					({{ car.plate }})</h3>
+			</article>
+		{% endfor %}
+
+		<dialog id="carModal" class="modal">
+			<button class="closeModal">X</button>
 			<form action="/car/add" method="post">
+				<label for="name">Nom du véhicule</label>
+				<input type="text" id="name" name="name" placeholder="Nom du véhicule">
 				<label for="plate">Immatriculation du véhicule</label>
-				<input type="text" id="plate" name="plate" placeholder="Immatriculation : AA-123-ZZ">
-                <button>Ajouter le véhicule</button>
+				<input type="text" id="plate" name="plate" placeholder="Immatriculation : AA123ZZ">
+				<button>Ajouter le véhicule</button>
 			</form>
-		</div>
+		</dialog>
 	</section>
+{% endblock %}
+
+{% block script %}
+	<script src="./scripts/companyDashboard.js"></script>
 {% endblock %}
