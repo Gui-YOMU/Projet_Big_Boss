@@ -1,7 +1,7 @@
 model Company {
     id Int @id @default(autoincrement())
     name String @db.VarChar(150)
-    siret String @db.Char(14)
+    siret String @db.Char(14) @unique
     password String
     ceo String?
     employees Employee[]
