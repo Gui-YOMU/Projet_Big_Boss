@@ -1,0 +1,18 @@
+{% extends "../layouts/company.twig" %}
+
+{% block main %}
+	<h1>Inscrivez votre établissement !</h1>
+	<form action="" method="post">
+		<label for="name">Nom de votre établissement : </label>
+		<input type="text" id="name" name="name" placeholder="Nom de l'établissement">
+        <label for="siret">Numéro SIRET : </label>
+		<input type="text" id="siret" name="siret" placeholder="SIRET">
+        <label for="ceo">Nom du directeur (facultatif) : </label>
+		<input type="text" id="ceo" name="ceo" placeholder="Nom du directeur">
+        <label for="password">Mot de passe : </label>
+		<input type="password" id="password" name="password" placeholder="Mot de passe">
+        <label for="confirmPassword">Confirmez votre mot de passe : </label>
+		<input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe">
+        <button>S'inscrire</button>
+	</form>
+{% endblock %}

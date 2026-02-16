@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import session from "express-session";
+import { companyRouter } from "./routers/companyRouter.js";
 
 const port = process.env.PORT;
 
@@ -12,6 +13,8 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
+app.use(companyRouter);
 
 app.listen(port, (error) => {
     error ? console.error(error) : console.log(`Connecté au serveur sur le port ${port}.`);
