@@ -79,10 +79,6 @@ export async function getCompanyDashboard(req, res) {
   try {
     const employees = await prisma.employee.findMany();
     const cars = await prisma.car.findMany();
-    console.log(employees);
-    console.log(cars);
-    
-    
     res.render("pages/companyDashboard.twig", {
       title: "Dashboard",
       company: req.company,

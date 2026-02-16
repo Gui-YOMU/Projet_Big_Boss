@@ -16,12 +16,13 @@
 			<article>
 				<h3>{{ employee.lastName }}
 					{{ employee.firstName }}</h3>
+					<form action="/employees/{{ employee.id }}" method="get"><button>Consulter</button></form>
 			</article>
 		{% endfor %}
 
 		<dialog id="employeeModal" class="modal">
 			<button class="closeModal">X</button>
-			<form action="/employee/add" method="post">
+			<form action="/employees/add" method="post">
 				<label for="lastName">Nom de famille de l'employé</label>
 				<input type="text" id="lastName" name="lastName" placeholder="Nom de famille">
 				<label for="firstName">Prénom de l'employé</label>
@@ -53,12 +54,13 @@
 			<article>
 				<h3>{{ car.name }}
 					({{ car.plate }})</h3>
+					<form action="/cars/{{ car.id }}" method="get"><button>Consulter</button></form>
 			</article>
 		{% endfor %}
 
 		<dialog id="carModal" class="modal">
 			<button class="closeModal">X</button>
-			<form action="/car/add" method="post">
+			<form action="/cars/add" method="post">
 				<label for="name">Nom du véhicule</label>
 				<input type="text" id="name" name="name" placeholder="Nom du véhicule">
 				<label for="plate">Immatriculation du véhicule</label>

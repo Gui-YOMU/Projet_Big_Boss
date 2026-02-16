@@ -17,8 +17,8 @@ app.use(session({
 }));
 
 app.use(companyRouter);
-app.use("/employee", employeeRouter);
-app.use("/car", carRouter);
+app.use("/employees", employeeRouter);
+app.use("/cars", carRouter);
 
 app.listen(port, (error) => {
     error ? console.error(error) : console.log(`Connecté au serveur sur le port ${port}.`);

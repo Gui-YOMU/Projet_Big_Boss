@@ -27,3 +27,23 @@ export async function addEmployee(req, res) {
         })
     }
 }
+
+export async function getEmployeeInformation(req, res) {
+    try {
+        const employee = await prisma.employee.findUnique({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+        res.render("pages/employeeInformation.twig", {
+            title: "Employé",
+            employee
+        })
+    } catch (error) {
+        console.error(error);
+        res.render("pages/companyDashboard.twig", {
+            title: "Dashboard",
+            error: "Erreur lors de l'affichage des informations de l'employé."
+        })
+    }
+}

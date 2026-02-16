@@ -1,0 +1,29 @@
+{% extends "../layouts/company.twig" %}
+
+{% block main %}
+	<h2>Informations de l'employé sélectionné :
+	</h2>
+	<h3>Nom :
+		<span>{{ employee.lastName }}</span>
+	</h3>
+	<h3>Prénom :
+		<span>{{ employee.firstName }}</span>
+	</h3>
+	<h3>Mail :
+		<span>{{ employee.mail }}</span>
+	</h3>
+	<h3>Date de naissance :
+		<span>{{ employee.birthday }}</span>
+	</h3>
+	<h3>Genre :
+		<span>
+			{% if employee.gender == "male" %}
+				Homme
+			{% elseif employee.gender == "female" %}
+				Femme
+			{% elseif employee.gender == "other" %}
+				Autre
+			{% endif %}
+		</span>
+	</h3>
+{% endblock %}

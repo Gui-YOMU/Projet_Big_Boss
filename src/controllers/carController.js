@@ -22,3 +22,23 @@ export async function addCar(req, res) {
         })
     }
 }
+
+export async function getCarInformation(req, res) {
+    try {
+        const car = await prisma.car.findUnique({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+        res.render("pages/carInformation.twig", {
+            title: "Véhicule",
+            car
+        })
+    } catch (error) {
+        console.error(error);
+        res.render("pages/companyDashboard.twig", {
+            title: "Dashboard",
+            error: "Erreur lors de l'affichage des informations du véhicule."
+        })
+    }
+}
