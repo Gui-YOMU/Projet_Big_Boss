@@ -1,0 +1,57 @@
+model Car {
+  id         Int       @id @default(autoincrement())
+  plate      String    @unique
+  companyId  Int
+  company    Company   @relation(fields: [companyId], references: [id])
+  employeeId Int?      @unique
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+}
+
+model Company {
+  id        Int        @id @default(autoincrement())
+  name      String     @db.VarChar(150)
+  siret     String     @db.Char(14)
+  password  String     @db.VarChar(30)
+  ceo       String?
+  employees Employee[]
+  cars      Car[]
+}
+
+model Employee {
+  id        Int       @id @default(autoincrement())
+  lastName  String    @db.VarChar(70)
+  firstName String    @db.VarChar(60)
+  mail      String    @unique @db.VarChar(150)
+  password  String    @db.VarChar(30)
+  birthday  DateTime?
+  // i.e. new Date('1998-12-24')
+  genre     Genre?
+  companyId Int
+  company   Company   @relation(fields: [companyId], references: [id])
+  car       Car?
+}
+
+enum Genre {
+  Homme
+  Femme
+  Autre
+}
+
+model Patient {
+  id Int @id @default(autoincrement())
+}
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}

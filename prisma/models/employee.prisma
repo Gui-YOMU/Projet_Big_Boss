@@ -1,0 +1,19 @@
+model Employee {
+    id Int @id @default(autoincrement())
+    lastName String @db.VarChar(70)
+    firstName String @db.VarChar(60)
+    mail String @db.VarChar(150) @unique
+    password String @db.VarChar(30)
+    birthday DateTime?
+    // i.e. new Date('1998-12-24')
+    genre Genre?
+    companyId Int
+    company Company @relation(fields:[companyId], references: [id])
+    car Car?
+}
+
+enum Genre {
+    Homme
+    Femme
+    Autre
+}
