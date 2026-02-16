@@ -5,6 +5,12 @@ import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient({ adapter }).$extends(hashPasswordExtension);
 
+export async function getIndex(req, res) {
+  res.render("pages/index.twig", {
+    title: "RH"
+  })
+}
+
 export async function getCompanySignin(req, res) {
   res.render("pages/companySignin.twig", {
     title: "Inscription"
@@ -71,6 +77,14 @@ export async function postCompanyLogin(req, res) {
 
 export async function getCompanyDashboard(req, res) {
   res.render("pages/companyDashboard.twig", {
-    title: "Dashboard"
+    title: "Dashboard",
+    company: req.company
   });
+}
+
+export async function getCompanyLogout(req, res) {
+  if (req.session.company) {
+    req.session.company = null;
+  }
+  res.redirect("/login");
 }
