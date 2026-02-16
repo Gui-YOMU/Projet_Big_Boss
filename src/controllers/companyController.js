@@ -7,7 +7,7 @@ const prisma = new PrismaClient({ adapter }).$extends(hashPasswordExtension);
 
 export async function getCompanySignin(req, res) {
   res.render("pages/companySignin.twig", {
-    title: "Inscription",
+    title: "Inscription"
   });
 }
 
@@ -38,7 +38,7 @@ export async function postCompanySignin(req, res) {
 
 export async function getCompanyLogin(req, res) {
   res.render("pages/companyLogin.twig", {
-    title: "Connexion",
+    title: "Connexion"
   });
 }
 
@@ -52,6 +52,7 @@ export async function postCompanyLogin(req, res) {
     });
     if (company) {
       if (bcrypt.compare(password, company.password)) {
+        req.session.company = company.id;
         res.redirect("/dashboard");
       } else {
         throw new Error("Mot de passe incorrect.");
@@ -66,4 +67,10 @@ export async function postCompanyLogin(req, res) {
       error
     });
   }
+}
+
+export async function getCompanyDashboard(req, res) {
+  res.render("pages/companyDashboard.twig", {
+    title: "Dashboard"
+  });
 }

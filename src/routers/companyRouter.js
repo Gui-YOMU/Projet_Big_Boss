@@ -1,5 +1,6 @@
 import express from "express";
-import { getCompanyLogin, getCompanySignin, postCompanyLogin, postCompanySignin } from "../controllers/companyController.js";
+import { getCompanyDashboard, getCompanyLogin, getCompanySignin, postCompanyLogin, postCompanySignin } from "../controllers/companyController.js";
+import { companyAuthguard } from "../services/companyAuthguard.js";
 
 export const companyRouter = express.Router();
 
@@ -8,3 +9,5 @@ companyRouter.post("/signin", postCompanySignin);
 
 companyRouter.get("/login", getCompanyLogin);
 companyRouter.post("/login", postCompanyLogin);
+
+companyRouter.get("/dashboard", companyAuthguard, getCompanyDashboard);
