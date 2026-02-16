@@ -1,6 +1,7 @@
 import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
 import { hashPasswordExtension } from "../../prisma/extensions/hashPasswordExtension.js";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient({ adapter }).$extends(hashPasswordExtension);
 
@@ -30,7 +31,39 @@ export async function postCompanySignin(req, res) {
     console.error(error);
     res.render("pages/companySignin.twig", {
       title: "Inscription",
-      error,
+      error
+    });
+  }
+}
+
+export async function getCompanyLogin(req, res) {
+  res.render("pages/companyLogin.twig", {
+    title: "Connexion",
+  });
+}
+
+export async function postCompanyLogin(req, res) {
+  const { siret, password } = req.body;
+  try {
+    const company = await prisma.company.findUnique({
+      where: {
+        siret: siret,
+      },
+    });
+    if (company) {
+      if (bcrypt.compare(password, company.password)) {
+        res.redirect("/dashboard");
+      } else {
+        throw new Error("Mot de passe incorrect.");
+      }
+    } else {
+      throw new Error("Cet établissement n'existe pas en base de données.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.render("pages/companySignin.twig", {
+      title: "Connexion",
+      error
     });
   }
 }

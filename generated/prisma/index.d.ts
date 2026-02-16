@@ -5279,16 +5279,16 @@ export namespace Prisma {
 
   export type CompanyWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    siret?: string
     AND?: CompanyWhereInput | CompanyWhereInput[]
     OR?: CompanyWhereInput[]
     NOT?: CompanyWhereInput | CompanyWhereInput[]
     name?: StringFilter<"Company"> | string
-    siret?: StringFilter<"Company"> | string
     password?: StringFilter<"Company"> | string
     ceo?: StringNullableFilter<"Company"> | string | null
     employees?: EmployeeListRelationFilter
     cars?: CarListRelationFilter
-  }, "id">
+  }, "id" | "siret">
 
   export type CompanyOrderByWithAggregationInput = {
     id?: SortOrder
