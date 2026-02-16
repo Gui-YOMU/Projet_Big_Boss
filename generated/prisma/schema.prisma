@@ -11,7 +11,7 @@ model Company {
   id        Int        @id @default(autoincrement())
   name      String     @db.VarChar(150)
   siret     String     @db.Char(14)
-  password  String     @db.VarChar(30)
+  password  String
   ceo       String?
   employees Employee[]
   cars      Car[]
@@ -22,7 +22,7 @@ model Employee {
   lastName  String    @db.VarChar(70)
   firstName String    @db.VarChar(60)
   mail      String    @unique @db.VarChar(150)
-  password  String    @db.VarChar(30)
+  password  String
   birthday  DateTime?
   // i.e. new Date('1998-12-24')
   genre     Genre?
