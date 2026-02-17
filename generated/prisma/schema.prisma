@@ -16,6 +16,7 @@ model Company {
   ceo       String?
   employees Employee[]
   cars      Car[]
+  patients  Patient[]
 }
 
 model Employee {
@@ -30,6 +31,7 @@ model Employee {
   companyId Int
   company   Company   @relation(fields: [companyId], references: [id])
   car       Car?
+  patients  Patient[]
 }
 
 enum Gender {
@@ -39,7 +41,17 @@ enum Gender {
 }
 
 model Patient {
-  id Int @id @default(autoincrement())
+  id           Int       @id @default(autoincrement())
+  lastName     String    @db.VarChar(70)
+  firstName    String    @db.VarChar(60)
+  streetNumber Int
+  street       String
+  zipCode      String
+  city         String
+  companyId    Int
+  company      Company   @relation(fields: [companyId], references: [id])
+  employeeId   Int?
+  employee     Employee? @relation(fields: [employeeId], references: [id])
 }
 
 // This is your Prisma schema file,

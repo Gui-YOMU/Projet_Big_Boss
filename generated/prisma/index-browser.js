@@ -148,7 +148,15 @@ exports.Prisma.EmployeeScalarFieldEnum = {
 };
 
 exports.Prisma.PatientScalarFieldEnum = {
-  id: 'id'
+  id: 'id',
+  lastName: 'lastName',
+  firstName: 'firstName',
+  streetNumber: 'streetNumber',
+  street: 'street',
+  zipCode: 'zipCode',
+  city: 'city',
+  companyId: 'companyId',
+  employeeId: 'employeeId'
 };
 
 exports.Prisma.SortOrder = {
@@ -178,6 +186,14 @@ exports.Prisma.EmployeeOrderByRelevanceFieldEnum = {
   firstName: 'firstName',
   mail: 'mail',
   password: 'password'
+};
+
+exports.Prisma.PatientOrderByRelevanceFieldEnum = {
+  lastName: 'lastName',
+  firstName: 'firstName',
+  street: 'street',
+  zipCode: 'zipCode',
+  city: 'city'
 };
 exports.Gender = exports.$Enums.Gender = {
   male: 'male',

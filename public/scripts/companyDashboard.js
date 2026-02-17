@@ -2,6 +2,8 @@ const addEmployee = document.querySelector("#addEmployee");
 const employeeModal = document.querySelector("#employeeModal");
 const addCar = document.querySelector("#addCar");
 const carModal = document.querySelector("#carModal");
+const addPatient = document.querySelector("#addPatient");
+const patientModal = document.querySelector("#patientModal");
 const closeModalButtons = document.querySelectorAll(".closeModal");
 
 closeModalButtons.forEach((button) => {
@@ -9,6 +11,7 @@ closeModalButtons.forEach((button) => {
     e.preventDefault();
     employeeModal.close();
     carModal.close();
+    patientModal.close();
   });
 });
 
@@ -20,4 +23,9 @@ addEmployee.addEventListener("click", (e) => {
 addCar.addEventListener("click", (e) => {
   e.preventDefault();
   carModal.showModal();
+});
+
+addPatient.addEventListener("click", (e) => {
+  e.preventDefault();
+  patientModal.showModal();
 });
