@@ -32,7 +32,8 @@ export async function getCarInformation(req, res) {
         })
         res.render("pages/carInformation.twig", {
             title: "Véhicule",
-            car
+            car,
+            company
         })
     } catch (error) {
         console.error(error);

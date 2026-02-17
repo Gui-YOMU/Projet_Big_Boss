@@ -37,7 +37,8 @@ export async function getEmployeeInformation(req, res) {
         })
         res.render("pages/employeeInformation.twig", {
             title: "Employé",
-            employee
+            employee,
+            company
         })
     } catch (error) {
         console.error(error);
