@@ -1,23 +1,29 @@
 import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
+import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension.js";
+import { escapehtml } from "../services/escapehtml.js";
 
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({ adapter }).$extends(checkRegexExtension);
 
 export async function addCar(req, res) {
   const { name, plate } = req.body;
   try {
     await prisma.car.create({
       data: {
-        name: name,
-        plate: plate,
+        name: escapehtml(name),
+        plate: escapehtml(plate),
         companyId: req.company.id,
       },
     });
     res.redirect("/dashboard");
   } catch (error) {
     console.error(error);
+    const employees = await prisma.employee.findMany();
+    const cars = await prisma.car.findMany();
     res.render("pages/companyDashboard.twig", {
       title: "Dashboard",
+      employees,
+      cars,
       error: "Erreur lors de l'ajout du véhicule.",
     });
   }
@@ -44,8 +50,8 @@ export async function getCarInformation(req, res) {
     });
   } catch (error) {
     console.error(error);
-    res.render("pages/companyDashboard.twig", {
-      title: "Dashboard",
+    res.render("pages/carInformation.twig", {
+      title: "Véhicule",
       error: "Erreur lors de l'affichage des informations du véhicule.",
     });
   }
@@ -83,8 +89,8 @@ export async function updateCar(req, res) {
     try {
       await prisma.car.update({
         data: {
-          name: name,
-          plate: plate,
+          name: escapehtml(name),
+          plate: escapehtml(plate),
         },
         where: {
           id: parseInt(req.params.id),
