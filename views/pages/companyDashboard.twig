@@ -5,9 +5,13 @@
 {% endblock %}
 
 {% block main %}
+	{% if error %}
+		<p>{{ error }}</p>
+	{% endif %}
+
 	{# <section>
-														    <h2>Patients</h2>
-														</section> #}
+															    <h2>Patients</h2>
+															</section> #}
 	<section>
 		<h2>Mes employés</h2>
 		<button id="addEmployee">+</button>
@@ -16,7 +20,9 @@
 			<article>
 				<h3>{{ employee.lastName }}
 					{{ employee.firstName }}</h3>
-					<form action="/employees/{{ employee.id }}" method="get"><button>Consulter</button></form>
+				<form action="/employees/{{ employee.id }}" method="get">
+					<button>Consulter</button>
+				</form>
 			</article>
 		{% endfor %}
 
@@ -54,7 +60,9 @@
 			<article>
 				<h3>{{ car.name }}
 					({{ car.plate }})</h3>
-					<form action="/cars/{{ car.id }}" method="get"><button>Consulter</button></form>
+				<form action="/cars/{{ car.id }}" method="get">
+					<button>Consulter</button>
+				</form>
 			</article>
 		{% endfor %}
 

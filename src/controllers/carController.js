@@ -18,8 +18,12 @@ export async function addCar(req, res) {
     res.redirect("/dashboard");
   } catch (error) {
     console.error(error);
+    const employees = await prisma.employee.findMany();
+    const cars = await prisma.car.findMany();
     res.render("pages/companyDashboard.twig", {
       title: "Dashboard",
+      employees,
+      cars,
       error: "Erreur lors de l'ajout du véhicule.",
     });
   }
@@ -46,8 +50,8 @@ export async function getCarInformation(req, res) {
     });
   } catch (error) {
     console.error(error);
-    res.render("pages/companyDashboard.twig", {
-      title: "Dashboard",
+    res.render("pages/carInformation.twig", {
+      title: "Véhicule",
       error: "Erreur lors de l'affichage des informations du véhicule.",
     });
   }

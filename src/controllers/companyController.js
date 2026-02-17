@@ -39,7 +39,7 @@ export async function postCompanySignin(req, res) {
     console.error(error);
     res.render("pages/companySignin.twig", {
       title: "Inscription",
-      error,
+      error
     });
   }
 }
@@ -70,9 +70,9 @@ export async function postCompanyLogin(req, res) {
     }
   } catch (error) {
     console.error(error);
-    res.render("pages/companySignin.twig", {
+    res.render("pages/companyLogin.twig", {
       title: "Connexion",
-      error,
+      error
     });
   }
 }
