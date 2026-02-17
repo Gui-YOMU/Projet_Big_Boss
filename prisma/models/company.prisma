@@ -6,4 +6,5 @@ model Company {
     ceo String?
     employees Employee[]
     cars Car[]
+    patients Patient[]
 }
