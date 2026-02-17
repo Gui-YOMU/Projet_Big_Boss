@@ -38,13 +38,37 @@ export async function getEmployeeInformation(req, res) {
         res.render("pages/employeeInformation.twig", {
             title: "Employé",
             employee,
-            company
+            company: req.company
         })
     } catch (error) {
         console.error(error);
         res.render("pages/companyDashboard.twig", {
             title: "Dashboard",
             error: "Erreur lors de l'affichage des informations de l'employé."
+        })
+    }
+}
+
+export async function deleteEmployee(req, res) {
+    try {
+        await prisma.employee.delete({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+        res.redirect("/dashboard");
+    } catch (error) {
+        console.error(error);
+        const employee = await prisma.employee.findUnique({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+        res.render("pages/carInformation.twig", {
+            title: "Employé",
+            company: req.company,
+            employee,
+            error: "Erreur lors de la suppression de l'employé."
         })
     }
 }

@@ -26,4 +26,8 @@
 			{% endif %}
 		</span>
 	</h3>
+	<button>Modifier</button>
+	<form action="/employees/{{ employee.id }}/delete" method="post">
+		<button>Supprimer</button>
+	</form>
 {% endblock %}

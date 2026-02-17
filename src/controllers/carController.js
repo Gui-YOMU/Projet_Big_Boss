@@ -33,13 +33,37 @@ export async function getCarInformation(req, res) {
         res.render("pages/carInformation.twig", {
             title: "Véhicule",
             car,
-            company
+            company: req.company
         })
     } catch (error) {
         console.error(error);
         res.render("pages/companyDashboard.twig", {
             title: "Dashboard",
             error: "Erreur lors de l'affichage des informations du véhicule."
+        })
+    }
+}
+
+export async function deleteCar(req, res) {
+    try {
+        await prisma.car.delete({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+        res.redirect("/dashboard");
+    } catch (error) {
+        console.error(error);
+        const car = await prisma.car.findUnique({
+            where: {
+                id: parseInt(req.params.id)
+            }
+        })
+        res.render("pages/carInformation.twig", {
+            title: "Véhicule",
+            company: req.company,
+            car,
+            error: "Erreur lors de la suppression du véhicule."
         })
     }
 }

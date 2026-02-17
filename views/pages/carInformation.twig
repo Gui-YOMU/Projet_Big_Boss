@@ -1,7 +1,22 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-    <h2>Informations du véhicule sélectionné : </h2>
-    <h3>Nom du véhicule : <span><p>{{ car.name }}</p></span></h3>
-    <h3>Immatriculation du véhicule : <span><p>{{ car.plate }}</p></span></h3>
+	<h2>Informations du véhicule sélectionné :
+	</h2>
+	<h3>Nom du véhicule :
+		<span>
+			<p>{{ car.name }}</p>
+		</span>
+	</h3>
+	<h3>Immatriculation du véhicule :
+		<span>
+			<p>{{ car.plate }}</p>
+		</span>
+	</h3>
+	<button>Modifier</button>
+	<form action="/cars/{{ car.id }}/delete" method="post">
+		<button>Supprimer</button>
+	</form>
+    {% if error %}<p>{{ error }}</p>{% endif %}
+    
 {% endblock %}
