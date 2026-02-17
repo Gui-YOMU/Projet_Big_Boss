@@ -1,0 +1,34 @@
+{% extends "../layouts/company.twig" %}
+
+{% block main %}
+	{% if update %}
+		<form action="/cars/{{car.id}}/update" method="post">
+			<h2>Modifier les informations du véhicule sélectionné :
+			</h2>
+			<label for="name">Nom du véhicule</label>
+			<input type="text" id="name" name="name" value="{{car.name}}">
+			<label for="plate">Immatriculation du véhicule</label>
+			<input type="text" id="plate" name="plate" value="{{car.plate}}">
+			<button name="updateYes">Valider</button>
+			<button name="updateNo">Annuler</button>
+		</form>
+	{% else %}
+		<form action="/cars/{{car.id}}" method="post">
+			<h2>Informations du véhicule sélectionné :
+			</h2>
+			<h3>Nom du véhicule :</h3>
+			<p>{{ car.name }}</p>
+			<h3>Immatriculation du véhicule :</h3>
+			<p>{{ car.plate }}</p>
+			<button name="update" value="{{car.id}}">Modifier</button>
+		</form>
+		<form action="/cars/{{ car.id }}/delete" method="post">
+			<button>Supprimer</button>
+		</form>
+	{% endif %}
+
+	{% if error %}
+		<p>{{ error }}</p>
+	{% endif %}
+
+{% endblock %}

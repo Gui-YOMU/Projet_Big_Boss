@@ -1,0 +1,21 @@
+<header>
+	<div>
+		<a href={% if company %} "/dashboard" {% else %} "/" {% endif %}>
+			<img src="" alt="logo">
+		</a>
+	</div>
+	{% if company %}
+		<h1>{{ company.name }}</h1>
+	{% else %}
+		<h1>Bienvenue !</h1>
+	{% endif %}
+	<nav>
+		<ul>
+			{% if company %}
+				<li>
+					<a href="/logout">Déconnexion</a>
+				</li>
+			{% endif %}
+		</ul>
+	</nav>
+</header>

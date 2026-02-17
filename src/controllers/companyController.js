@@ -5,9 +5,15 @@ import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient({ adapter }).$extends(hashPasswordExtension);
 
+export async function getIndex(req, res) {
+  res.render("pages/index.twig", {
+    title: "RH",
+  });
+}
+
 export async function getCompanySignin(req, res) {
   res.render("pages/companySignin.twig", {
-    title: "Inscription"
+    title: "Inscription",
   });
 }
 
@@ -31,14 +37,14 @@ export async function postCompanySignin(req, res) {
     console.error(error);
     res.render("pages/companySignin.twig", {
       title: "Inscription",
-      error
+      error,
     });
   }
 }
 
 export async function getCompanyLogin(req, res) {
   res.render("pages/companyLogin.twig", {
-    title: "Connexion"
+    title: "Connexion",
   });
 }
 
@@ -64,13 +70,33 @@ export async function postCompanyLogin(req, res) {
     console.error(error);
     res.render("pages/companySignin.twig", {
       title: "Connexion",
-      error
+      error,
     });
   }
 }
 
 export async function getCompanyDashboard(req, res) {
-  res.render("pages/companyDashboard.twig", {
-    title: "Dashboard"
-  });
+  try {
+    const employees = await prisma.employee.findMany();
+    const cars = await prisma.car.findMany();
+    res.render("pages/companyDashboard.twig", {
+      title: "Dashboard",
+      company: req.company,
+      employees,
+      cars
+    });
+  } catch (error) {
+    console.error(error);
+    res.render("pages/companyDashboard.twig", {
+      title: "Dashboard",
+      error
+    });
+  }
+}
+
+export async function getCompanyLogout(req, res) {
+  if (req.session.company) {
+    req.session.company = null;
+  }
+  res.redirect("/login");
 }

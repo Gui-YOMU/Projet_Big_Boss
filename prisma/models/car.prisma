@@ -1,5 +1,6 @@
 model Car {
     id Int @id @default(autoincrement())
+    name String @db.VarChar(20)
     plate String @unique
     companyId Int
     company Company @relation(fields:[companyId], references:[id])

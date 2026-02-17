@@ -1,0 +1,54 @@
+{% extends "../layouts/company.twig" %}
+
+{% block main %}
+	{% if update %}
+		<form action="/employees/{{employee.id}}/update" method="post">
+			<h2>Modifier les informations de l'employé sélectionné :
+			</h2>
+			<label for="lastName">Nom de famille</label>
+			<input type="text" id="lastName" name="lastName" value="{{employee.lastName}}">
+			<label for="firstName">Prénom</label>
+			<input type="text" id="firstName" name="firstName" value="{{employee.firstName}}">
+			<label for="mail">Adresse mail</label>
+			<input type="mail" id="mail" name="mail" value="{{employee.mail}}">
+			<label for="birthday">Date de naissance (facultatif)</label>
+			<input type="date" id="birthday" name="birthday" value="{{birthday}}">
+			<label for="gender">Genre (facultatif)</label>
+			<select id="gender" name="gender">
+				<option value="">--Sélectionnez le genre (facultatif)--</option>
+				<option value="male">Homme</option>
+				<option value="female">Femme</option>
+				<option value="other">Autre</option>
+			</select>
+			<button name="updateYes">Valider</button>
+			<button name="updateNo">Annuler</button>
+		</form>
+	{% else %}
+		<form action="/employees/{{employee.id}}" method="post">
+			<h2>Informations de l'employé sélectionné :
+			</h2>
+			<h3>Nom :</h3>
+			<p>{{ employee.lastName }}</p>
+			<h3>Prénom :</h3>
+			<p>{{ employee.firstName }}</p>
+			<h3>Mail :</h3>
+			<p>{{ employee.mail }}</p>
+			<h3>Date de naissance :</h3>
+			<p>{{ employee.birthday }}</p>
+			<h3>Genre :</h3>
+			<p>
+				{% if employee.gender == "male" %}
+					Homme
+				{% elseif employee.gender == "female" %}
+					Femme
+				{% elseif employee.gender == "other" %}
+					Autre
+				{% endif %}
+			</p>
+			<button name="update" value="{{employee.id}}">Modifier</button>
+		</form>
+		<form action="/employees/{{ employee.id }}/delete" method="post">
+			<button>Supprimer</button>
+		</form>
+	{% endif %}
+{% endblock %}
