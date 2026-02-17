@@ -73,7 +73,7 @@ export async function getEmployeeInformation(req, res) {
   } catch (error) {
     console.error(error);
     res.render("pages/employeeInformation.twig", {
-      title: "Dashboard",
+      title: "Employé",
       error: "Erreur lors de l'affichage des informations de l'employé.",
     });
   }
