@@ -24,9 +24,9 @@ model Employee {
   firstName String    @db.VarChar(60)
   mail      String    @unique @db.VarChar(150)
   password  String
-  birthday  DateTime?
+  birthday  DateTime? @db.Date
   // i.e. new Date('1998-12-24')
-  gender    Gender
+  gender    Gender?
   companyId Int
   company   Company   @relation(fields: [companyId], references: [id])
   car       Car?
