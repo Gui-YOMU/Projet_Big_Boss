@@ -2,8 +2,10 @@ import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
 import { hashPasswordExtension } from "../../prisma/extensions/hashPasswordExtension.js";
 import bcrypt from "bcrypt";
+import { escapehtml } from "../services/escapehtml.js";
+import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension.js";
 
-const prisma = new PrismaClient({ adapter }).$extends(hashPasswordExtension);
+const prisma = new PrismaClient({ adapter }).$extends(checkRegexExtension).$extends(hashPasswordExtension);
 
 export async function getIndex(req, res) {
   res.render("pages/index.twig", {
@@ -20,12 +22,12 @@ export async function getCompanySignin(req, res) {
 export async function postCompanySignin(req, res) {
   const { name, siret, ceo, password, confirmPassword } = req.body;
   try {
-    if (password === confirmPassword) {
+    if (escapehtml(password) === escapehtml(confirmPassword)) {
       await prisma.company.create({
         data: {
-          name: name,
-          siret: siret,
-          ceo: ceo,
+          name: escapehtml(name),
+          siret: escapehtml(siret),
+          ceo: escapehtml(ceo),
           password: password,
         },
       });
