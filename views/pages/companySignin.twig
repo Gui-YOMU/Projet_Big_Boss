@@ -3,17 +3,28 @@
 {% block main %}
 	<h2>Inscrivez votre établissement !</h2>
 	<form action="" method="post">
-		<label for="name">Nom de votre établissement : </label>
+		<label for="name">Nom de votre établissement :
+		</label>
 		<input type="text" id="name" name="name" placeholder="Nom de l'établissement">
-        <label for="siret">Numéro SIRET : </label>
-		<input type="text" id="siret" name="siret" placeholder="SIRET">
-        <label for="ceo">Nom du directeur (facultatif) : </label>
-		<input type="text" id="ceo" name="ceo" placeholder="Nom du directeur">
-        <label for="password">Mot de passe : </label>
-		<input type="password" id="password" name="password" placeholder="Mot de passe">
-        <label for="confirmPassword">Confirmez votre mot de passe : </label>
+		<label for="siret">Numéro SIRET :
+		</label>
+		<input type="text" id="siret" name="siret" placeholder="Code SIRET à 14 chiffres">
+		<label for="ceo">Nom du directeur (facultatif) :
+		</label>
+		<input type="text" id="ceo" name="ceo" placeholder="ex: DURAND Pierre">
+		<label for="password">Mot de passe :
+		</label>
+		<input type="password" id="password" name="password" placeholder="Au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s)">
+		<label for="confirmPassword">Confirmez votre mot de passe :
+		</label>
 		<input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe">
-        <button>S'inscrire</button>
+		<button>S'inscrire</button>
 	</form>
-	<p>Déjà inscrit ? Cliquez <a href="/login">ici</a> pour vous connecter.</p>
+	{% if error %}
+		{{ error }}
+	{% endif %}
+
+	<p>Déjà inscrit ? Cliquez
+		<a href="/login">ici</a>
+		pour vous connecter.</p>
 {% endblock %}

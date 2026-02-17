@@ -1,9 +1,11 @@
 import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
+import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension.js";
 import { hashPasswordExtension } from "../../prisma/extensions/hashPasswordExtension.js";
+import { escapehtml } from "../services/escapehtml.js";
 import { formatDate } from "../services/formatDate.js";
 
-const prisma = new PrismaClient({ adapter }).$extends(hashPasswordExtension);
+const prisma = new PrismaClient({ adapter }).$extends(checkRegexExtension).$extends(hashPasswordExtension);
 
 export async function addEmployee(req, res) {
   const { lastName, firstName, mail, password } = req.body;
@@ -18,9 +20,9 @@ export async function addEmployee(req, res) {
   try {
     await prisma.employee.create({
       data: {
-        lastName: lastName,
-        firstName: firstName,
-        mail: mail,
+        lastName: escapehtml(lastName),
+        firstName: escapehtml(firstName),
+        mail: escapehtml(mail),
         password: password,
         birthday: req.body.birthday,
         gender: req.body.gender,
@@ -46,7 +48,7 @@ export async function getEmployeeInformation(req, res) {
     });
     let birthday;
     if (employee.birthday) {
-      birthday = formatDate(employee.birthday)
+      birthday = formatDate(employee.birthday);
       employee.birthday = employee.birthday.toLocaleDateString();
     }
     let update;
@@ -111,9 +113,9 @@ export async function updateEmployee(req, res) {
     try {
       await prisma.employee.update({
         data: {
-          lastName: lastName,
-          firstName: firstName,
-          mail: mail,
+          lastName: escapehtml(lastName),
+          firstName: escapehtml(firstName),
+          mail: escapehtml(mail),
           birthday: req.body.birthday,
           gender: req.body.gender,
         },

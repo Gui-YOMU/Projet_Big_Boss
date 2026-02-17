@@ -1,15 +1,17 @@
 import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
+import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension.js";
+import { escapehtml } from "../services/escapehtml.js";
 
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({ adapter }).$extends(checkRegexExtension);
 
 export async function addCar(req, res) {
   const { name, plate } = req.body;
   try {
     await prisma.car.create({
       data: {
-        name: name,
-        plate: plate,
+        name: escapehtml(name),
+        plate: escapehtml(plate),
         companyId: req.company.id,
       },
     });
@@ -83,8 +85,8 @@ export async function updateCar(req, res) {
     try {
       await prisma.car.update({
         data: {
-          name: name,
-          plate: plate,
+          name: escapehtml(name),
+          plate: escapehtml(plate),
         },
         where: {
           id: parseInt(req.params.id),

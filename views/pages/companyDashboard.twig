@@ -24,14 +24,14 @@
 			<button class="closeModal">X</button>
 			<form action="/employees/add" method="post">
 				<label for="lastName">Nom de famille de l'employé</label>
-				<input type="text" id="lastName" name="lastName" placeholder="Nom de famille">
+				<input type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
 				<label for="firstName">Prénom de l'employé</label>
-				<input type="text" id="firstName" name="firstName" placeholder="Prénom">
+				<input type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
 				<label for="mail">Adresse mail de l'employé</label>
-				<input type="mail" id="mail" name="mail" placeholder="Adresse mail">
+				<input type="mail" id="mail" name="mail" placeholder="ex: jacques.dupont@gmail.com">
 				<label for="password">Mot de passe initial</label>
 				{# <p>Le mot de passe sera changé par l'employé à sa première connexion.</p> #}
-				<input type="password" id="password" name="password" placeholder="Mot de passe">
+				<input type="password" id="password" name="password" placeholder="Au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s)">
 				<label for="birthday">Date de naissance de l'employé (facultatif)</label>
 				<input type="date" id="birthday" name="birthday">
 				<label for="gender">Genre de l'employé (facultatif)</label>
@@ -64,7 +64,7 @@
 				<label for="name">Nom du véhicule</label>
 				<input type="text" id="name" name="name" placeholder="Nom du véhicule">
 				<label for="plate">Immatriculation du véhicule</label>
-				<input type="text" id="plate" name="plate" placeholder="Immatriculation : AA123ZZ">
+				<input type="text" id="plate" name="plate" placeholder="ex : AA123ZZ">
 				<button>Ajouter le véhicule</button>
 			</form>
 		</dialog>
