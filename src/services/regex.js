@@ -1,28 +1,29 @@
-export const lastNameRegex = new RegExp(
+const lastNameRegex = new RegExp(
   /^[A-ZÀ-Ý]([A-ZÀ-Ý]|\'[A-ZÀ-Ý]+|\-[A-ZÀ-Ý]+|\ [A-ZÀ-Ý]+)*$/,
   "m",
 );
-export const firstNameRegex = new RegExp(
+const firstNameRegex = new RegExp(
   /^[A-ZÀ-Ý]([a-zà-ÿ]|\-[A-ZÀ-Ý][a-zà-ÿ]+|\ [A-ZÀ-Ý][a-zà-ÿ]+)*$/,
   "m",
 );
-export const mailRegex = new RegExp(
+const mailRegex = new RegExp(
   /^([a-z0-9_])(([a-z0-9_\-]*)|(\.(?!\.)))@([a-z0-9])(([a-z0-9])|(\-[a-z0-9]+)|(\.(?!\.)[a-z0-9]+))*(\.([a-z0-9])(([a-z0-9])|(\-[a-z0-9]+))*)+$/,
   "m",
 );
-export const passwordRegex = new RegExp(
+const passwordRegex = new RegExp(
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{12,}$/,
   "m",
 );
-export const ceoRegex = new RegExp(
+const ceoRegex = new RegExp(
   /^[A-ZÀ-Ý]([A-ZÀ-Ý]|\'[A-ZÀ-Ý]+|\-[A-ZÀ-Ý]+|\ [A-ZÀ-Ý]+)*\ [A-ZÀ-Ý]([a-zà-ÿ]|\-[A-ZÀ-Ý][a-zà-ÿ]+|\ [A-ZÀ-Ý][a-zà-ÿ]+)*$/,
   "m",
 );
-export const siretRegex = new RegExp(/^\d{14}$/, "m");
-export const plateRegex = new RegExp(
+const siretRegex = new RegExp(/^\d{14}$/, "m");
+const plateRegex = new RegExp(
   /^((?!SS|WW)[A-HJ-NP-TV-Z]{2})[0-9]{2}([1-9]|((?<!00)0)){1}((?!SS)[A-HJ-NP-TV-Z]{2})$/,
   "m",
 );
+const zipCoderegex = new RegExp(/^\d{5}$/, "m");
 
 export function checkCompany(args) {
   if (!siretRegex[Symbol.match](args.data.siret)) {
@@ -62,4 +63,16 @@ export function checkCar(args) {
     throw new Error("L'immatriculation n'est pas valide.");
   }
   return args
+}
+
+export function checkPatient(args) {
+  if (!lastNameRegex[Symbol.match](args.data.lastName)) {
+    throw new Error("Le nom de famille n'est pas valide.");
+  }
+  if (!firstNameRegex[Symbol.match](args.data.firstName)) {
+    throw new Error("Le prénom n'est pas valide.");
+  }
+  if (!zipCoderegex[Symbol.match](args.data.zipCode)) {
+    throw new Error("Le code postal n'est pas valide");
+  }
 }

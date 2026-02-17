@@ -1,0 +1,46 @@
+{% extends "../layouts/company.twig" %}
+
+{% block main %}
+	{% if update %}
+		<form action="/patients/{{patient.id}}/update" method="post">
+			<h2>Modifier les informations du patient sélectionné :
+			</h2>
+			<label for="lastName">Nom de famille</label>
+			<input type="text" id="lastName" name="lastName" value="{{patient.lastName}}">
+			<label for="firstName">Prénom</label>
+			<input type="text" id="firstName" name="firstName" value="{{patient.firstName}}">
+			<p>Adresse du patient</p>
+				<label for="streetNumber">N°</label>
+				<input type="text" id="streetNumber" name="streetNumber" value="{{patient.streetNumber}}">
+				<label for="street">Voie</label>
+				<input type="text" id="street" name="street" value="{{patient.street}}">
+				<label for="zipCode">Code postal</label>
+				<input type="text" id="zipCode" name="zipCode" value="{{patient.zipCode}}">
+				<label for="city">Ville</label>
+				<input type="text" id="city" name="city" value="{{patient.city}}">
+			<button name="updateYes">Valider</button>
+			<button name="updateNo">Annuler</button>
+		</form>
+	{% else %}
+		<form action="/patients/{{patient.id}}" method="post">
+			<h2>Informations du patient sélectionné :
+			</h2>
+			<h3>Nom :</h3>
+			<p>{{ patient.lastName }}</p>
+			<h3>Prénom :</h3>
+			<p>{{ patient.firstName }}</p>
+			<h3>Adresse :</h3>
+			<p>{{ patient.streetNumber }} {{ patient.street }}</p>
+			<p>{{ patient.zipCode }} {{ patient.city }}</p>
+			<button name="update" value="{{patient.id}}">Modifier</button>
+		</form>
+		<form action="/patients/{{ patient.id }}/delete" method="post">
+			<button>Supprimer</button>
+		</form>
+	{% endif %}
+
+	{% if error %}
+		<p>{{ error }}</p>
+	{% endif %}
+
+{% endblock %}

@@ -81,11 +81,13 @@ export async function getCompanyDashboard(req, res) {
   try {
     const employees = await prisma.employee.findMany();
     const cars = await prisma.car.findMany();
+    const patients = await prisma.patient.findMany();
     res.render("pages/companyDashboard.twig", {
       title: "Dashboard",
       company: req.company,
       employees,
-      cars
+      cars,
+      patients
     });
   } catch (error) {
     console.error(error);

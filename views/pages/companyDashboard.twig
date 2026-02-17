@@ -9,11 +9,43 @@
 		<p>{{ error }}</p>
 	{% endif %}
 
-	{# <section>
-															    <h2>Patients</h2>
-															</section> #}
 	<section>
-		<h2>Mes employés</h2>
+		<h2>Liste des patients</h2>
+		<button id="addPatient">+</button>
+
+		{% for patient in patients %}
+			<article>
+				<h3>{{ patient.lastName }}
+					{{ patient.firstName }}</h3>
+				<form action="/patients/{{ patient.id }}" method="get">
+					<button>Consulter</button>
+				</form>
+			</article>
+		{% endfor %}
+
+		<dialog id="patientModal" class="modal">
+			<button class="closeModal">X</button>
+			<form action="/patients/add" method="post">
+				<label for="lastName">Nom de famille du patient</label>
+				<input type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
+				<label for="firstName">Prénom du patient</label>
+				<input type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
+				<p>Adresse du patient</p>
+				<label for="streetNumber">N°</label>
+				<input type="text" id="streetNumber" name="streetNumber" placeholder="ex: 123">
+				<label for="street">Voie</label>
+				<input type="text" id="street" name="street" placeholder="ex: rue du Paradis">
+				<label for="zipCode">Code postal</label>
+				<input type="text" id="zipCode" name="zipCode" placeholder="ex: 83000">
+				<label for="city">Ville</label>
+				<input type="text" id="city" name="city" placeholder="ex: TOULON">
+				<button type="reset">Effacer les champs</button>
+				<button>Ajouter le patient</button>
+			</form>
+		</dialog>
+	</section>
+	<section>
+		<h2>Liste des employés</h2>
 		<button id="addEmployee">+</button>
 
 		{% for employee in employees %}
@@ -53,7 +85,7 @@
 		</dialog>
 	</section>
 	<section>
-		<h2>Mes véhicules</h2>
+		<h2>Liste des véhicules</h2>
 		<button id="addCar">+</button>
 
 		{% for car in cars %}

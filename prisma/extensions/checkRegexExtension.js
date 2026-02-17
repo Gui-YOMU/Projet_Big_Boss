@@ -1,5 +1,5 @@
 import { Prisma } from "../../generated/prisma/client.js";
-import { checkCar, checkCompany, checkEmployee } from "../../src/services/regex.js"
+import { checkCar, checkCompany, checkEmployee, checkPatient } from "../../src/services/regex.js"
 
 export const checkRegexExtension = Prisma.defineExtension({
     name: "checkRegex",
@@ -31,6 +31,16 @@ export const checkRegexExtension = Prisma.defineExtension({
             },
             update: ({args, query}) => {
                 checkCar(args);
+                return query(args);
+            }
+        },
+        patient: {
+            create: ({args, query}) => {
+                checkPatient(args);
+                return query(args);
+            },
+            update: ({args, query}) => {
+                checkPatient(args);
                 return query(args);
             }
         }
