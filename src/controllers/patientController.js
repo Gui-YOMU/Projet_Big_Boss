@@ -102,7 +102,7 @@ export async function updatePatient(req, res) {
   if (req.body.updateNo) {
     res.redirect(`/patients/${parseInt(req.params.id)}`);
   } else {
-    const { lastName, firstName, streetNumber, street, zipCode, city } =
+    const { lastName, firstName, streetNumber, street, zipCode, city, tourId } =
       req.body;
     try {
       await prisma.patient.update({
@@ -113,6 +113,7 @@ export async function updatePatient(req, res) {
           street: escapehtml(street),
           zipCode: escapehtml(zipCode),
           city: escapehtml(city),
+          tourId: parseInt(tourId)
         },
         where: {
           id: parseInt(req.params.id),
