@@ -32,6 +32,17 @@ export async function companyAuthguard(req, res, next) {
                             lastName: true,
                             firstName: true
                         }
+                    },
+                    tours: {
+                        select: {
+                            id: true,
+                            name: true
+                        }
+                    },
+                    missions: {
+                        select: {
+                            id: true
+                        }
                     }
                 },
         where: {

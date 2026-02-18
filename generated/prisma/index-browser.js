@@ -151,7 +151,8 @@ exports.Prisma.MissionScalarFieldEnum = {
   date: 'date',
   tourId: 'tourId',
   employeeId: 'employeeId',
-  carId: 'carId'
+  carId: 'carId',
+  companyId: 'companyId'
 };
 
 exports.Prisma.PatientScalarFieldEnum = {
@@ -168,7 +169,8 @@ exports.Prisma.PatientScalarFieldEnum = {
 
 exports.Prisma.TourScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  companyId: 'companyId'
 };
 
 exports.Prisma.SortOrder = {

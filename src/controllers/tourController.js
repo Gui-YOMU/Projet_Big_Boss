@@ -10,6 +10,7 @@ export async function createTour(req, res) {
     await prisma.tour.create({
       data: {
         name: escapehtml(name),
+        companyId: req.company.id
       },
     });
     res.redirect("/dashboard");

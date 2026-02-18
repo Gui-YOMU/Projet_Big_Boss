@@ -40,6 +40,13 @@
 				<input type="text" id="zipCode" name="zipCode" placeholder="ex: 83000">
 				<label for="city">Ville</label>
 				<input type="text" id="city" name="city" placeholder="ex: TOULON">
+				<label for="tourId">Tournée</label>
+				<select name="tourId" id="tourId">
+				<option value="">--Sélectionnez une tournée--</option>
+				{% for tour in company.tours %}
+					<option value="{{tour.id}}">{{ tour.name }}</option>
+				{% endfor %}
+				</select>
 				<button type="reset">Effacer les champs</button>
 				<button>Ajouter le patient</button>
 			</form>

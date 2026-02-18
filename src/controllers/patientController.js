@@ -3,11 +3,11 @@ import { adapter } from "../../prisma/adapter.js";
 import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension.js";
 import { escapehtml } from "../services/escapehtml.js";
 
-const prisma = new PrismaClient({ adapter })
-  .$extends(checkRegexExtension)
+const prisma = new PrismaClient({ adapter }).$extends(checkRegexExtension);
 
 export async function addPatient(req, res) {
-  const { lastName, firstName, streetNumber, street, zipCode, city } = req.body;
+  const { lastName, firstName, streetNumber, street, zipCode, city, tourId } =
+    req.body;
   try {
     await prisma.patient.create({
       data: {
@@ -17,6 +17,7 @@ export async function addPatient(req, res) {
         street: escapehtml(street),
         zipCode: escapehtml(zipCode),
         city: escapehtml(city),
+        tourId: parseInt(tourId),
         companyId: req.company.id,
       },
     });
@@ -43,6 +44,14 @@ export async function getPatientInformation(req, res) {
         id: parseInt(req.params.id),
       },
     });
+    let tour;
+    if (patient.tourId) {
+      tour = await prisma.tour.findUnique({
+        where: {
+          id: patient.tourId,
+        },
+      });
+    }
     let update;
     if (req.body) {
       update = req.body.update;
@@ -54,6 +63,7 @@ export async function getPatientInformation(req, res) {
       patient,
       company: req.company,
       update,
+      tour
     });
   } catch (error) {
     console.error(error);
@@ -92,16 +102,17 @@ export async function updatePatient(req, res) {
   if (req.body.updateNo) {
     res.redirect(`/patients/${parseInt(req.params.id)}`);
   } else {
-    const { lastName, firstName, streetNumber, street, zipCode, city } = req.body;
+    const { lastName, firstName, streetNumber, street, zipCode, city } =
+      req.body;
     try {
       await prisma.patient.update({
         data: {
           lastName: escapehtml(lastName),
-        firstName: escapehtml(firstName),
-        streetNumber: parseInt(escapehtml(streetNumber)),
-        street: escapehtml(street),
-        zipCode: escapehtml(zipCode),
-        city: escapehtml(city)
+          firstName: escapehtml(firstName),
+          streetNumber: parseInt(escapehtml(streetNumber)),
+          street: escapehtml(street),
+          zipCode: escapehtml(zipCode),
+          city: escapehtml(city),
         },
         where: {
           id: parseInt(req.params.id),

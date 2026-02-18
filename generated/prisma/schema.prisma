@@ -16,6 +16,8 @@ model Company {
   employees Employee[]
   cars      Car[]
   patients  Patient[]
+  tours     Tour[]
+  missions  Mission[]
 }
 
 model Employee {
@@ -47,6 +49,8 @@ model Mission {
   employee   Employee @relation(fields: [employeeId], references: [id])
   carId      Int?     @unique
   car        Car?     @relation(fields: [carId], references: [id])
+  companyId  Int
+  company    Company  @relation(fields: [companyId], references: [id])
 }
 
 model Patient {
@@ -64,10 +68,12 @@ model Patient {
 }
 
 model Tour {
-  id       Int       @id @default(autoincrement())
-  name     String
-  patients Patient[]
-  missions Mission[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  patients  Patient[]
+  missions  Mission[]
+  companyId Int
+  company   Company   @relation(fields: [companyId], references: [id])
 }
 
 // This is your Prisma schema file,

@@ -7,4 +7,6 @@ model Mission {
     employee Employee @relation(fields:[employeeId], references: [id])
     carId Int? @unique
     car Car? @relation(fields:[carId], references: [id])
+    companyId Int
+    company Company @relation(fields:[companyId], references: [id])
 }
