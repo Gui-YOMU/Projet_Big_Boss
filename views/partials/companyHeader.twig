@@ -1,21 +1,24 @@
-<header>
+<header class="flex justify-center gap-20">
 	<div>
-		<a href={% if company %} "/dashboard" {% else %} "/" {% endif %}>
-			<img src="" alt="logo">
-		</a>
+		<div>
+			<a class="" href={% if company %} "/dashboard" {% else %} "/" {% endif %}>
+				<img {% if company %} class="w-20 object-contain m-auto" {% else %} class="w-50 object-contain m-auto" {% endif %}  src="./images/logo.png" alt="logo">
+			</a>
+		</div>
+		{% if company %}
+			<h1 class="text-center text-xl">{{ company.name }}</h1>
+		{% else %}
+			<h1 class="text-center text-3xl">Bienvenue !</h1>
+		{% endif %}
 	</div>
 	{% if company %}
-		<h1>{{ company.name }}</h1>
-	{% else %}
-		<h1>Bienvenue !</h1>
+		<nav class="flex justify-center items-center">
+			<ul>
+				<li><a class="text-sm" href="/dashboard">Tableau de bord</a></li>
+				<li><a class="text-sm" href="/tours">Tournées</a></li>
+				<li><a class="text-sm" href="/logout">Déconnexion</a></li>
+			</ul>
+		</nav>
 	{% endif %}
-	<nav>
-		<ul>
-			{% if company %}
-				<li>
-					<a href="/logout">Déconnexion</a>
-				</li>
-			{% endif %}
-		</ul>
-	</nav>
+
 </header>

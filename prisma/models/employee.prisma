@@ -9,8 +9,7 @@ model Employee {
     gender Gender?
     companyId Int
     company Company @relation(fields:[companyId], references: [id])
-    car Car?
-    patients Patient[]
+    missions Mission[]
 }
 
 enum Gender {

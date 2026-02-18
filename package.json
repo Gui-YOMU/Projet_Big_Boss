@@ -5,7 +5,8 @@
   "main": "src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/app.js"
+    "start": "nodemon src/app.js",
+    "tailwind": "npx @tailwindcss/cli -i ./public/styles/style.css -o ./public/styles/build.css --watch"
   },
   "repository": {
     "type": "git",
@@ -21,13 +22,17 @@
   "dependencies": {
     "@prisma/adapter-mariadb": "^7.4.0",
     "@prisma/client": "^7.4.0",
+    "@tailwindcss/cli": "^4.1.18",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
+    "tailwindcss": "^4.1.18",
     "twig": "^1.17.1"
   },
   "devDependencies": {
+    "@iconify-json/tabler": "^1.2.26",
+    "@iconify/tailwind4": "^1.2.1",
     "@types/node": "^25.2.3",
     "prisma": "^7.4.0"
   }

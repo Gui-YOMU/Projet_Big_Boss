@@ -25,31 +25,42 @@ const plateRegex = new RegExp(
 );
 const zipCoderegex = new RegExp(/^\d{5}$/, "m");
 
-export function checkCompany(args) {
-  if (!siretRegex[Symbol.match](args.data.siret)) {
+export function checkSiret(args) {
+ if (!siretRegex[Symbol.match](args.data.siret)) {
     throw new Error("Le SIRET n'est pas valide.");
   }
+  return args;
+}
+
+export function checkCeo(args) {
   if (!ceoRegex[Symbol.match](args.data.ceo)) {
     throw new Error("Le nom du directeur n'est pas valide.");
   }
-  if (!passwordRegex[Symbol.match](args.data.password)) {
-    throw new Error(
-      "Le mot de passe n'est pas valide (au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s).",
-    );
+  return args;
+}
+
+export function checkLastName(args) {
+  if (!lastNameRegex[Symbol.match](args.data.lastName)) {
+    throw new Error("Le nom de famille n'est pas valide.");
   }
   return args;
 }
 
-export function checkEmployee(args) {
-  if (!lastNameRegex[Symbol.match](args.data.lastName)) {
-    throw new Error("Le nom de famille n'est pas valide.");
-  }
+export function checkFirstName(args) {
   if (!firstNameRegex[Symbol.match](args.data.firstName)) {
     throw new Error("Le prénom n'est pas valide.");
   }
+  return args;
+}
+
+export function checkMail(args) {
   if (!mailRegex[Symbol.match](args.data.mail)) {
     throw new Error("Le mail n'est pas valide.");
   }
+  return args;
+}
+
+export function checkPassword(args) {
   if (!passwordRegex[Symbol.match](args.data.password)) {
     throw new Error(
       "Le mot de passe n'est pas valide (au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s).",
@@ -58,21 +69,16 @@ export function checkEmployee(args) {
   return args;
 }
 
-export function checkCar(args) {
+export function checkPlate(args) {
   if (!plateRegex[Symbol.match](args.data.plate)) {
     throw new Error("L'immatriculation n'est pas valide.");
   }
-  return args
+  return args;
 }
 
-export function checkPatient(args) {
-  if (!lastNameRegex[Symbol.match](args.data.lastName)) {
-    throw new Error("Le nom de famille n'est pas valide.");
-  }
-  if (!firstNameRegex[Symbol.match](args.data.firstName)) {
-    throw new Error("Le prénom n'est pas valide.");
-  }
+export function checkZipCode(args) {
   if (!zipCoderegex[Symbol.match](args.data.zipCode)) {
     throw new Error("Le code postal n'est pas valide");
   }
+  return args;
 }

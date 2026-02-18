@@ -1,0 +1,8 @@
+model Tour {
+    id Int @id @default(autoincrement())
+    name String
+    patients Patient[]
+    missions Mission[]
+    companyId Int
+    company Company @relation(fields:[companyId], references: [id])
+}

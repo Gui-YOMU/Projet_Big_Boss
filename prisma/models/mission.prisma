@@ -1,0 +1,12 @@
+model Mission {
+    id Int @id @default(autoincrement())
+    date DateTime @db.Date
+    tourId Int
+    tour Tour @relation(fields:[tourId], references: [id])
+    employeeId Int
+    employee Employee @relation(fields:[employeeId], references: [id])
+    carId Int? @unique
+    car Car? @relation(fields:[carId], references: [id])
+    companyId Int
+    company Company @relation(fields:[companyId], references: [id])
+}

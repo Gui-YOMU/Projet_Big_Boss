@@ -1,6 +1,7 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
+<main>
 	{% if update %}
 		<form action="/cars/{{car.id}}/update" method="post">
 			<h2>Modifier les informations du véhicule sélectionné :
@@ -30,5 +31,5 @@
 	{% if error %}
 		<p>{{ error }}</p>
 	{% endif %}
-
+</main>
 {% endblock %}

@@ -5,6 +5,8 @@ import { companyRouter } from "./routers/companyRouter.js";
 import { employeeRouter } from "./routers/employeeRouter.js";
 import { carRouter } from "./routers/carRouter.js";
 import { patientRouter } from "./routers/patientRouter.js";
+import { missionRouter } from "./routers/missionRouter.js";
+import { tourRouter } from "./routers/tourRouter.js";
 
 const port = process.env.PORT;
 
@@ -21,6 +23,8 @@ app.use(companyRouter);
 app.use("/employees", employeeRouter);
 app.use("/cars", carRouter);
 app.use("/patients", patientRouter);
+app.use("/tours", tourRouter);
+app.use("/missions", missionRouter);
 
 app.listen(port, (error) => {
     error ? console.error(error) : console.log(`Connecté au serveur sur le port ${port}.`);

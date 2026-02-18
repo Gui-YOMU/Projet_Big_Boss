@@ -7,4 +7,6 @@ model Company {
     employees Employee[]
     cars Car[]
     patients Patient[]
+    tours Tour[]
+    missions Mission[]
 }

@@ -1,0 +1,33 @@
+{% extends "../layouts/company.twig" %}
+
+{% block main %}
+	<main>
+		<section>
+			<h2>Liste des tournées</h2>
+			<button id="createTour">Créer une tournée</button>
+
+			{% for tour in tours %}
+				<h3>{{ tour.name }}</h3>
+				<ul>
+					{% for patient in tour.patients %}
+						<li>{{ patient.lastName }}
+							{{ patient.firstName }}</li>
+					{% endfor %}
+				</ul>
+			{% endfor %}
+
+			<dialog id="tourModal">
+				<button class="closeModal">X</button>
+				<form action="/tours/add" method="post">
+					<label for="name">Nom de la tournée</label>
+					<input type="text" id="name" name="name">
+					<button>Créer la tournée</button>
+				</form>
+			</dialog>
+		</section>
+	</main>
+{% endblock %}
+
+{% block script %}
+	<script src="../scripts/allTours.js"></script>
+{% endblock %}

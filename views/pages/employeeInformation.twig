@@ -1,59 +1,88 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	{% if update %}
-		<form action="/employees/{{employee.id}}/update" method="post">
-			<h2>Modifier les informations de l'employé sélectionné :
-			</h2>
-			<label for="lastName">Nom de famille</label>
-			<input type="text" id="lastName" name="lastName" value="{{employee.lastName}}">
-			<label for="firstName">Prénom</label>
-			<input type="text" id="firstName" name="firstName" value="{{employee.firstName}}">
-			<label for="mail">Adresse mail</label>
-			<input type="mail" id="mail" name="mail" value="{{employee.mail}}">
-			<label for="birthday">Date de naissance (facultatif)</label>
-			<input type="date" id="birthday" name="birthday" value="{{birthday}}">
-			<label for="gender">Genre (facultatif)</label>
-			<select id="gender" name="gender">
-				<option value="">--Sélectionnez le genre (facultatif)--</option>
-				<option value="male">Homme</option>
-				<option value="female">Femme</option>
-				<option value="other">Autre</option>
-			</select>
-			<button name="updateYes">Valider</button>
-			<button name="updateNo">Annuler</button>
-		</form>
-	{% else %}
-		<form action="/employees/{{employee.id}}" method="post">
-			<h2>Informations de l'employé sélectionné :
-			</h2>
-			<h3>Nom :</h3>
-			<p>{{ employee.lastName }}</p>
-			<h3>Prénom :</h3>
-			<p>{{ employee.firstName }}</p>
-			<h3>Mail :</h3>
-			<p>{{ employee.mail }}</p>
-			<h3>Date de naissance :</h3>
-			<p>{{ employee.birthday }}</p>
-			<h3>Genre :</h3>
-			<p>
-				{% if employee.gender == "male" %}
-					Homme
-				{% elseif employee.gender == "female" %}
-					Femme
-				{% elseif employee.gender == "other" %}
-					Autre
-				{% endif %}
-			</p>
-			<button name="update" value="{{employee.id}}">Modifier</button>
-		</form>
-		<form action="/employees/{{ employee.id }}/delete" method="post">
-			<button>Supprimer</button>
-		</form>
-	{% endif %}
+	<main>
+		{% if update %}
+			<form action="/employees/{{employee.id}}/update" method="post">
+				<h2>Modifier les informations de l'employé sélectionné :
+				</h2>
+				<label for="lastName">Nom de famille</label>
+				<input type="text" id="lastName" name="lastName" value="{{employee.lastName}}">
+				<label for="firstName">Prénom</label>
+				<input type="text" id="firstName" name="firstName" value="{{employee.firstName}}">
+				<label for="mail">Adresse mail</label>
+				<input type="mail" id="mail" name="mail" value="{{employee.mail}}">
+				<label for="birthday">Date de naissance (facultatif)</label>
+				<input type="date" id="birthday" name="birthday" value="{{birthday}}">
+				<label for="gender">Genre (facultatif)</label>
+				<select id="gender" name="gender">
+					<option value="">--Sélectionnez le genre (facultatif)--</option>
+					<option value="male">Homme</option>
+					<option value="female">Femme</option>
+					<option value="other">Autre</option>
+				</select>
+				<button name="updateYes">Valider</button>
+				<button name="updateNo">Annuler</button>
+			</form>
+		{% else %}
+			<form action="/employees/{{employee.id}}" method="post">
+				<h2>Informations de l'employé sélectionné :
+				</h2>
+				<h3>Nom :</h3>
+				<p>{{ employee.lastName }}</p>
+				<h3>Prénom :</h3>
+				<p>{{ employee.firstName }}</p>
+				<h3>Mail :</h3>
+				<p>{{ employee.mail }}</p>
+				<h3>Date de naissance :</h3>
+				<p>{{ employee.birthday }}</p>
+				<h3>Genre :</h3>
+				<p>
+					{% if employee.gender == "male" %}
+						Homme
+					{% elseif employee.gender == "female" %}
+						Femme
+					{% elseif employee.gender == "other" %}
+						Autre
+					{% endif %}
+				</p>
+				<button name="update" value="{{employee.id}}">Modifier</button>
+			</form>
+			<form action="/employees/{{ employee.id }}/delete" method="post">
+				<button>Supprimer</button>
+			</form>
+		{% endif %}
 
-	{% if error %}
-		<p>{{ error }}</p>
-	{% endif %}
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
 
+		<button id="giveMission">Attribuer une mission</button>
+		<dialog id="missionModal">
+			<form action="/missions/add" method="post">
+				<button class="closeModal">X</button>
+				<label for="tourId">Affecter une tournée</label>
+				<select name="tourId" id="tourId">
+					<option value="">--Sélectionnez une tournée--</option>
+					{% for tour in company.tours %}
+						<option value="{{ tour.id }}">{{ tour.name }}</option>
+					{% endfor %}
+				</select>
+				<label for="carId">Affecter un véhicule</label>
+				<select name="carId" id="carId">
+					<option value="">--Sélectionnez un véhicule--</option>
+					{% for car in company.cars %}
+						<option value="{{car.id}}">{{ car.name }}</option>
+					{% endfor %}
+				</select>
+				<label for="date">Date de la mission</label>
+				<input type="date" id="date" name="date">
+				<button name="employeeId" value="{{ employee.id }}">Attribuer</button>
+			</form>
+		</dialog>
+	</main>
+{% endblock %}
+
+{% block script %}
+	<script src="../scripts/employeeInformation.js"></script>
 {% endblock %}

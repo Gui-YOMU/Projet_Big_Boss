@@ -79,9 +79,21 @@ export async function postCompanyLogin(req, res) {
 
 export async function getCompanyDashboard(req, res) {
   try {
-    const employees = await prisma.employee.findMany();
-    const cars = await prisma.car.findMany();
-    const patients = await prisma.patient.findMany();
+    const employees = await prisma.employee.findMany({
+      where: {
+        companyId: req.company.id
+      }
+    });
+    const cars = await prisma.car.findMany({
+      where: {
+        companyId: req.company.id
+      }
+    });
+    const patients = await prisma.patient.findMany({
+      where: {
+        companyId: req.company.id
+      }
+    });
     res.render("pages/companyDashboard.twig", {
       title: "Dashboard",
       company: req.company,
