@@ -7,9 +7,7 @@ createTour.addEventListener("click", (e) => {
   tourModal.showModal();
 });
 
-closeModalButtons.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    e.preventDefault();
-    tourModal.close();
-  });
+closeModal.addEventListener("click", (e) => {
+  e.preventDefault();
+  tourModal.close();
 });

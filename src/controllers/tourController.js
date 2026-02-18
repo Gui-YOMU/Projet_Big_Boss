@@ -46,8 +46,6 @@ export async function getAllTours(req, res) {
         }
       }
     })
-    console.log(tours);
-    
     res.render("pages/allTours.twig", {
       tours,
       company: req.company
