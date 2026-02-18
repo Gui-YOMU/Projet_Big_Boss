@@ -1,35 +1,35 @@
 import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
 
-const prisma = new PrismaClient({ adapter })
+const prisma = new PrismaClient({ adapter });
 
 export async function giveMission(req, res) {
-    console.log(req.body);
-    
-    const { date, tourId, carId, employeeId } = req.body;
-    try {
-        await prisma.mission.create({
-            data: {
-                date: new Date(date),
-                tourId: parseInt(tourId),
-                carId: parseInt(carId),
-                employeeId: parseInt(employeeId),
-                companyId: req.company.id
-            }
-        })
-        res.redirect(`/employees/${employeeId}`);
-    } catch (error) {
-        console.error(error);
-        const employee = await prisma.employee.findUnique({
-        where: {
-          id: parseInt(employeeId),
-        },
-      });
-      res.render("pages/employeeInformation.twig", {
-        title: "Employé",
-        company: req.company,
-        employee,
-        error: "Erreur lors de l'attribution de la mission.",
-      });
-    }
+  console.log(req.body);
+
+  const { date, tourId, carId, employeeId } = req.body;
+  try {
+    await prisma.mission.create({
+      data: {
+        date: new Date(date),
+        tourId: parseInt(tourId),
+        carId: parseInt(carId),
+        employeeId: parseInt(employeeId),
+        companyId: req.company.id,
+      },
+    });
+    res.redirect(`/employees/${employeeId}`);
+  } catch (error) {
+    console.error(error);
+    const employee = await prisma.employee.findUnique({
+      where: {
+        id: parseInt(employeeId),
+      },
+    });
+    res.render("pages/employeeInformation.twig", {
+      title: "Employé",
+      company: req.company,
+      employee,
+      error: "Erreur lors de l'attribution de la mission.",
+    });
+  }
 }

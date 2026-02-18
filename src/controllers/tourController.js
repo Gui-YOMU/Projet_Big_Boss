@@ -13,7 +13,7 @@ export async function createTour(req, res) {
         companyId: req.company.id
       },
     });
-    res.redirect("/dashboard");
+    res.redirect("/tours");
   } catch (error) {
     console.error(error);
     const employees = await prisma.employee.findMany();
@@ -25,6 +25,38 @@ export async function createTour(req, res) {
       cars,
       patients,
       error: "Erreur lors de la création de la tournée.",
+    });
+  }
+}
+
+export async function getAllTours(req, res) {
+  try {
+    const tours = await prisma.tour.findMany({
+      where: {
+        companyId: req.company.id
+      },
+      select: {
+        name: true,
+        patients: {
+          select: {
+            id: true,
+            lastName: true,
+            firstName: true
+          }
+        }
+      }
+    })
+    console.log(tours);
+    
+    res.render("pages/allTours.twig", {
+      tours,
+      company: req.company
+    });
+  } catch (error) {
+    console.error(error);
+    res.render("pages/allTours.twig", {
+      company: req.company,
+      error: "Erreur lors de l'affichage des tournées."
     });
   }
 }

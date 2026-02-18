@@ -18,12 +18,26 @@ export async function addCar(req, res) {
     res.redirect("/dashboard");
   } catch (error) {
     console.error(error);
-    const employees = await prisma.employee.findMany();
-    const cars = await prisma.car.findMany();
+    const employees = await prisma.employee.findMany({
+      where: {
+        companyId: req.company.id
+      }
+    });
+    const cars = await prisma.car.findMany({
+      where: {
+        companyId: req.company.id
+      }
+    });
+    const patients = await prisma.patient.findMany({
+      where: {
+        companyId: req.company.id
+      }
+    });
     res.render("pages/companyDashboard.twig", {
       title: "Dashboard",
       employees,
       cars,
+      patients,
       error: "Erreur lors de l'ajout du véhicule.",
     });
   }
