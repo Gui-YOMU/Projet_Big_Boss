@@ -1,21 +1,23 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	<h2>Connectez-vous pour accéder à votre dashboard !</h2>
-	<form action="/login" method="post">
-		<label for="siret">Numéro SIRET :
-		</label>
-		<input type="text" id="siret" name="siret" placeholder="SIRET">
-		<label for="password">Mot de passe :
-		</label>
-		<input type="password" id="password" name="password" placeholder="Mot de passe">
-		<button>Se connecter</button>
-	</form>
-	{% if error %}
-		<p>{{ error }}</p>
-	{% endif %}
+	<main>
+		<h2>Connectez-vous pour accéder à votre dashboard !</h2>
+		<form action="/login" method="post">
+			<label for="siret">Numéro SIRET :
+			</label>
+			<input type="text" id="siret" name="siret" placeholder="SIRET">
+			<label for="password">Mot de passe :
+			</label>
+			<input type="password" id="password" name="password" placeholder="Mot de passe">
+			<button>Se connecter</button>
+		</form>
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
 
-	<p>Pas encore inscrit ? Cliquez
-		<a href="/signin">ici</a>
-		pour inscrire votre établissement.</p>
+		<p>Pas encore inscrit ? Cliquez
+			<a href="/signin">ici</a>
+			pour inscrire votre établissement.</p>
+	</main>
 {% endblock %}

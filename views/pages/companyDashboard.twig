@@ -1,117 +1,119 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	{% if error %}
-		<p>{{ error }}</p>
-	{% endif %}
+	<main>
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
 
-	<section>
-		<h2>Liste des patients</h2>
-		<button id="addPatient">+</button>
+		<section>
+			<h2>Liste des patients</h2>
+			<button id="addPatient">+</button>
 
-		{% for patient in patients %}
-			<article>
-				<h3>{{ patient.lastName }}
-					{{ patient.firstName }}</h3>
-				<form action="/patients/{{ patient.id }}" method="get">
-					<button>Consulter</button>
+			{% for patient in patients %}
+				<article>
+					<h3>{{ patient.lastName }}
+						{{ patient.firstName }}</h3>
+					<form action="/patients/{{ patient.id }}" method="get">
+						<button>Consulter</button>
+					</form>
+				</article>
+			{% endfor %}
+
+			<dialog id="patientModal" class="modal">
+				<button class="closeModal">X</button>
+				<form action="/patients/add" method="post">
+					<label for="lastName">Nom de famille du patient</label>
+					<input type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
+					<label for="firstName">Prénom du patient</label>
+					<input type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
+					<p>Adresse du patient</p>
+					<label for="streetNumber">N°</label>
+					<input type="text" id="streetNumber" name="streetNumber" placeholder="ex: 123">
+					<label for="street">Voie</label>
+					<input type="text" id="street" name="street" placeholder="ex: rue du Paradis">
+					<label for="zipCode">Code postal</label>
+					<input type="text" id="zipCode" name="zipCode" placeholder="ex: 83000">
+					<label for="city">Ville</label>
+					<input type="text" id="city" name="city" placeholder="ex: TOULON">
+					<label for="tourId">Tournée</label>
+					<select name="tourId" id="tourId">
+						<option value="">--Sélectionnez une tournée--</option>
+						{% for tour in company.tours %}
+							<option value="{{tour.id}}">{{ tour.name }}</option>
+						{% endfor %}
+					</select>
+					<button type="reset">Effacer les champs</button>
+					<button>Ajouter le patient</button>
 				</form>
-			</article>
-		{% endfor %}
+			</dialog>
+		</section>
+		<section>
+			<h2>Liste des employés</h2>
+			<button id="addEmployee">+</button>
 
-		<dialog id="patientModal" class="modal">
-			<button class="closeModal">X</button>
-			<form action="/patients/add" method="post">
-				<label for="lastName">Nom de famille du patient</label>
-				<input type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
-				<label for="firstName">Prénom du patient</label>
-				<input type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
-				<p>Adresse du patient</p>
-				<label for="streetNumber">N°</label>
-				<input type="text" id="streetNumber" name="streetNumber" placeholder="ex: 123">
-				<label for="street">Voie</label>
-				<input type="text" id="street" name="street" placeholder="ex: rue du Paradis">
-				<label for="zipCode">Code postal</label>
-				<input type="text" id="zipCode" name="zipCode" placeholder="ex: 83000">
-				<label for="city">Ville</label>
-				<input type="text" id="city" name="city" placeholder="ex: TOULON">
-				<label for="tourId">Tournée</label>
-				<select name="tourId" id="tourId">
-				<option value="">--Sélectionnez une tournée--</option>
-				{% for tour in company.tours %}
-					<option value="{{tour.id}}">{{ tour.name }}</option>
-				{% endfor %}
-				</select>
-				<button type="reset">Effacer les champs</button>
-				<button>Ajouter le patient</button>
-			</form>
-		</dialog>
-	</section>
-	<section>
-		<h2>Liste des employés</h2>
-		<button id="addEmployee">+</button>
+			{% for employee in employees %}
+				<article>
+					<h3>{{ employee.lastName }}
+						{{ employee.firstName }}</h3>
+					<form action="/employees/{{ employee.id }}" method="get">
+						<button>Consulter</button>
+					</form>
+				</article>
+			{% endfor %}
 
-		{% for employee in employees %}
-			<article>
-				<h3>{{ employee.lastName }}
-					{{ employee.firstName }}</h3>
-				<form action="/employees/{{ employee.id }}" method="get">
-					<button>Consulter</button>
+			<dialog id="employeeModal" class="modal">
+				<button class="closeModal">X</button>
+				<form action="/employees/add" method="post">
+					<label for="lastName">Nom de famille de l'employé</label>
+					<input type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
+					<label for="firstName">Prénom de l'employé</label>
+					<input type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
+					<label for="mail">Adresse mail de l'employé</label>
+					<input type="mail" id="mail" name="mail" placeholder="ex: jacques.dupont@gmail.com">
+					<label for="password">Mot de passe initial</label>
+					{# <p>Le mot de passe sera changé par l'employé à sa première connexion.</p> #}
+					<input type="password" id="password" name="password" placeholder="Au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s)">
+					<label for="birthday">Date de naissance de l'employé (facultatif)</label>
+					<input type="date" id="birthday" name="birthday">
+					<label for="gender">Genre de l'employé (facultatif)</label>
+					<select id="gender" name="gender">
+						<option value="">--Votre genre (facultatif)--</option>
+						<option value="male">Homme</option>
+						<option value="female">Femme</option>
+						<option value="other">Autre</option>
+					</select>
+					<button type="reset">Effacer les champs</button>
+					<button>Ajouter l'employé</button>
 				</form>
-			</article>
-		{% endfor %}
+			</dialog>
+		</section>
+		<section>
+			<h2>Liste des véhicules</h2>
+			<button id="addCar">+</button>
 
-		<dialog id="employeeModal" class="modal">
-			<button class="closeModal">X</button>
-			<form action="/employees/add" method="post">
-				<label for="lastName">Nom de famille de l'employé</label>
-				<input type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
-				<label for="firstName">Prénom de l'employé</label>
-				<input type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
-				<label for="mail">Adresse mail de l'employé</label>
-				<input type="mail" id="mail" name="mail" placeholder="ex: jacques.dupont@gmail.com">
-				<label for="password">Mot de passe initial</label>
-				{# <p>Le mot de passe sera changé par l'employé à sa première connexion.</p> #}
-				<input type="password" id="password" name="password" placeholder="Au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s)">
-				<label for="birthday">Date de naissance de l'employé (facultatif)</label>
-				<input type="date" id="birthday" name="birthday">
-				<label for="gender">Genre de l'employé (facultatif)</label>
-				<select id="gender" name="gender">
-					<option value="">--Votre genre (facultatif)--</option>
-					<option value="male">Homme</option>
-					<option value="female">Femme</option>
-					<option value="other">Autre</option>
-				</select>
-				<button type="reset">Effacer les champs</button>
-				<button>Ajouter l'employé</button>
-			</form>
-		</dialog>
-	</section>
-	<section>
-		<h2>Liste des véhicules</h2>
-		<button id="addCar">+</button>
+			{% for car in cars %}
+				<article>
+					<h3>{{ car.name }}
+						({{ car.plate }})</h3>
+					<form action="/cars/{{ car.id }}" method="get">
+						<button>Consulter</button>
+					</form>
+				</article>
+			{% endfor %}
 
-		{% for car in cars %}
-			<article>
-				<h3>{{ car.name }}
-					({{ car.plate }})</h3>
-				<form action="/cars/{{ car.id }}" method="get">
-					<button>Consulter</button>
+			<dialog id="carModal" class="modal">
+				<button class="closeModal">X</button>
+				<form action="/cars/add" method="post">
+					<label for="name">Nom du véhicule</label>
+					<input type="text" id="name" name="name" placeholder="Nom du véhicule">
+					<label for="plate">Immatriculation du véhicule</label>
+					<input type="text" id="plate" name="plate" placeholder="ex : AA123ZZ">
+					<button>Ajouter le véhicule</button>
 				</form>
-			</article>
-		{% endfor %}
-
-		<dialog id="carModal" class="modal">
-			<button class="closeModal">X</button>
-			<form action="/cars/add" method="post">
-				<label for="name">Nom du véhicule</label>
-				<input type="text" id="name" name="name" placeholder="Nom du véhicule">
-				<label for="plate">Immatriculation du véhicule</label>
-				<input type="text" id="plate" name="plate" placeholder="ex : AA123ZZ">
-				<button>Ajouter le véhicule</button>
-			</form>
-		</dialog>
-	</section>
+			</dialog>
+		</section>
+	</main>
 {% endblock %}
 
 {% block script %}

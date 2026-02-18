@@ -1,66 +1,67 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	{% if update %}
-		<form action="/patients/{{patient.id}}/update" method="post">
-			<h2>Modifier les informations du patient sélectionné :
-			</h2>
-			<label for="lastName">Nom de famille</label>
-			<input type="text" id="lastName" name="lastName" value="{{patient.lastName}}">
-			<label for="firstName">Prénom</label>
-			<input type="text" id="firstName" name="firstName" value="{{patient.firstName}}">
-			<p>Adresse du patient</p>
-			<label for="streetNumber">N°</label>
-			<input type="text" id="streetNumber" name="streetNumber" value="{{patient.streetNumber}}">
-			<label for="street">Voie</label>
-			<input type="text" id="street" name="street" value="{{patient.street}}">
-			<label for="zipCode">Code postal</label>
-			<input type="text" id="zipCode" name="zipCode" value="{{patient.zipCode}}">
-			<label for="city">Ville</label>
-			<input type="text" id="city" name="city" value="{{patient.city}}">
-			<label for="tourId">Tournée</label>
-			<select name="tourId" id="tourId">
-				{% if patient.tourId == null %}
-					<option value="">--Sélectionnez une tournée--</option>
-				{% else %}
-					<option value="{{patient.tourId}}">{{ tour.name }}</option>
-				{% endif %}
-				{% for tour in company.tours %}
-					{% if tour.id != patient.tourId %}
-						<option value="{{tour.id}}">{{ tour.name }}</option>
+	<main>
+		{% if update %}
+			<form action="/patients/{{patient.id}}/update" method="post">
+				<h2>Modifier les informations du patient sélectionné :
+				</h2>
+				<label for="lastName">Nom de famille</label>
+				<input type="text" id="lastName" name="lastName" value="{{patient.lastName}}">
+				<label for="firstName">Prénom</label>
+				<input type="text" id="firstName" name="firstName" value="{{patient.firstName}}">
+				<p>Adresse du patient</p>
+				<label for="streetNumber">N°</label>
+				<input type="text" id="streetNumber" name="streetNumber" value="{{patient.streetNumber}}">
+				<label for="street">Voie</label>
+				<input type="text" id="street" name="street" value="{{patient.street}}">
+				<label for="zipCode">Code postal</label>
+				<input type="text" id="zipCode" name="zipCode" value="{{patient.zipCode}}">
+				<label for="city">Ville</label>
+				<input type="text" id="city" name="city" value="{{patient.city}}">
+				<label for="tourId">Tournée</label>
+				<select name="tourId" id="tourId">
+					{% if patient.tourId == null %}
+						<option value="">--Sélectionnez une tournée--</option>
+					{% else %}
+						<option value="{{patient.tourId}}">{{ tour.name }}</option>
 					{% endif %}
-				{% endfor %}
-			</select>
-			<button name="updateYes">Valider</button>
-			<button name="updateNo">Annuler</button>
-		</form>
-	{% else %}
-		<form action="/patients/{{patient.id}}" method="post">
-			<h2>Informations du patient sélectionné :
-			</h2>
-			<h3>Nom :</h3>
-			<p>{{ patient.lastName }}</p>
-			<h3>Prénom :</h3>
-			<p>{{ patient.firstName }}</p>
-			<h3>Adresse :</h3>
-			<p>{{ patient.streetNumber }}
-				{{ patient.street }}</p>
-			<p>{{ patient.zipCode }}
-				{{ patient.city }}</p>
-			<h3>Tournée :</h3>
-			{% if patient.tourId %}
-				<p>{{ tour.name }}</p>
-			{% endif %}
+					{% for tour in company.tours %}
+						{% if tour.id != patient.tourId %}
+							<option value="{{tour.id}}">{{ tour.name }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+				<button name="updateYes">Valider</button>
+				<button name="updateNo">Annuler</button>
+			</form>
+		{% else %}
+			<form action="/patients/{{patient.id}}" method="post">
+				<h2>Informations du patient sélectionné :
+				</h2>
+				<h3>Nom :</h3>
+				<p>{{ patient.lastName }}</p>
+				<h3>Prénom :</h3>
+				<p>{{ patient.firstName }}</p>
+				<h3>Adresse :</h3>
+				<p>{{ patient.streetNumber }}
+					{{ patient.street }}</p>
+				<p>{{ patient.zipCode }}
+					{{ patient.city }}</p>
+				<h3>Tournée :</h3>
+				{% if patient.tourId %}
+					<p>{{ tour.name }}</p>
+				{% endif %}
 
-			<button name="update" value="{{patient.id}}">Modifier</button>
-		</form>
-		<form action="/patients/{{ patient.id }}/delete" method="post">
-			<button>Supprimer</button>
-		</form>
-	{% endif %}
+				<button name="update" value="{{patient.id}}">Modifier</button>
+			</form>
+			<form action="/patients/{{ patient.id }}/delete" method="post">
+				<button>Supprimer</button>
+			</form>
+		{% endif %}
 
-	{% if error %}
-		<p>{{ error }}</p>
-	{% endif %}
-
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
+	</main>
 {% endblock %}
