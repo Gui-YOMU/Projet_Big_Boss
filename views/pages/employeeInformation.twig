@@ -58,29 +58,25 @@
 
 	<button id="giveMission">Attribuer une mission</button>
 	<dialog id="missionModal">
-		<form action="/employees/{{employee.id}}/mission" method="post">
+		<form action="/missions/add" method="post">
 			<button class="closeModal">X</button>
-			<label for="patients">Affecter des patients</label>
-			<button type="button" id="addPatient">+</button>
-			<select name="patients" id="patients">
-				<option value="">--Sélectionnez un patient--</option>
-				{% for patient in company.patients %}
-					{% if patient.employeeId == null %}
-						<option value="{{patient.id}}">{{ patient.lastName }}
-							{{ patient.firstName }}</option>
-					{% endif %}
+			<label for="tourId">Affecter une tournée</label>
+			<select name="tourId" id="tourId">
+				<option value="">--Sélectionnez une tournée--</option>
+				{% for tour in company.tours %}
+					<option value="{{ tour.id }}">{{ tour.name }}</option>
 				{% endfor %}
 			</select>
-			<label for="car">Affecter un véhicule</label>
-			<select name="car" id="car">
+			<label for="carId">Affecter un véhicule</label>
+			<select name="carId" id="carId">
 				<option value="">--Sélectionnez un véhicule--</option>
 				{% for car in company.cars %}
-					{% if car.employeeId == null %}
-						<option value="{{car.id}}">{{ car.name }}</option>
-					{% endif %}
+					<option value="{{car.id}}">{{ car.name }}</option>
 				{% endfor %}
 			</select>
-			<button>Attribuer</button>
+			<label for="date">Date de la mission</label>
+			<input type="date" id="date" name="date">
+			<button name="employeeId" value="{{ employee.id }}">Attribuer</button>
 		</form>
 	</dialog>
 
