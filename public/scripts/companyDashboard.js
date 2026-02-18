@@ -24,3 +24,8 @@ addCar.addEventListener("click", (e) => {
   e.preventDefault();
   carModal.showModal();
 });
+
+addPatient.addEventListener("click", (e) => {
+  e.preventDefault();
+  patientModal.showModal();
+});

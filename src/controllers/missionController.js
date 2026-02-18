@@ -4,8 +4,6 @@ import { adapter } from "../../prisma/adapter.js";
 const prisma = new PrismaClient({ adapter });
 
 export async function giveMission(req, res) {
-  console.log(req.body);
-
   const { date, tourId, carId, employeeId } = req.body;
   try {
     await prisma.mission.create({
