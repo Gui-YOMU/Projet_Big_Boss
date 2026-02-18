@@ -146,3 +146,41 @@ export async function updateEmployee(req, res) {
     }
   }
 }
+
+export async function giveMission(req, res) {
+  const mission = new PrismaClient({ adapter })
+  console.log(req.body);
+  const { patients, car } = req.body;
+  try {
+    await mission.car.update({
+      where: {
+        id: car,
+      },
+      data: {
+        employeeId: parseInt(req.params.id),
+      },
+    });
+    await mission.patient.update({
+      where: {
+        id: patients,
+      },
+      data: {
+        employeeId: parseInt(req.params.id),
+      },
+    });
+    res.redirect(`/employees/${parseInt(req.params.id)}`);
+  } catch (error) {
+    console.error(error);
+    const employee = await prisma.employee.findUnique({
+      where: {
+        id: parseInt(req.params.id),
+      },
+    });
+    res.render("pages/employeeInformation.twig", {
+      title: "Employé",
+      company: req.company,
+      employee,
+      error: "Erreur lors de l'attribution de la mission.",
+    });
+  }
+}

@@ -56,4 +56,36 @@
 		<p>{{ error }}</p>
 	{% endif %}
 
+	<button id="giveMission">Attribuer une mission</button>
+	<dialog id="missionModal">
+		<form action="/employees/{{employee.id}}/mission" method="post">
+			<button class="closeModal">X</button>
+			<label for="patients">Affecter des patients</label>
+			<button type="button" id="addPatient">+</button>
+			<select name="patients" id="patients">
+				<option value="">--Sélectionnez un patient--</option>
+				{% for patient in company.patients %}
+					{% if patient.employeeId == null %}
+						<option value="{{patient.id}}">{{ patient.lastName }}
+							{{ patient.firstName }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+			<label for="car">Affecter un véhicule</label>
+			<select name="car" id="car">
+				<option value="">--Sélectionnez un véhicule--</option>
+				{% for car in company.cars %}
+					{% if car.employeeId == null %}
+						<option value="{{car.id}}">{{ car.name }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+			<button>Attribuer</button>
+		</form>
+	</dialog>
+
+{% endblock %}
+
+{% block script %}
+	<script src="../scripts/employeeInformation.js"></script>
 {% endblock %}

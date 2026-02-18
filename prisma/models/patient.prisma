@@ -8,6 +8,6 @@ model Patient {
     city String
     companyId Int
     company Company @relation(fields:[companyId], references: [id])
-    employeeId Int?
-    employee Employee? @relation(fields:[employeeId], references:[id])
+    tourId Int?
+    tour Tour? @relation(fields:[tourId], references: [id])
 }

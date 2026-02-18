@@ -124,8 +124,7 @@ exports.Prisma.CarScalarFieldEnum = {
   id: 'id',
   name: 'name',
   plate: 'plate',
-  companyId: 'companyId',
-  employeeId: 'employeeId'
+  companyId: 'companyId'
 };
 
 exports.Prisma.CompanyScalarFieldEnum = {
@@ -147,6 +146,14 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   companyId: 'companyId'
 };
 
+exports.Prisma.MissionScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  tourId: 'tourId',
+  employeeId: 'employeeId',
+  carId: 'carId'
+};
+
 exports.Prisma.PatientScalarFieldEnum = {
   id: 'id',
   lastName: 'lastName',
@@ -156,7 +163,12 @@ exports.Prisma.PatientScalarFieldEnum = {
   zipCode: 'zipCode',
   city: 'city',
   companyId: 'companyId',
-  employeeId: 'employeeId'
+  tourId: 'tourId'
+};
+
+exports.Prisma.TourScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.SortOrder = {
@@ -164,14 +176,14 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 exports.Prisma.CarOrderByRelevanceFieldEnum = {
   name: 'name',
   plate: 'plate'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 exports.Prisma.CompanyOrderByRelevanceFieldEnum = {
@@ -195,6 +207,10 @@ exports.Prisma.PatientOrderByRelevanceFieldEnum = {
   zipCode: 'zipCode',
   city: 'city'
 };
+
+exports.Prisma.TourOrderByRelevanceFieldEnum = {
+  name: 'name'
+};
 exports.Gender = exports.$Enums.Gender = {
   male: 'male',
   female: 'female',
@@ -205,7 +221,9 @@ exports.Prisma.ModelName = {
   Car: 'Car',
   Company: 'Company',
   Employee: 'Employee',
-  Patient: 'Patient'
+  Mission: 'Mission',
+  Patient: 'Patient',
+  Tour: 'Tour'
 };
 
 /**
