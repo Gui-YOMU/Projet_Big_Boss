@@ -86,10 +86,10 @@
 		{% endif %}
 
 		<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="carModal">
-			<form class="flex flex-col items-center" action="/employees/{{employee.id}}/give" method="post">
+			<form class="flex flex-col items-center md:gap-3" action="/employees/{{employee.id}}/give" method="post">
 				<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
-				<label class="m-auto" for="carId">Affecter un véhicule</label>
-				<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" name="carId" id="carId">
+				<label class="m-auto md:text-lg" for="carId">Affecter un véhicule</label>
+				<select class="text-sm md:text-lg m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 md:w-80 pl-1 shadow-sm shadow-blue-300" name="carId" id="carId">
 					<option value="">--Sélectionnez un véhicule--</option>
 					{% for car in company.cars %}
 						{% if car.employeeId == null %}
@@ -102,17 +102,17 @@
 		</dialog>
 
 		<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="missionModal">
-			<form class="flex flex-col items-center" action="/missions/add" method="post">
+			<form class="flex flex-col items-center md:gap-3" action="/missions/add" method="post">
 				<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
-				<label class="m-auto" for="tourId">Affecter une tournée</label>
-				<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" name="tourId" id="tourId">
+				<label class="m-auto md:text-lg" for="tourId">Affecter une tournée</label>
+				<select class="text-sm md:text-lg m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 md:w-80 pl-1 shadow-sm shadow-blue-300" name="tourId" id="tourId">
 					<option value="">--Sélectionnez une tournée--</option>
 					{% for tour in company.tours %}
 						<option value="{{ tour.id }}">{{ tour.name }}</option>
 					{% endfor %}
 				</select>
-				<label class="m-auto" for="date">Date de la mission</label>
-				<input class="text-sm m-auto border border-blue-600 rounded-lg w-40 pl-1 shadow-sm shadow-blue-300" type="date" id="date" name="date">
+				<label class="m-auto md:text-lg" for="date">Date de la mission</label>
+				<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-40 md:w-60 pl-1 shadow-sm shadow-blue-300" type="date" id="date" name="date">
 				<button class="m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="employeeId" value="{{ employee.id }}">Attribuer</button>
 			</form>
 		</dialog>

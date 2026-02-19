@@ -11,7 +11,7 @@
 			{% for tour in tours %}
 				<article class="border rounded-lg pl-5 pr-5 pb-5 bg-blue-200">
 					<h3 class="text-lg text-center">{{ tour.name }}</h3>
-					<div class="grid grid-cols-2 gap-2">
+					<div class="grid grid-cols-2 gap-2 md:grid-cols-4">
 						{% for patient in tour.patients %}
 							<form class="flex flex-col" action="/patients/{{ patient.id }}" method="get">
 								<button class="bg-white border border-blue-600 rounded-md h-15">{{ patient.lastName }}
@@ -23,10 +23,10 @@
 			{% endfor %}
 
 			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="tourModal">	
-				<form class="flex flex-col items-center" action="/tours/add" method="post">
+				<form class="flex flex-col items-center md:gap-3" action="/tours/add" method="post">
 				<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal">X</button>
-					<label class="m-auto" for="name">Nom de la tournée</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="name" name="name">
+					<label class="m-auto md:text-lg" for="name">Nom de la tournée</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-70 md:w-90 pl-1 shadow-sm shadow-blue-300" type="text" id="name" name="name">
 					<button class="m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Créer la tournée</button>
 				</form>
 			</dialog>

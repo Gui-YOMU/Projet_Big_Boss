@@ -11,7 +11,7 @@
 				<h2 class="text-xl text-center">Liste des patients</h2>
 				<button class="text-lg font-bold m-5 p-2 border rounded-lg w-10 bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="addPatient">+</button>
 			</div>
-			<div class="grid grid-cols-2 gap-2">
+			<div class="grid grid-cols-2 gap-2 md:grid-cols-4">
 				{% for patient in patients %}
 					<form class="flex flex-col" action="/patients/{{ patient.id }}" method="get">
 						<button class="bg-white border border-blue-600 rounded-md h-15">{{ patient.lastName }}
@@ -21,28 +21,43 @@
 			</div>
 
 			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="patientModal" class="modal">
-				<form class="flex flex-col items-center" action="/patients/add" method="post">
+				<form class="flex flex-col items-center gap-2 md:gap-3" action="/patients/add" method="post">
 					<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
-					<label class="m-auto" for="lastName">Nom de famille du patient</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
-					<label class="m-auto" for="firstName">Prénom du patient</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
-					<p class="text-lg text-center">Adresse du patient</p>
-					<label class="m-auto" for="streetNumber">N°</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-20 pl-1 shadow-sm shadow-blue-300" type="text" id="streetNumber" name="streetNumber" placeholder="ex: 123">
-					<label class="m-auto" for="street">Voie</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="street" name="street" placeholder="ex: rue du Paradis">
-					<label class="m-auto" for="zipCode">Code postal</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-30 pl-1 shadow-sm shadow-blue-300" type="text" id="zipCode" name="zipCode" placeholder="ex: 83000">
-					<label class="m-auto" for="city">Ville</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="city" name="city" placeholder="ex: TOULON">
-					<label class="m-auto" for="tourId">Tournée</label>
-					<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" name="tourId" id="tourId">
-						<option value="">--Sélectionnez une tournée--</option>
-						{% for tour in company.tours %}
-							<option value="{{tour.id}}">{{ tour.name }}</option>
-						{% endfor %}
-					</select>
+					<label class="m-auto md:text-lg" for="lastName">Nom de famille du patient</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-70 md:w-90 pl-1 shadow-sm shadow-blue-300" type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
+					<label class="m-auto md:text-lg" for="firstName">Prénom du patient</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-70 md:w-90 pl-1 shadow-sm shadow-blue-300" type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
+					<p class="mt-5 font-bold italic text-lg md:text-xl text-center">Adresse du patient</p>
+					<div class="flex gap-2">
+						<div class="flex flex-col">
+							<label class="m-auto md:text-lg" for="streetNumber">N°</label>
+							<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-15 md:w-40 pl-1 shadow-sm shadow-blue-300" type="text" id="streetNumber" name="streetNumber" placeholder="ex: 123">
+						</div>
+						<div class="flex flex-col">
+							<label class="m-auto md:text-lg" for="street">Voie</label>
+							<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-60 md:w-90 pl-1 shadow-sm shadow-blue-300" type="text" id="street" name="street" placeholder="ex: rue du Paradis">
+						</div>
+					</div>
+					<div class="flex gap-2">
+						<div class="flex flex-col">
+							<label class="m-auto md:text-lg" for="zipCode">Code postal</label>
+							<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-20 md:w-50 pl-1 shadow-sm shadow-blue-300" type="text" id="zipCode" name="zipCode" placeholder="ex: 83000">
+						</div>
+						<div class="flex flex-col">
+							<label class="m-auto md:text-lg" for="city">Ville</label>
+							<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-50 md:w-90 pl-1 shadow-sm shadow-blue-300" type="text" id="city" name="city" placeholder="ex: TOULON">
+						</div>
+					</div>
+					<div class="flex flex-col">
+						<label class="m-auto md:text-lg" for="tourId">Tournée</label>
+						<select class="text-sm md:text-lg m-auto mb-2 border border-blue-600 rounded-lg w-60 md:w-80 pl-1 shadow-sm shadow-blue-300" name="tourId" id="tourId">
+							<option value="">--Sélectionnez une tournée--</option>
+							{% for tour in company.tours %}
+								<option value="{{tour.id}}">{{ tour.name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+
 					<div class="flex justify-center">
 						<button class="m-5 p-2 border rounded-lg w-fit bg-yellow-400 hover:bg-yellow-200 shadow-sm shadow-yellow-600" type="reset">Effacer les champs</button>
 						<button class="m-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Ajouter le patient</button>
@@ -56,7 +71,7 @@
 				<h2 class="text-xl text-center">Liste des employés</h2>
 				<button class="text-lg font-bold m-5 p-2 border rounded-lg w-10 bg-lime-400 hover:bg-lime-200 shadow-sm shadow-lime-600" id="addEmployee">+</button>
 			</div>
-			<div class="grid grid-cols-2 gap-2">
+			<div class="grid grid-cols-2 gap-2 md:grid-cols-4">
 				{% for employee in employees %}
 					<form class="flex flex-col" action="/employees/{{ employee.id }}" method="get">
 						<button class="bg-white border border-lime-600 rounded-md h-15">{{ employee.lastName }}
@@ -66,21 +81,21 @@
 			</div>
 
 			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="employeeModal" class="modal">
-				<form class="flex flex-col items-center" action="/employees/add" method="post">
+				<form class="flex flex-col items-center md:gap-3" action="/employees/add" method="post">
 					<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
-					<label class="m-auto" for="lastName">Nom de famille de l'employé</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
-					<label class="m-auto" for="firstName">Prénom de l'employé</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
-					<label class="m-auto" for="mail">Adresse mail de l'employé</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="mail" id="mail" name="mail" placeholder="ex: jacques.dupont@gmail.com">
-					<label class="m-auto" for="password">Mot de passe initial</label>
+					<label class="m-auto md:text-lg" for="lastName">Nom de famille de l'employé</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-70 md:w-90 pl-1 shadow-sm shadow-blue-300" type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
+					<label class="m-auto md:text-lg" for="firstName">Prénom de l'employé</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-70 md:w-90 pl-1 shadow-sm shadow-blue-300" type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
+					<label class="m-auto md:text-lg" for="mail">Adresse mail de l'employé</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-70 md:w-90 pl-1 shadow-sm shadow-blue-300" type="mail" id="mail" name="mail" placeholder="ex: jacques.dupont@gmail.com">
+					<label class="m-auto md:text-lg" for="password">Mot de passe initial</label>
 					{# <p>Le mot de passe sera changé par l'employé à sa première connexion.</p> #}
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="password" id="password" name="password" placeholder="Au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s)">
-					<label class="m-auto" for="birthday">Date de naissance de l'employé (facultatif)</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-40 pl-1 shadow-sm shadow-blue-300" type="date" id="birthday" name="birthday">
-					<label class="m-auto" for="gender">Genre de l'employé (facultatif)</label>
-					<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" id="gender" name="gender">
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-70 md:w-90 pl-1 shadow-sm shadow-blue-300" type="password" id="password" name="password" placeholder="12+ majuscule(s), minuscule(s) et chiffre(s)">
+					<label class="m-auto md:text-lg" for="birthday">Date de naissance de l'employé (facultatif)</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-40 md:w-60 pl-1 shadow-sm shadow-blue-300" type="date" id="birthday" name="birthday">
+					<label class="m-auto md:text-lg" for="gender">Genre de l'employé (facultatif)</label>
+					<select class="text-sm md:text-lg m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 md:w-80 pl-1 shadow-sm shadow-blue-300" id="gender" name="gender">
 						<option value="">--Sélectionnez un genre--</option>
 						<option value="male">Homme</option>
 						<option value="female">Femme</option>
@@ -99,7 +114,7 @@
 				<h2 class="text-xl text-center">Liste des véhicules</h2>
 				<button class="text-lg font-bold m-5 p-2 border rounded-lg w-10 bg-green-400 hover:bg-green-600 shadow-sm shadow-green-200" id="addCar">+</button>
 			</div>
-			<div class="grid grid-cols-2 gap-2">
+			<div class="grid grid-cols-2 gap-2 md:grid-cols-4">
 				{% for car in cars %}
 					<form class="flex flex-col" action="/cars/{{ car.id }}" method="get">
 						<button class="bg-white border border-green-200 rounded-md h-15">{{ car.name }}
@@ -109,12 +124,12 @@
 			</div>
 
 			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="carModal" class="modal">
-				<form class="flex flex-col items-center" action="/cars/add" method="post">
+				<form class="flex flex-col items-center md:gap-3" action="/cars/add" method="post">
 					<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
-					<label class="m-auto" for="name">Nom du véhicule</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="name" name="name" placeholder="Nom du véhicule">
-					<label class="m-auto" for="plate">Immatriculation du véhicule</label>
-					<input class="text-sm m-auto border border-blue-600 rounded-lg w-30 pl-1 shadow-sm shadow-blue-300" type="text" id="plate" name="plate" placeholder="ex : AA123ZZ">
+					<label class="m-auto md:text-lg" for="name">Nom du véhicule</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-70 md:w-90 pl-1 shadow-sm shadow-blue-300" type="text" id="name" name="name" placeholder="Nom du véhicule">
+					<label class="m-auto md:text-lg" for="plate">Immatriculation du véhicule</label>
+					<input class="text-sm md:text-lg m-auto border border-blue-600 rounded-lg w-30 md:w-50 pl-1 shadow-sm shadow-blue-300" type="text" id="plate" name="plate" placeholder="ex : AA123ZZ">
 					<div class="flex justify-center">
 						<button class="m-5 p-2 border rounded-lg w-fit bg-yellow-400 hover:bg-yellow-200 shadow-sm shadow-yellow-600" type="reset">Effacer les champs</button>
 						<button class="m-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Ajouter le véhicule</button>
