@@ -315,9 +315,6 @@
   .p-0 {
     padding: calc(var(--spacing) * 0);
   }
-  .p-0\.5 {
-    padding: calc(var(--spacing) * 0.5);
-  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -335,9 +332,6 @@
   }
   .pl-0 {
     padding-left: calc(var(--spacing) * 0);
-  }
-  .pl-0\.5 {
-    padding-left: calc(var(--spacing) * 0.5);
   }
   .pl-1 {
     padding-left: calc(var(--spacing) * 1);
@@ -444,31 +438,10 @@
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
-  .hover\:bg-blue-100 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-blue-100);
-      }
-    }
-  }
   .hover\:bg-blue-200 {
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-blue-200);
-      }
-    }
-  }
-  .hover\:bg-blue-300 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-blue-300);
-      }
-    }
-  }
-  .hover\:bg-blue-900 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-blue-900);
       }
     }
   }

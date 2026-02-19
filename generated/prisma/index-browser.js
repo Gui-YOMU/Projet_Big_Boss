@@ -124,7 +124,8 @@ exports.Prisma.CarScalarFieldEnum = {
   id: 'id',
   name: 'name',
   plate: 'plate',
-  companyId: 'companyId'
+  companyId: 'companyId',
+  employeeId: 'employeeId'
 };
 
 exports.Prisma.CompanyScalarFieldEnum = {
@@ -151,7 +152,6 @@ exports.Prisma.MissionScalarFieldEnum = {
   date: 'date',
   tourId: 'tourId',
   employeeId: 'employeeId',
-  carId: 'carId',
   companyId: 'companyId'
 };
 
@@ -178,14 +178,14 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.CarOrderByRelevanceFieldEnum = {
-  name: 'name',
-  plate: 'plate'
-};
-
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.CarOrderByRelevanceFieldEnum = {
+  name: 'name',
+  plate: 'plate'
 };
 
 exports.Prisma.CompanyOrderByRelevanceFieldEnum = {

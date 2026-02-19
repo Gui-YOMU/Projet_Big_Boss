@@ -36,18 +36,18 @@ export async function addEmployee(req, res) {
     console.error(error);
     const employees = await prisma.employee.findMany({
       where: {
-        companyId: req.company.id
-      }
+        companyId: req.company.id,
+      },
     });
     const cars = await prisma.car.findMany({
       where: {
-        companyId: req.company.id
-      }
+        companyId: req.company.id,
+      },
     });
     const patients = await prisma.patient.findMany({
       where: {
-        companyId: req.company.id
-      }
+        companyId: req.company.id,
+      },
     });
     res.render("pages/companyDashboard.twig", {
       title: "Dashboard",
@@ -64,6 +64,21 @@ export async function getEmployeeInformation(req, res) {
     const employee = await prisma.employee.findUnique({
       where: {
         id: parseInt(req.params.id),
+      },
+      select: {
+        id: true,
+        lastName: true,
+        firstName: true,
+        mail: true,
+        birthday: true,
+        gender: true,
+        car: {
+          select: {
+            id: true,
+            name: true,
+            plate: true,
+          },
+        },
       },
     });
     let birthday;
@@ -162,7 +177,7 @@ export async function updateEmployee(req, res) {
 }
 
 export async function giveMission(req, res) {
-  const mission = new PrismaClient({ adapter })
+  const mission = new PrismaClient({ adapter });
   console.log(req.body);
   const { patients, car } = req.body;
   try {
@@ -196,5 +211,84 @@ export async function giveMission(req, res) {
       employee,
       error: "Erreur lors de l'attribution de la mission.",
     });
+  }
+}
+
+export async function giveCar(req, res) {
+  const { carId } = req.body;
+  try {
+    await prisma.employee.update({
+      data: {
+        car: {
+          connect: {
+            id: parseInt(carId),
+          },
+        },
+      },
+      where: {
+        id: parseInt(req.params.id),
+      },
+    });
+    res.redirect(`/employees/${parseInt(req.params.id)}`);
+  } catch (error) {
+    console.error(error);
+    const employee = await prisma.employee.findUnique({
+      where: {
+        id: parseInt(req.params.id),
+      },
+    });
+    res.render("pages/employeeInformation.twig", {
+      title: "Véhicule",
+      company: req.company,
+      employee,
+      error: "Erreur lors de l'affectation du véhicule.",
+    });
+  }
+}
+
+export async function takeCar(req, res) {
+  try {
+    await prisma.employee.update({
+      data: {
+        car: {
+          disconnect: true,
+        },
+      },
+      where: {
+        id: parseInt(req.params.id),
+      },
+    });
+    if (req.body.employee) {
+      res.redirect(`/employees/${parseInt(req.body.employee)}`);
+    } else if (req.body.car) {
+      res.redirect(`/cars/${parseInt(req.body.car)}`);
+    }
+  } catch (error) {
+    console.error(error);
+    if (req.body.employee) {
+      const employee = await prisma.employee.findUnique({
+        where: {
+          id: parseInt(req.body.employee),
+        },
+      });
+      res.render("pages/employeeInformation.twig", {
+        title: "Employé",
+        company: req.company,
+        employee,
+        error: "Erreur lors de la désaffectation du véhicule.",
+      });
+    } else if (req.body.car) {
+      const car = await prisma.car.findUnique({
+        where: {
+          id: parseInt(req.body.car),
+        },
+      });
+      res.render("pages/carInformation.twig", {
+        title: "Véhicule",
+        company: req.company,
+        car,
+        error: "Erreur lors de la désaffectation du véhicule.",
+      });
+    }
   }
 }

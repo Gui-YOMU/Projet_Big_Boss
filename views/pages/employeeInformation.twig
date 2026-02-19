@@ -2,6 +2,9 @@
 
 {% block main %}
 	<main>
+
+		<button id="giveMission">Attribuer une mission</button>
+
 		{% if update %}
 			<form action="/employees/{{employee.id}}/update" method="post">
 				<h2>Modifier les informations de l'employé sélectionné :
@@ -53,11 +56,42 @@
 			</form>
 		{% endif %}
 
+		<h3>Véhicule :</h3>
+		{% if employee.car %}
+			<p>{{ employee.car.name }}
+				({{ employee.car.plate }})</p>
+			<button id="giveCar">Attribuer un autre véhicule</button>
+			<form action="/employees/{{employee.id}}/take" method="post">
+				<button name="employee" value="{{employee.id}}">Retirer le véhicule</button>
+			</form>
+		{% else %}
+			<p></p>
+		{% endif %}
+
 		{% if error %}
 			<p>{{ error }}</p>
 		{% endif %}
 
-		<button id="giveMission">Attribuer une mission</button>
+		{% if employee.car == null %}
+			<button id="giveCar">Attribuer un véhicule</button>
+		{% endif %}
+
+		<dialog id="carModal">
+			<form action="/employees/{{employee.id}}/give" method="post">
+				<button class="closeModal">X</button>
+				<label for="carId">Affecter un véhicule</label>
+				<select name="carId" id="carId">
+					<option value="">--Sélectionnez un véhicule--</option>
+					{% for car in company.cars %}
+						{% if car.employeeId == null %}
+							<option value="{{car.id}}">{{ car.name }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+				<button>Attribuer</button>
+			</form>
+		</dialog>
+
 		<dialog id="missionModal">
 			<form action="/missions/add" method="post">
 				<button class="closeModal">X</button>
@@ -66,13 +100,6 @@
 					<option value="">--Sélectionnez une tournée--</option>
 					{% for tour in company.tours %}
 						<option value="{{ tour.id }}">{{ tour.name }}</option>
-					{% endfor %}
-				</select>
-				<label for="carId">Affecter un véhicule</label>
-				<select name="carId" id="carId">
-					<option value="">--Sélectionnez un véhicule--</option>
-					{% for car in company.cars %}
-						<option value="{{car.id}}">{{ car.name }}</option>
 					{% endfor %}
 				</select>
 				<label for="date">Date de la mission</label>

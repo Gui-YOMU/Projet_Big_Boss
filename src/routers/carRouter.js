@@ -1,6 +1,6 @@
 import express from "express";
 import { companyAuthguard } from "../services/companyAuthguard.js";
-import { addCar, deleteCar, getCarInformation, updateCar } from "../controllers/carController.js";
+import { addCar, deleteCar, getCarInformation, giveCar, updateCar } from "../controllers/carController.js";
 
 export const carRouter = express.Router();
 
@@ -12,3 +12,5 @@ carRouter.post("/:id", companyAuthguard, getCarInformation);
 carRouter.post("/:id/delete", companyAuthguard, deleteCar);
 
 carRouter.post("/:id/update", companyAuthguard, updateCar);
+
+carRouter.post("/:id/give", companyAuthguard, giveCar);

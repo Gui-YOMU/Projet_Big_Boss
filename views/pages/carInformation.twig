@@ -1,35 +1,69 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-<main>
-	{% if update %}
-		<form action="/cars/{{car.id}}/update" method="post">
-			<h2>Modifier les informations du véhicule sélectionné :
-			</h2>
-			<label for="name">Nom du véhicule</label>
-			<input type="text" id="name" name="name" value="{{car.name}}">
-			<label for="plate">Immatriculation du véhicule</label>
-			<input type="text" id="plate" name="plate" value="{{car.plate}}">
-			<button name="updateYes">Valider</button>
-			<button name="updateNo">Annuler</button>
-		</form>
-	{% else %}
-		<form action="/cars/{{car.id}}" method="post">
-			<h2>Informations du véhicule sélectionné :
-			</h2>
-			<h3>Nom du véhicule :</h3>
-			<p>{{ car.name }}</p>
-			<h3>Immatriculation du véhicule :</h3>
-			<p>{{ car.plate }}</p>
-			<button name="update" value="{{car.id}}">Modifier</button>
-		</form>
-		<form action="/cars/{{ car.id }}/delete" method="post">
-			<button>Supprimer</button>
-		</form>
-	{% endif %}
+	<main>
+		{% if update %}
+			<form action="/cars/{{car.id}}/update" method="post">
+				<h2>Modifier les informations du véhicule sélectionné :
+				</h2>
+				<label for="name">Nom du véhicule</label>
+				<input type="text" id="name" name="name" value="{{car.name}}">
+				<label for="plate">Immatriculation du véhicule</label>
+				<input type="text" id="plate" name="plate" value="{{car.plate}}">
+				<button name="updateYes">Valider</button>
+				<button name="updateNo">Annuler</button>
+			</form>
+		{% else %}
+			<form action="/cars/{{car.id}}" method="post">
+				<h2>Informations du véhicule sélectionné :
+				</h2>
+				<h3>Nom du véhicule :</h3>
+				<p>{{ car.name }}</p>
+				<h3>Immatriculation du véhicule :</h3>
+				<p>{{ car.plate }}</p>
+				<button name="update" value="{{car.id}}">Modifier</button>
+			</form>
+			<form action="/cars/{{ car.id }}/delete" method="post">
+				<button>Supprimer</button>
+			</form>
+		{% endif %}
 
-	{% if error %}
-		<p>{{ error }}</p>
-	{% endif %}
-</main>
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
+
+		{% if car.employeeId %}
+			<h2>Ce véhicule est actuellement affecté à :
+			</h2>
+			<p>{{ employee.lastName }}
+				{{ employee.firstName }}</p>
+			<button id="giveEmployee">Attribuer à un autre employé</button>
+			<form action="/employees/{{employee.id}}/take" method="post">
+				<button name="car" value="{{ car.id }}">Retirer le véhicule</button>
+			</form>
+		{% else %}
+			<button id="giveEmployee">Attribuer à un employé</button>
+		{% endif %}
+
+		<dialog id="employeeModal">
+			<form action="/cars/{{car.id}}/give" method="post">
+				<button class="closeModal">X</button>
+				<label for="employeeId">Attribuer à un employé</label>
+				<select name="employeeId" id="employeeId">
+					<option value="">--Sélectionnez un employé--</option>
+					{% for employee in company.employees %}
+						{% if employee.car == null %}
+							<option value="{{employee.id}}">{{ employee.lastName }} {{ employee.firstName }}</option>
+						{% endif %}
+					{% endfor %}
+				</select>
+				<button>Attribuer</button>
+			</form>
+		</dialog>
+
+	</main>
+{% endblock %}
+
+{% block script %}
+	<script src="../scripts/carInformation.js"></script>
 {% endblock %}
