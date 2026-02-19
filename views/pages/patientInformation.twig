@@ -1,62 +1,75 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	<main>
+	<main class="p-10">
 		{% if update %}
-			<form action="/patients/{{patient.id}}/update" method="post">
-				<h2>Modifier les informations du patient sélectionné :
-				</h2>
-				<label for="lastName">Nom de famille</label>
-				<input type="text" id="lastName" name="lastName" value="{{patient.lastName}}">
-				<label for="firstName">Prénom</label>
-				<input type="text" id="firstName" name="firstName" value="{{patient.firstName}}">
-				<p>Adresse du patient</p>
-				<label for="streetNumber">N°</label>
-				<input type="text" id="streetNumber" name="streetNumber" value="{{patient.streetNumber}}">
-				<label for="street">Voie</label>
-				<input type="text" id="street" name="street" value="{{patient.street}}">
-				<label for="zipCode">Code postal</label>
-				<input type="text" id="zipCode" name="zipCode" value="{{patient.zipCode}}">
-				<label for="city">Ville</label>
-				<input type="text" id="city" name="city" value="{{patient.city}}">
-				<label for="tourId">Tournée</label>
-				<select name="tourId" id="tourId">
-					{% if patient.tourId == null %}
-						<option value="">--Sélectionnez une tournée--</option>
-					{% else %}
-						<option value="{{patient.tourId}}">{{ tour.name }}</option>
-					{% endif %}
-					{% for tour in company.tours %}
-						{% if tour.id != patient.tourId %}
-							<option value="{{tour.id}}">{{ tour.name }}</option>
+			<form class="flex flex-col" action="/patients/{{patient.id}}/update" method="post">
+				<h2 class="text-2xl text-center pb-5">Modifier les informations du patient sélectionné</h2>
+				<div class="flex flex-col">
+					<label class="m-auto" for="lastName">Nom de famille</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="lastName" name="lastName" value="{{patient.lastName}}">
+				</div>
+				<div class="flex flex-col">
+					<label class="m-auto" for="firstName">Prénom</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="firstName" name="firstName" value="{{patient.firstName}}">
+				</div>
+				<p class="text-lg text-center">Adresse du patient</p>
+				<div class="flex flex-col">
+					<label class="m-auto" for="streetNumber">N°</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="streetNumber" name="streetNumber" value="{{patient.streetNumber}}">
+				</div>
+				<div class="flex flex-col">
+					<label class="m-auto" for="street">Voie</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="street" name="street" value="{{patient.street}}">
+				</div>
+				<div class="flex flex-col">
+					<label class="m-auto" for="zipCode">Code postal</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="zipCode" name="zipCode" value="{{patient.zipCode}}">
+				</div>
+				<div class="flex flex-col">
+					<label class="m-auto" for="city">Ville</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="city" name="city" value="{{patient.city}}">
+				</div>
+				<div class="flex flex-col">
+					<label class="m-auto" for="tourId">Tournée</label>
+					<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" name="tourId" id="tourId">
+						{% if patient.tourId == null %}
+							<option value="">--Sélectionnez une tournée--</option>
+						{% else %}
+							<option value="{{patient.tourId}}">{{ tour.name }}</option>
 						{% endif %}
-					{% endfor %}
-				</select>
-				<button name="updateYes">Valider</button>
-				<button name="updateNo">Annuler</button>
+						{% for tour in company.tours %}
+							{% if tour.id != patient.tourId %}
+								<option value="{{tour.id}}">{{ tour.name }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+				<div class="flex justify-center">
+					<button class="m-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="updateYes">Valider</button>
+					<button class="m-5 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600" name="updateNo">Annuler</button>
+				</div>
 			</form>
 		{% else %}
-			<form action="/patients/{{patient.id}}" method="post">
-				<h2>Informations du patient sélectionné :
-				</h2>
-				<h3>Nom :</h3>
-				<p>{{ patient.lastName }}</p>
-				<h3>Prénom :</h3>
-				<p>{{ patient.firstName }}</p>
-				<h3>Adresse :</h3>
-				<p>{{ patient.streetNumber }}
+			<form class="flex flex-col" action="/patients/{{patient.id}}" method="post">
+				<h2 class="text-2xl text-center pb-5">Informations du patient sélectionné</h2>
+				<h3 class="font-bold m-auto">Nom :</h3>
+				<p class="m-auto">{{ patient.lastName }}</p>
+				<h3 class="font-bold m-auto">Prénom :</h3>
+				<p class="m-auto">{{ patient.firstName }}</p>
+				<h3 class="font-bold m-auto">Adresse :</h3>
+				<p class="m-auto">{{ patient.streetNumber }}
 					{{ patient.street }}</p>
-				<p>{{ patient.zipCode }}
+				<p class="m-auto">{{ patient.zipCode }}
 					{{ patient.city }}</p>
-				<h3>Tournée :</h3>
+				<h3 class="font-bold m-auto">Tournée :</h3>
 				{% if patient.tourId %}
-					<p>{{ tour.name }}</p>
+					<p class="m-auto">{{ tour.name }}</p>
 				{% endif %}
-
-				<button name="update" value="{{patient.id}}">Modifier</button>
+				<button class="self-center m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="update" value="{{patient.id}}">Modifier</button>
 			</form>
-			<form action="/patients/{{ patient.id }}/delete" method="post">
-				<button>Supprimer</button>
+			<form class="flex flex-col" action="/patients/{{ patient.id }}/delete" method="post">
+				<button class="m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600">Supprimer</button>
 			</form>
 		{% endif %}
 

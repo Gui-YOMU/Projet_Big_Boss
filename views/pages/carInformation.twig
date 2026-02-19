@@ -1,30 +1,34 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	<main>
+	<main class="p-10">
 		{% if update %}
-			<form action="/cars/{{car.id}}/update" method="post">
-				<h2>Modifier les informations du véhicule sélectionné :
-				</h2>
-				<label for="name">Nom du véhicule</label>
-				<input type="text" id="name" name="name" value="{{car.name}}">
-				<label for="plate">Immatriculation du véhicule</label>
-				<input type="text" id="plate" name="plate" value="{{car.plate}}">
-				<button name="updateYes">Valider</button>
-				<button name="updateNo">Annuler</button>
+			<form class="flex flex-col" action="/cars/{{car.id}}/update" method="post">
+				<h2 class="text-2xl text-center pb-5">Modifier les informations du véhicule sélectionné</h2>
+				<div class="flex flex-col">
+					<label class="m-auto" for="name">Nom du véhicule</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="name" name="name" value="{{car.name}}">
+				</div>
+				<div class="flex flex-col">
+					<label class="m-auto" for="plate">Immatriculation du véhicule</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-20 pl-1 shadow-sm shadow-blue-300" type="text" id="plate" name="plate" value="{{car.plate}}">
+				</div>
+				<div class="flex justify-center">
+					<button class="m-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="updateYes">Valider</button>
+					<button class="m-5 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600" name="updateNo">Annuler</button>
+				</div>
 			</form>
 		{% else %}
-			<form action="/cars/{{car.id}}" method="post">
-				<h2>Informations du véhicule sélectionné :
-				</h2>
-				<h3>Nom du véhicule :</h3>
-				<p>{{ car.name }}</p>
-				<h3>Immatriculation du véhicule :</h3>
-				<p>{{ car.plate }}</p>
-				<button name="update" value="{{car.id}}">Modifier</button>
+			<form class="flex flex-col" action="/cars/{{car.id}}" method="post">
+				<h2 class="text-2xl text-center pb-5">Informations du véhicule sélectionné</h2>
+				<h3 class="font-bold m-auto">Nom du véhicule :</h3>
+				<p class="m-auto">{{ car.name }}</p>
+				<h3 class="font-bold m-auto">Immatriculation du véhicule :</h3>
+				<p class="m-auto">{{ car.plate }}</p>
+				<button class="self-center m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="update" value="{{car.id}}">Modifier</button>
 			</form>
-			<form action="/cars/{{ car.id }}/delete" method="post">
-				<button>Supprimer</button>
+			<form class="flex flex-col" action="/cars/{{ car.id }}/delete" method="post">
+				<button class="m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600">Supprimer</button>
 			</form>
 		{% endif %}
 
@@ -32,35 +36,38 @@
 			<p>{{ error }}</p>
 		{% endif %}
 
-		{% if car.employeeId %}
-			<h2>Ce véhicule est actuellement affecté à :
-			</h2>
-			<p>{{ employee.lastName }}
-				{{ employee.firstName }}</p>
-			<button id="giveEmployee">Attribuer à un autre employé</button>
-			<form action="/employees/{{employee.id}}/take" method="post">
-				<button name="car" value="{{ car.id }}">Retirer le véhicule</button>
-			</form>
-		{% else %}
-			<button id="giveEmployee">Attribuer à un employé</button>
-		{% endif %}
+		<section class="flex flex-col">
+		<h2 class="mt-5 text-2xl text-center">Ce véhicule est actuellement affecté à :
+				</h2>
+			{% if car.employeeId %}
+				<p class="text-center">{{ employee.lastName }}
+					{{ employee.firstName }}</p>
+				<button class="m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveEmployee">Attribuer à un autre employé</button>
+				<form class="flex flex-col" action="/employees/{{employee.id}}/take" method="post">
+					<button class="m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600" name="car" value="{{ car.id }}">Retirer de l'employé</button>
+				</form>
+			{% else %}
+				<button class="m-auto mt-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveEmployee">Attribuer à un employé</button>
+			{% endif %}
+		</section>
 
-		<dialog id="employeeModal">
-			<form action="/cars/{{car.id}}/give" method="post">
-				<button class="closeModal">X</button>
-				<label for="employeeId">Attribuer à un employé</label>
-				<select name="employeeId" id="employeeId">
+
+		<dialog class="absolute m-auto w-2xl" id="employeeModal">
+			<form class="flex flex-col items-center" action="/cars/{{car.id}}/give" method="post">
+			<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
+				<label class="m-auto" for="employeeId">Attribuer à un employé</label>
+				<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" name="employeeId" id="employeeId">
 					<option value="">--Sélectionnez un employé--</option>
 					{% for employee in company.employees %}
 						{% if employee.car == null %}
-							<option value="{{employee.id}}">{{ employee.lastName }} {{ employee.firstName }}</option>
+							<option value="{{employee.id}}">{{ employee.lastName }}
+								{{ employee.firstName }}</option>
 						{% endif %}
 					{% endfor %}
 				</select>
-				<button>Attribuer</button>
+				<button class="m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Attribuer</button>
 			</form>
 		</dialog>
-
 	</main>
 {% endblock %}
 
