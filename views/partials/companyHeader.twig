@@ -1,24 +1,35 @@
-<header class="flex justify-center gap-20">
-	<div>
+{% if company %}
+	<header class="relative flex justify-between items-center p-5 md:justify-between">
 		<div>
-			<a class="" href={% if company %} "/dashboard" {% else %} "/" {% endif %}>
-				<img {% if company %} class="w-20 object-contain m-auto" {% else %} class="w-50 object-contain m-auto" {% endif %}  src="./images/logo.png" alt="logo">
+			<a class="" href="/dashboard">
+				<img class="w-20 object-contain m-auto md:w-25 lg:w-30 xl:w-40 2xl:w-50" src="/static/images/logo.png" alt="logo">
 			</a>
 		</div>
-		{% if company %}
-			<h1 class="text-center text-xl">{{ company.name }}</h1>
-		{% else %}
-			<h1 class="text-center text-3xl">Bienvenue !</h1>
-		{% endif %}
-	</div>
-	{% if company %}
-		<nav class="flex justify-center items-center">
-			<ul>
-				<li><a class="text-sm" href="/dashboard">Tableau de bord</a></li>
-				<li><a class="text-sm" href="/tours">Tournées</a></li>
-				<li><a class="text-sm" href="/logout">Déconnexion</a></li>
+		<h1 class="text-center text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">{{ company.name }}</h1>
+		<button id="burger" class="md:hidden">
+			<img class="w-10 object-contain m-auto" src="/static/images/menu.jpg" alt="menu">
+		</button>
+		<nav id="nav" class="hidden md:flex pr-5 md:pr-10 2xl:pr-15">
+			<ul class="flex justify-center items-center gap-5">
+				<li>
+					<a class="text-sm lg:text-md xl:text-lg 2xl:text-xl hover:text-blue-600" href="/dashboard">Tableau de bord</a>
+				</li>
+				<li>
+					<a class="text-sm lg:text-md xl:text-lg 2xl:text-xl hover:text-blue-600" href="/tours">Tournées</a>
+				</li>
+				<li>
+					<a class="text-sm lg:text-md xl:text-lg 2xl:text-xl font-bold text-red-500" href="/logout">Déconnexion</a>
+				</li>
 			</ul>
 		</nav>
-	{% endif %}
-
-</header>
+	</header>
+{% else %}
+	<div>
+		<div>
+			<a class="" href="/">
+				<img class="w-50 object-contain m-auto" src="/static/images/logo.png" alt="logo">
+			</a>
+		</div>
+		<h1 class="text-center text-3xl">Bienvenue !</h1>
+	</div>
+{% endif %}
