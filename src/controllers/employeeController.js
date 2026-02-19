@@ -76,10 +76,10 @@ export async function getEmployeeInformation(req, res) {
           select: {
             id: true,
             name: true,
-            plate: true
-          }
-        }
-      }
+            plate: true,
+          },
+        },
+      },
     });
     let birthday;
     if (employee.birthday) {
@@ -247,31 +247,48 @@ export async function giveCar(req, res) {
 }
 
 export async function takeCar(req, res) {
-  const { carId } = req.body;
   try {
     await prisma.employee.update({
       data: {
         car: {
-          disconnect: true
+          disconnect: true,
         },
       },
       where: {
         id: parseInt(req.params.id),
       },
     });
-    res.redirect(`/employees/${parseInt(req.params.id)}`);
+    if (req.body.employee) {
+      res.redirect(`/employees/${parseInt(req.body.employee)}`);
+    } else if (req.body.car) {
+      res.redirect(`/cars/${parseInt(req.body.car)}`);
+    }
   } catch (error) {
     console.error(error);
-    const employee = await prisma.employee.findUnique({
-      where: {
-        id: parseInt(req.params.id),
-      },
-    });
-    res.render("pages/employeeInformation.twig", {
-      title: "Véhicule",
-      company: req.company,
-      employee,
-      error: "Erreur lors de l'affectation du véhicule.",
-    });
+    if (req.body.employee) {
+      const employee = await prisma.employee.findUnique({
+        where: {
+          id: parseInt(req.body.employee),
+        },
+      });
+      res.render("pages/employeeInformation.twig", {
+        title: "Employé",
+        company: req.company,
+        employee,
+        error: "Erreur lors de la désaffectation du véhicule.",
+      });
+    } else if (req.body.car) {
+      const car = await prisma.car.findUnique({
+        where: {
+          id: parseInt(req.body.car),
+        },
+      });
+      res.render("pages/carInformation.twig", {
+        title: "Véhicule",
+        company: req.company,
+        car,
+        error: "Erreur lors de la désaffectation du véhicule.",
+      });
+    }
   }
 }

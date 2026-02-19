@@ -46,7 +46,7 @@ export const checkRegexExtension = Prisma.defineExtension({
           checkMail(args);
         }
         if (args.password) {
-            checkPassword(args);
+          checkPassword(args);
         }
         return query(args);
       },
@@ -57,7 +57,9 @@ export const checkRegexExtension = Prisma.defineExtension({
         return query(args);
       },
       update: ({ args, query }) => {
-        checkPlate(args);
+        if (args.plate) {
+          checkPlate(args);
+        }
         return query(args);
       },
     },
