@@ -1,19 +1,24 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	<main>
-		<section>
-			<h2>Liste des tournées</h2>
-			<button id="createTour">+</button>
+	<main class="p-10">
+		<section class="flex flex-col gap-5">
+			<div class="flex justify-center items-center">
+				<h2 class="text-xl text-center">Liste des tournées</h2>
+				<button class="text-lg font-bold m-5 p-2 border rounded-lg w-10 bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="createTour">+</button>
+			</div>
+
 
 			{% for tour in tours %}
-				<h3>{{ tour.name }}</h3>
-				<ul>
-					{% for patient in tour.patients %}
-						<li>{{ patient.lastName }}
-							{{ patient.firstName }}</li>
-					{% endfor %}
-				</ul>
+				<article class="border rounded-lg pl-5 pr-5 pb-5 bg-blue-200">
+					<h3 class="text-lg text-center">{{ tour.name }}</h3>
+					<div class="grid grid-cols-2 gap-2">
+						{% for patient in tour.patients %}
+							<p class="bg-white border border-blue-600 rounded-md h-15 text-center">{{ patient.lastName }}
+								{{ patient.firstName }}</p>
+						{% endfor %}
+					</div>
+				</article>
 			{% endfor %}
 
 			<dialog id="tourModal">
