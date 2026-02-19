@@ -1,10 +1,11 @@
 model Car {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(20)
-  plate     String   @unique
-  companyId Int
-  company   Company  @relation(fields: [companyId], references: [id])
-  missions  Mission?
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(20)
+  plate      String    @unique
+  companyId  Int
+  company    Company   @relation(fields: [companyId], references: [id])
+  employeeId Int?      @unique
+  employee   Employee? @relation(fields: [employeeId], references: [id])
 }
 
 model Company {
@@ -32,6 +33,7 @@ model Employee {
   companyId Int
   company   Company   @relation(fields: [companyId], references: [id])
   missions  Mission[]
+  car       Car?
 }
 
 enum Gender {
@@ -47,8 +49,6 @@ model Mission {
   tour       Tour     @relation(fields: [tourId], references: [id])
   employeeId Int
   employee   Employee @relation(fields: [employeeId], references: [id])
-  carId      Int?     @unique
-  car        Car?     @relation(fields: [carId], references: [id])
   companyId  Int
   company    Company  @relation(fields: [companyId], references: [id])
 }

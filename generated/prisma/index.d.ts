@@ -1439,11 +1439,13 @@ export namespace Prisma {
   export type CarAvgAggregateOutputType = {
     id: number | null
     companyId: number | null
+    employeeId: number | null
   }
 
   export type CarSumAggregateOutputType = {
     id: number | null
     companyId: number | null
+    employeeId: number | null
   }
 
   export type CarMinAggregateOutputType = {
@@ -1451,6 +1453,7 @@ export namespace Prisma {
     name: string | null
     plate: string | null
     companyId: number | null
+    employeeId: number | null
   }
 
   export type CarMaxAggregateOutputType = {
@@ -1458,6 +1461,7 @@ export namespace Prisma {
     name: string | null
     plate: string | null
     companyId: number | null
+    employeeId: number | null
   }
 
   export type CarCountAggregateOutputType = {
@@ -1465,6 +1469,7 @@ export namespace Prisma {
     name: number
     plate: number
     companyId: number
+    employeeId: number
     _all: number
   }
 
@@ -1472,11 +1477,13 @@ export namespace Prisma {
   export type CarAvgAggregateInputType = {
     id?: true
     companyId?: true
+    employeeId?: true
   }
 
   export type CarSumAggregateInputType = {
     id?: true
     companyId?: true
+    employeeId?: true
   }
 
   export type CarMinAggregateInputType = {
@@ -1484,6 +1491,7 @@ export namespace Prisma {
     name?: true
     plate?: true
     companyId?: true
+    employeeId?: true
   }
 
   export type CarMaxAggregateInputType = {
@@ -1491,6 +1499,7 @@ export namespace Prisma {
     name?: true
     plate?: true
     companyId?: true
+    employeeId?: true
   }
 
   export type CarCountAggregateInputType = {
@@ -1498,6 +1507,7 @@ export namespace Prisma {
     name?: true
     plate?: true
     companyId?: true
+    employeeId?: true
     _all?: true
   }
 
@@ -1592,6 +1602,7 @@ export namespace Prisma {
     name: string
     plate: string
     companyId: number
+    employeeId: number | null
     _count: CarCountAggregateOutputType | null
     _avg: CarAvgAggregateOutputType | null
     _sum: CarSumAggregateOutputType | null
@@ -1618,8 +1629,9 @@ export namespace Prisma {
     name?: boolean
     plate?: boolean
     companyId?: boolean
+    employeeId?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    missions?: boolean | Car$missionsArgs<ExtArgs>
+    employee?: boolean | Car$employeeArgs<ExtArgs>
   }, ExtArgs["result"]["car"]>
 
 
@@ -1629,25 +1641,27 @@ export namespace Prisma {
     name?: boolean
     plate?: boolean
     companyId?: boolean
+    employeeId?: boolean
   }
 
-  export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "plate" | "companyId", ExtArgs["result"]["car"]>
+  export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "plate" | "companyId" | "employeeId", ExtArgs["result"]["car"]>
   export type CarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    missions?: boolean | Car$missionsArgs<ExtArgs>
+    employee?: boolean | Car$employeeArgs<ExtArgs>
   }
 
   export type $CarPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Car"
     objects: {
       company: Prisma.$CompanyPayload<ExtArgs>
-      missions: Prisma.$MissionPayload<ExtArgs> | null
+      employee: Prisma.$EmployeePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
       plate: string
       companyId: number
+      employeeId: number | null
     }, ExtArgs["result"]["car"]>
     composites: {}
   }
@@ -1989,7 +2003,7 @@ export namespace Prisma {
   export interface Prisma__CarClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    missions<T extends Car$missionsArgs<ExtArgs> = {}>(args?: Subset<T, Car$missionsArgs<ExtArgs>>): Prisma__MissionClient<$Result.GetResult<Prisma.$MissionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    employee<T extends Car$employeeArgs<ExtArgs> = {}>(args?: Subset<T, Car$employeeArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2023,6 +2037,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Car", 'String'>
     readonly plate: FieldRef<"Car", 'String'>
     readonly companyId: FieldRef<"Car", 'Int'>
+    readonly employeeId: FieldRef<"Car", 'Int'>
   }
     
 
@@ -2366,22 +2381,22 @@ export namespace Prisma {
   }
 
   /**
-   * Car.missions
+   * Car.employee
    */
-  export type Car$missionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Car$employeeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Mission
+     * Select specific fields to fetch from the Employee
      */
-    select?: MissionSelect<ExtArgs> | null
+    select?: EmployeeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Mission
+     * Omit specific fields from the Employee
      */
-    omit?: MissionOmit<ExtArgs> | null
+    omit?: EmployeeOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: MissionInclude<ExtArgs> | null
-    where?: MissionWhereInput
+    include?: EmployeeInclude<ExtArgs> | null
+    where?: EmployeeWhereInput
   }
 
   /**
@@ -3732,6 +3747,7 @@ export namespace Prisma {
     companyId?: boolean
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     missions?: boolean | Employee$missionsArgs<ExtArgs>
+    car?: boolean | Employee$carArgs<ExtArgs>
     _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["employee"]>
 
@@ -3752,6 +3768,7 @@ export namespace Prisma {
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     missions?: boolean | Employee$missionsArgs<ExtArgs>
+    car?: boolean | Employee$carArgs<ExtArgs>
     _count?: boolean | EmployeeCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3760,6 +3777,7 @@ export namespace Prisma {
     objects: {
       company: Prisma.$CompanyPayload<ExtArgs>
       missions: Prisma.$MissionPayload<ExtArgs>[]
+      car: Prisma.$CarPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4112,6 +4130,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     missions<T extends Employee$missionsArgs<ExtArgs> = {}>(args?: Subset<T, Employee$missionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    car<T extends Employee$carArgs<ExtArgs> = {}>(args?: Subset<T, Employee$carArgs<ExtArgs>>): Prisma__CarClient<$Result.GetResult<Prisma.$CarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4516,6 +4535,25 @@ export namespace Prisma {
   }
 
   /**
+   * Employee.car
+   */
+  export type Employee$carArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Car
+     */
+    select?: CarSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Car
+     */
+    omit?: CarOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CarInclude<ExtArgs> | null
+    where?: CarWhereInput
+  }
+
+  /**
    * Employee without action
    */
   export type EmployeeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4550,7 +4588,6 @@ export namespace Prisma {
     id: number | null
     tourId: number | null
     employeeId: number | null
-    carId: number | null
     companyId: number | null
   }
 
@@ -4558,7 +4595,6 @@ export namespace Prisma {
     id: number | null
     tourId: number | null
     employeeId: number | null
-    carId: number | null
     companyId: number | null
   }
 
@@ -4567,7 +4603,6 @@ export namespace Prisma {
     date: Date | null
     tourId: number | null
     employeeId: number | null
-    carId: number | null
     companyId: number | null
   }
 
@@ -4576,7 +4611,6 @@ export namespace Prisma {
     date: Date | null
     tourId: number | null
     employeeId: number | null
-    carId: number | null
     companyId: number | null
   }
 
@@ -4585,7 +4619,6 @@ export namespace Prisma {
     date: number
     tourId: number
     employeeId: number
-    carId: number
     companyId: number
     _all: number
   }
@@ -4595,7 +4628,6 @@ export namespace Prisma {
     id?: true
     tourId?: true
     employeeId?: true
-    carId?: true
     companyId?: true
   }
 
@@ -4603,7 +4635,6 @@ export namespace Prisma {
     id?: true
     tourId?: true
     employeeId?: true
-    carId?: true
     companyId?: true
   }
 
@@ -4612,7 +4643,6 @@ export namespace Prisma {
     date?: true
     tourId?: true
     employeeId?: true
-    carId?: true
     companyId?: true
   }
 
@@ -4621,7 +4651,6 @@ export namespace Prisma {
     date?: true
     tourId?: true
     employeeId?: true
-    carId?: true
     companyId?: true
   }
 
@@ -4630,7 +4659,6 @@ export namespace Prisma {
     date?: true
     tourId?: true
     employeeId?: true
-    carId?: true
     companyId?: true
     _all?: true
   }
@@ -4726,7 +4754,6 @@ export namespace Prisma {
     date: Date
     tourId: number
     employeeId: number
-    carId: number | null
     companyId: number
     _count: MissionCountAggregateOutputType | null
     _avg: MissionAvgAggregateOutputType | null
@@ -4754,11 +4781,9 @@ export namespace Prisma {
     date?: boolean
     tourId?: boolean
     employeeId?: boolean
-    carId?: boolean
     companyId?: boolean
     tour?: boolean | TourDefaultArgs<ExtArgs>
     employee?: boolean | EmployeeDefaultArgs<ExtArgs>
-    car?: boolean | Mission$carArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mission"]>
 
@@ -4769,15 +4794,13 @@ export namespace Prisma {
     date?: boolean
     tourId?: boolean
     employeeId?: boolean
-    carId?: boolean
     companyId?: boolean
   }
 
-  export type MissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "tourId" | "employeeId" | "carId" | "companyId", ExtArgs["result"]["mission"]>
+  export type MissionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "date" | "tourId" | "employeeId" | "companyId", ExtArgs["result"]["mission"]>
   export type MissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tour?: boolean | TourDefaultArgs<ExtArgs>
     employee?: boolean | EmployeeDefaultArgs<ExtArgs>
-    car?: boolean | Mission$carArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
   }
 
@@ -4786,7 +4809,6 @@ export namespace Prisma {
     objects: {
       tour: Prisma.$TourPayload<ExtArgs>
       employee: Prisma.$EmployeePayload<ExtArgs>
-      car: Prisma.$CarPayload<ExtArgs> | null
       company: Prisma.$CompanyPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4794,7 +4816,6 @@ export namespace Prisma {
       date: Date
       tourId: number
       employeeId: number
-      carId: number | null
       companyId: number
     }, ExtArgs["result"]["mission"]>
     composites: {}
@@ -5138,7 +5159,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tour<T extends TourDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TourDefaultArgs<ExtArgs>>): Prisma__TourClient<$Result.GetResult<Prisma.$TourPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     employee<T extends EmployeeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmployeeDefaultArgs<ExtArgs>>): Prisma__EmployeeClient<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    car<T extends Mission$carArgs<ExtArgs> = {}>(args?: Subset<T, Mission$carArgs<ExtArgs>>): Prisma__CarClient<$Result.GetResult<Prisma.$CarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5173,7 +5193,6 @@ export namespace Prisma {
     readonly date: FieldRef<"Mission", 'DateTime'>
     readonly tourId: FieldRef<"Mission", 'Int'>
     readonly employeeId: FieldRef<"Mission", 'Int'>
-    readonly carId: FieldRef<"Mission", 'Int'>
     readonly companyId: FieldRef<"Mission", 'Int'>
   }
     
@@ -5515,25 +5534,6 @@ export namespace Prisma {
      * Limit how many Missions to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Mission.car
-   */
-  export type Mission$carArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Car
-     */
-    select?: CarSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Car
-     */
-    omit?: CarOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CarInclude<ExtArgs> | null
-    where?: CarWhereInput
   }
 
   /**
@@ -7618,7 +7618,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     plate: 'plate',
-    companyId: 'companyId'
+    companyId: 'companyId',
+    employeeId: 'employeeId'
   };
 
   export type CarScalarFieldEnum = (typeof CarScalarFieldEnum)[keyof typeof CarScalarFieldEnum]
@@ -7654,7 +7655,6 @@ export namespace Prisma {
     date: 'date',
     tourId: 'tourId',
     employeeId: 'employeeId',
-    carId: 'carId',
     companyId: 'companyId'
   };
 
@@ -7693,20 +7693,20 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-  export const CarOrderByRelevanceFieldEnum: {
-    name: 'name',
-    plate: 'plate'
-  };
-
-  export type CarOrderByRelevanceFieldEnum = (typeof CarOrderByRelevanceFieldEnum)[keyof typeof CarOrderByRelevanceFieldEnum]
-
-
   export const NullsOrder: {
     first: 'first',
     last: 'last'
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const CarOrderByRelevanceFieldEnum: {
+    name: 'name',
+    plate: 'plate'
+  };
+
+  export type CarOrderByRelevanceFieldEnum = (typeof CarOrderByRelevanceFieldEnum)[keyof typeof CarOrderByRelevanceFieldEnum]
 
 
   export const CompanyOrderByRelevanceFieldEnum: {
@@ -7798,8 +7798,9 @@ export namespace Prisma {
     name?: StringFilter<"Car"> | string
     plate?: StringFilter<"Car"> | string
     companyId?: IntFilter<"Car"> | number
+    employeeId?: IntNullableFilter<"Car"> | number | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-    missions?: XOR<MissionNullableScalarRelationFilter, MissionWhereInput> | null
+    employee?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
   }
 
   export type CarOrderByWithRelationInput = {
@@ -7807,28 +7808,31 @@ export namespace Prisma {
     name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
+    employeeId?: SortOrderInput | SortOrder
     company?: CompanyOrderByWithRelationInput
-    missions?: MissionOrderByWithRelationInput
+    employee?: EmployeeOrderByWithRelationInput
     _relevance?: CarOrderByRelevanceInput
   }
 
   export type CarWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     plate?: string
+    employeeId?: number
     AND?: CarWhereInput | CarWhereInput[]
     OR?: CarWhereInput[]
     NOT?: CarWhereInput | CarWhereInput[]
     name?: StringFilter<"Car"> | string
     companyId?: IntFilter<"Car"> | number
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-    missions?: XOR<MissionNullableScalarRelationFilter, MissionWhereInput> | null
-  }, "id" | "plate">
+    employee?: XOR<EmployeeNullableScalarRelationFilter, EmployeeWhereInput> | null
+  }, "id" | "plate" | "employeeId">
 
   export type CarOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
+    employeeId?: SortOrderInput | SortOrder
     _count?: CarCountOrderByAggregateInput
     _avg?: CarAvgOrderByAggregateInput
     _max?: CarMaxOrderByAggregateInput
@@ -7844,6 +7848,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Car"> | string
     plate?: StringWithAggregatesFilter<"Car"> | string
     companyId?: IntWithAggregatesFilter<"Car"> | number
+    employeeId?: IntNullableWithAggregatesFilter<"Car"> | number | null
   }
 
   export type CompanyWhereInput = {
@@ -7930,6 +7935,7 @@ export namespace Prisma {
     companyId?: IntFilter<"Employee"> | number
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     missions?: MissionListRelationFilter
+    car?: XOR<CarNullableScalarRelationFilter, CarWhereInput> | null
   }
 
   export type EmployeeOrderByWithRelationInput = {
@@ -7943,6 +7949,7 @@ export namespace Prisma {
     companyId?: SortOrder
     company?: CompanyOrderByWithRelationInput
     missions?: MissionOrderByRelationAggregateInput
+    car?: CarOrderByWithRelationInput
     _relevance?: EmployeeOrderByRelevanceInput
   }
 
@@ -7960,6 +7967,7 @@ export namespace Prisma {
     companyId?: IntFilter<"Employee"> | number
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
     missions?: MissionListRelationFilter
+    car?: XOR<CarNullableScalarRelationFilter, CarWhereInput> | null
   }, "id" | "mail">
 
   export type EmployeeOrderByWithAggregationInput = {
@@ -8000,11 +8008,9 @@ export namespace Prisma {
     date?: DateTimeFilter<"Mission"> | Date | string
     tourId?: IntFilter<"Mission"> | number
     employeeId?: IntFilter<"Mission"> | number
-    carId?: IntNullableFilter<"Mission"> | number | null
     companyId?: IntFilter<"Mission"> | number
     tour?: XOR<TourScalarRelationFilter, TourWhereInput>
     employee?: XOR<EmployeeScalarRelationFilter, EmployeeWhereInput>
-    car?: XOR<CarNullableScalarRelationFilter, CarWhereInput> | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
   }
 
@@ -8013,17 +8019,14 @@ export namespace Prisma {
     date?: SortOrder
     tourId?: SortOrder
     employeeId?: SortOrder
-    carId?: SortOrderInput | SortOrder
     companyId?: SortOrder
     tour?: TourOrderByWithRelationInput
     employee?: EmployeeOrderByWithRelationInput
-    car?: CarOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
   }
 
   export type MissionWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    carId?: number
     AND?: MissionWhereInput | MissionWhereInput[]
     OR?: MissionWhereInput[]
     NOT?: MissionWhereInput | MissionWhereInput[]
@@ -8033,16 +8036,14 @@ export namespace Prisma {
     companyId?: IntFilter<"Mission"> | number
     tour?: XOR<TourScalarRelationFilter, TourWhereInput>
     employee?: XOR<EmployeeScalarRelationFilter, EmployeeWhereInput>
-    car?: XOR<CarNullableScalarRelationFilter, CarWhereInput> | null
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-  }, "id" | "carId">
+  }, "id">
 
   export type MissionOrderByWithAggregationInput = {
     id?: SortOrder
     date?: SortOrder
     tourId?: SortOrder
     employeeId?: SortOrder
-    carId?: SortOrderInput | SortOrder
     companyId?: SortOrder
     _count?: MissionCountOrderByAggregateInput
     _avg?: MissionAvgOrderByAggregateInput
@@ -8059,7 +8060,6 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter<"Mission"> | Date | string
     tourId?: IntWithAggregatesFilter<"Mission"> | number
     employeeId?: IntWithAggregatesFilter<"Mission"> | number
-    carId?: IntNullableWithAggregatesFilter<"Mission"> | number | null
     companyId?: IntWithAggregatesFilter<"Mission"> | number
   }
 
@@ -8202,7 +8202,7 @@ export namespace Prisma {
     name: string
     plate: string
     company: CompanyCreateNestedOneWithoutCarsInput
-    missions?: MissionCreateNestedOneWithoutCarInput
+    employee?: EmployeeCreateNestedOneWithoutCarInput
   }
 
   export type CarUncheckedCreateInput = {
@@ -8210,14 +8210,14 @@ export namespace Prisma {
     name: string
     plate: string
     companyId: number
-    missions?: MissionUncheckedCreateNestedOneWithoutCarInput
+    employeeId?: number | null
   }
 
   export type CarUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     company?: CompanyUpdateOneRequiredWithoutCarsNestedInput
-    missions?: MissionUpdateOneWithoutCarNestedInput
+    employee?: EmployeeUpdateOneWithoutCarNestedInput
   }
 
   export type CarUncheckedUpdateInput = {
@@ -8225,7 +8225,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
-    missions?: MissionUncheckedUpdateOneWithoutCarNestedInput
+    employeeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CarCreateManyInput = {
@@ -8233,6 +8233,7 @@ export namespace Prisma {
     name: string
     plate: string
     companyId: number
+    employeeId?: number | null
   }
 
   export type CarUpdateManyMutationInput = {
@@ -8245,6 +8246,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
     companyId?: IntFieldUpdateOperationsInput | number
+    employeeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CompanyCreateInput = {
@@ -8329,6 +8331,7 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     company: CompanyCreateNestedOneWithoutEmployeesInput
     missions?: MissionCreateNestedManyWithoutEmployeeInput
+    car?: CarCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateInput = {
@@ -8341,6 +8344,7 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     companyId: number
     missions?: MissionUncheckedCreateNestedManyWithoutEmployeeInput
+    car?: CarUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeUpdateInput = {
@@ -8352,6 +8356,7 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     company?: CompanyUpdateOneRequiredWithoutEmployeesNestedInput
     missions?: MissionUpdateManyWithoutEmployeeNestedInput
+    car?: CarUpdateOneWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateInput = {
@@ -8364,6 +8369,7 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     companyId?: IntFieldUpdateOperationsInput | number
     missions?: MissionUncheckedUpdateManyWithoutEmployeeNestedInput
+    car?: CarUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
   export type EmployeeCreateManyInput = {
@@ -8401,7 +8407,6 @@ export namespace Prisma {
     date: Date | string
     tour: TourCreateNestedOneWithoutMissionsInput
     employee: EmployeeCreateNestedOneWithoutMissionsInput
-    car?: CarCreateNestedOneWithoutMissionsInput
     company: CompanyCreateNestedOneWithoutMissionsInput
   }
 
@@ -8410,7 +8415,6 @@ export namespace Prisma {
     date: Date | string
     tourId: number
     employeeId: number
-    carId?: number | null
     companyId: number
   }
 
@@ -8418,7 +8422,6 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tour?: TourUpdateOneRequiredWithoutMissionsNestedInput
     employee?: EmployeeUpdateOneRequiredWithoutMissionsNestedInput
-    car?: CarUpdateOneWithoutMissionsNestedInput
     company?: CompanyUpdateOneRequiredWithoutMissionsNestedInput
   }
 
@@ -8427,7 +8430,6 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tourId?: IntFieldUpdateOperationsInput | number
     employeeId?: IntFieldUpdateOperationsInput | number
-    carId?: NullableIntFieldUpdateOperationsInput | number | null
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -8436,7 +8438,6 @@ export namespace Prisma {
     date: Date | string
     tourId: number
     employeeId: number
-    carId?: number | null
     companyId: number
   }
 
@@ -8449,7 +8450,6 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tourId?: IntFieldUpdateOperationsInput | number
     employeeId?: IntFieldUpdateOperationsInput | number
-    carId?: NullableIntFieldUpdateOperationsInput | number | null
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -8604,14 +8604,30 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type CompanyScalarRelationFilter = {
     is?: CompanyWhereInput
     isNot?: CompanyWhereInput
   }
 
-  export type MissionNullableScalarRelationFilter = {
-    is?: MissionWhereInput | null
-    isNot?: MissionWhereInput | null
+  export type EmployeeNullableScalarRelationFilter = {
+    is?: EmployeeWhereInput | null
+    isNot?: EmployeeWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type CarOrderByRelevanceInput = {
@@ -8625,11 +8641,13 @@ export namespace Prisma {
     name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
+    employeeId?: SortOrder
   }
 
   export type CarAvgOrderByAggregateInput = {
     id?: SortOrder
     companyId?: SortOrder
+    employeeId?: SortOrder
   }
 
   export type CarMaxOrderByAggregateInput = {
@@ -8637,6 +8655,7 @@ export namespace Prisma {
     name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
+    employeeId?: SortOrder
   }
 
   export type CarMinOrderByAggregateInput = {
@@ -8644,11 +8663,13 @@ export namespace Prisma {
     name?: SortOrder
     plate?: SortOrder
     companyId?: SortOrder
+    employeeId?: SortOrder
   }
 
   export type CarSumOrderByAggregateInput = {
     id?: SortOrder
     companyId?: SortOrder
+    employeeId?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -8683,6 +8704,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -8728,11 +8765,6 @@ export namespace Prisma {
     every?: MissionWhereInput
     some?: MissionWhereInput
     none?: MissionWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type EmployeeOrderByRelationAggregateInput = {
@@ -8829,6 +8861,11 @@ export namespace Prisma {
     not?: NestedEnumGenderNullableFilter<$PrismaModel> | $Enums.Gender | null
   }
 
+  export type CarNullableScalarRelationFilter = {
+    is?: CarWhereInput | null
+    isNot?: CarWhereInput | null
+  }
+
   export type EmployeeOrderByRelevanceInput = {
     fields: EmployeeOrderByRelevanceFieldEnum | EmployeeOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -8913,17 +8950,6 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type TourScalarRelationFilter = {
     is?: TourWhereInput
     isNot?: TourWhereInput
@@ -8934,17 +8960,11 @@ export namespace Prisma {
     isNot?: EmployeeWhereInput
   }
 
-  export type CarNullableScalarRelationFilter = {
-    is?: CarWhereInput | null
-    isNot?: CarWhereInput | null
-  }
-
   export type MissionCountOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
     tourId?: SortOrder
     employeeId?: SortOrder
-    carId?: SortOrder
     companyId?: SortOrder
   }
 
@@ -8952,7 +8972,6 @@ export namespace Prisma {
     id?: SortOrder
     tourId?: SortOrder
     employeeId?: SortOrder
-    carId?: SortOrder
     companyId?: SortOrder
   }
 
@@ -8961,7 +8980,6 @@ export namespace Prisma {
     date?: SortOrder
     tourId?: SortOrder
     employeeId?: SortOrder
-    carId?: SortOrder
     companyId?: SortOrder
   }
 
@@ -8970,7 +8988,6 @@ export namespace Prisma {
     date?: SortOrder
     tourId?: SortOrder
     employeeId?: SortOrder
-    carId?: SortOrder
     companyId?: SortOrder
   }
 
@@ -8978,7 +8995,6 @@ export namespace Prisma {
     id?: SortOrder
     tourId?: SortOrder
     employeeId?: SortOrder
-    carId?: SortOrder
     companyId?: SortOrder
   }
 
@@ -8994,22 +9010,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type TourNullableScalarRelationFilter = {
@@ -9113,16 +9113,10 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
-  export type MissionCreateNestedOneWithoutCarInput = {
-    create?: XOR<MissionCreateWithoutCarInput, MissionUncheckedCreateWithoutCarInput>
-    connectOrCreate?: MissionCreateOrConnectWithoutCarInput
-    connect?: MissionWhereUniqueInput
-  }
-
-  export type MissionUncheckedCreateNestedOneWithoutCarInput = {
-    create?: XOR<MissionCreateWithoutCarInput, MissionUncheckedCreateWithoutCarInput>
-    connectOrCreate?: MissionCreateOrConnectWithoutCarInput
-    connect?: MissionWhereUniqueInput
+  export type EmployeeCreateNestedOneWithoutCarInput = {
+    create?: XOR<EmployeeCreateWithoutCarInput, EmployeeUncheckedCreateWithoutCarInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutCarInput
+    connect?: EmployeeWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -9137,14 +9131,14 @@ export namespace Prisma {
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutCarsInput, CompanyUpdateWithoutCarsInput>, CompanyUncheckedUpdateWithoutCarsInput>
   }
 
-  export type MissionUpdateOneWithoutCarNestedInput = {
-    create?: XOR<MissionCreateWithoutCarInput, MissionUncheckedCreateWithoutCarInput>
-    connectOrCreate?: MissionCreateOrConnectWithoutCarInput
-    upsert?: MissionUpsertWithoutCarInput
-    disconnect?: MissionWhereInput | boolean
-    delete?: MissionWhereInput | boolean
-    connect?: MissionWhereUniqueInput
-    update?: XOR<XOR<MissionUpdateToOneWithWhereWithoutCarInput, MissionUpdateWithoutCarInput>, MissionUncheckedUpdateWithoutCarInput>
+  export type EmployeeUpdateOneWithoutCarNestedInput = {
+    create?: XOR<EmployeeCreateWithoutCarInput, EmployeeUncheckedCreateWithoutCarInput>
+    connectOrCreate?: EmployeeCreateOrConnectWithoutCarInput
+    upsert?: EmployeeUpsertWithoutCarInput
+    disconnect?: EmployeeWhereInput | boolean
+    delete?: EmployeeWhereInput | boolean
+    connect?: EmployeeWhereUniqueInput
+    update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutCarInput, EmployeeUpdateWithoutCarInput>, EmployeeUncheckedUpdateWithoutCarInput>
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -9155,14 +9149,12 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type MissionUncheckedUpdateOneWithoutCarNestedInput = {
-    create?: XOR<MissionCreateWithoutCarInput, MissionUncheckedCreateWithoutCarInput>
-    connectOrCreate?: MissionCreateOrConnectWithoutCarInput
-    upsert?: MissionUpsertWithoutCarInput
-    disconnect?: MissionWhereInput | boolean
-    delete?: MissionWhereInput | boolean
-    connect?: MissionWhereUniqueInput
-    update?: XOR<XOR<MissionUpdateToOneWithWhereWithoutCarInput, MissionUpdateWithoutCarInput>, MissionUncheckedUpdateWithoutCarInput>
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type EmployeeCreateNestedManyWithoutCompanyInput = {
@@ -9392,11 +9384,23 @@ export namespace Prisma {
     connect?: MissionWhereUniqueInput | MissionWhereUniqueInput[]
   }
 
+  export type CarCreateNestedOneWithoutEmployeeInput = {
+    create?: XOR<CarCreateWithoutEmployeeInput, CarUncheckedCreateWithoutEmployeeInput>
+    connectOrCreate?: CarCreateOrConnectWithoutEmployeeInput
+    connect?: CarWhereUniqueInput
+  }
+
   export type MissionUncheckedCreateNestedManyWithoutEmployeeInput = {
     create?: XOR<MissionCreateWithoutEmployeeInput, MissionUncheckedCreateWithoutEmployeeInput> | MissionCreateWithoutEmployeeInput[] | MissionUncheckedCreateWithoutEmployeeInput[]
     connectOrCreate?: MissionCreateOrConnectWithoutEmployeeInput | MissionCreateOrConnectWithoutEmployeeInput[]
     createMany?: MissionCreateManyEmployeeInputEnvelope
     connect?: MissionWhereUniqueInput | MissionWhereUniqueInput[]
+  }
+
+  export type CarUncheckedCreateNestedOneWithoutEmployeeInput = {
+    create?: XOR<CarCreateWithoutEmployeeInput, CarUncheckedCreateWithoutEmployeeInput>
+    connectOrCreate?: CarCreateOrConnectWithoutEmployeeInput
+    connect?: CarWhereUniqueInput
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -9429,6 +9433,16 @@ export namespace Prisma {
     deleteMany?: MissionScalarWhereInput | MissionScalarWhereInput[]
   }
 
+  export type CarUpdateOneWithoutEmployeeNestedInput = {
+    create?: XOR<CarCreateWithoutEmployeeInput, CarUncheckedCreateWithoutEmployeeInput>
+    connectOrCreate?: CarCreateOrConnectWithoutEmployeeInput
+    upsert?: CarUpsertWithoutEmployeeInput
+    disconnect?: CarWhereInput | boolean
+    delete?: CarWhereInput | boolean
+    connect?: CarWhereUniqueInput
+    update?: XOR<XOR<CarUpdateToOneWithWhereWithoutEmployeeInput, CarUpdateWithoutEmployeeInput>, CarUncheckedUpdateWithoutEmployeeInput>
+  }
+
   export type MissionUncheckedUpdateManyWithoutEmployeeNestedInput = {
     create?: XOR<MissionCreateWithoutEmployeeInput, MissionUncheckedCreateWithoutEmployeeInput> | MissionCreateWithoutEmployeeInput[] | MissionUncheckedCreateWithoutEmployeeInput[]
     connectOrCreate?: MissionCreateOrConnectWithoutEmployeeInput | MissionCreateOrConnectWithoutEmployeeInput[]
@@ -9443,6 +9457,16 @@ export namespace Prisma {
     deleteMany?: MissionScalarWhereInput | MissionScalarWhereInput[]
   }
 
+  export type CarUncheckedUpdateOneWithoutEmployeeNestedInput = {
+    create?: XOR<CarCreateWithoutEmployeeInput, CarUncheckedCreateWithoutEmployeeInput>
+    connectOrCreate?: CarCreateOrConnectWithoutEmployeeInput
+    upsert?: CarUpsertWithoutEmployeeInput
+    disconnect?: CarWhereInput | boolean
+    delete?: CarWhereInput | boolean
+    connect?: CarWhereUniqueInput
+    update?: XOR<XOR<CarUpdateToOneWithWhereWithoutEmployeeInput, CarUpdateWithoutEmployeeInput>, CarUncheckedUpdateWithoutEmployeeInput>
+  }
+
   export type TourCreateNestedOneWithoutMissionsInput = {
     create?: XOR<TourCreateWithoutMissionsInput, TourUncheckedCreateWithoutMissionsInput>
     connectOrCreate?: TourCreateOrConnectWithoutMissionsInput
@@ -9453,12 +9477,6 @@ export namespace Prisma {
     create?: XOR<EmployeeCreateWithoutMissionsInput, EmployeeUncheckedCreateWithoutMissionsInput>
     connectOrCreate?: EmployeeCreateOrConnectWithoutMissionsInput
     connect?: EmployeeWhereUniqueInput
-  }
-
-  export type CarCreateNestedOneWithoutMissionsInput = {
-    create?: XOR<CarCreateWithoutMissionsInput, CarUncheckedCreateWithoutMissionsInput>
-    connectOrCreate?: CarCreateOrConnectWithoutMissionsInput
-    connect?: CarWhereUniqueInput
   }
 
   export type CompanyCreateNestedOneWithoutMissionsInput = {
@@ -9487,30 +9505,12 @@ export namespace Prisma {
     update?: XOR<XOR<EmployeeUpdateToOneWithWhereWithoutMissionsInput, EmployeeUpdateWithoutMissionsInput>, EmployeeUncheckedUpdateWithoutMissionsInput>
   }
 
-  export type CarUpdateOneWithoutMissionsNestedInput = {
-    create?: XOR<CarCreateWithoutMissionsInput, CarUncheckedCreateWithoutMissionsInput>
-    connectOrCreate?: CarCreateOrConnectWithoutMissionsInput
-    upsert?: CarUpsertWithoutMissionsInput
-    disconnect?: CarWhereInput | boolean
-    delete?: CarWhereInput | boolean
-    connect?: CarWhereUniqueInput
-    update?: XOR<XOR<CarUpdateToOneWithWhereWithoutMissionsInput, CarUpdateWithoutMissionsInput>, CarUncheckedUpdateWithoutMissionsInput>
-  }
-
   export type CompanyUpdateOneRequiredWithoutMissionsNestedInput = {
     create?: XOR<CompanyCreateWithoutMissionsInput, CompanyUncheckedCreateWithoutMissionsInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutMissionsInput
     upsert?: CompanyUpsertWithoutMissionsInput
     connect?: CompanyWhereUniqueInput
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutMissionsInput, CompanyUpdateWithoutMissionsInput>, CompanyUncheckedUpdateWithoutMissionsInput>
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type CompanyCreateNestedOneWithoutPatientsInput = {
@@ -9667,6 +9667,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -9712,6 +9723,33 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -9743,17 +9781,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -9823,33 +9850,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type CompanyCreateWithoutCarsInput = {
     name: string
     siret: string
@@ -9878,24 +9878,32 @@ export namespace Prisma {
     create: XOR<CompanyCreateWithoutCarsInput, CompanyUncheckedCreateWithoutCarsInput>
   }
 
-  export type MissionCreateWithoutCarInput = {
-    date: Date | string
-    tour: TourCreateNestedOneWithoutMissionsInput
-    employee: EmployeeCreateNestedOneWithoutMissionsInput
-    company: CompanyCreateNestedOneWithoutMissionsInput
+  export type EmployeeCreateWithoutCarInput = {
+    lastName: string
+    firstName: string
+    mail: string
+    password: string
+    birthday?: Date | string | null
+    gender?: $Enums.Gender | null
+    company: CompanyCreateNestedOneWithoutEmployeesInput
+    missions?: MissionCreateNestedManyWithoutEmployeeInput
   }
 
-  export type MissionUncheckedCreateWithoutCarInput = {
+  export type EmployeeUncheckedCreateWithoutCarInput = {
     id?: number
-    date: Date | string
-    tourId: number
-    employeeId: number
+    lastName: string
+    firstName: string
+    mail: string
+    password: string
+    birthday?: Date | string | null
+    gender?: $Enums.Gender | null
     companyId: number
+    missions?: MissionUncheckedCreateNestedManyWithoutEmployeeInput
   }
 
-  export type MissionCreateOrConnectWithoutCarInput = {
-    where: MissionWhereUniqueInput
-    create: XOR<MissionCreateWithoutCarInput, MissionUncheckedCreateWithoutCarInput>
+  export type EmployeeCreateOrConnectWithoutCarInput = {
+    where: EmployeeWhereUniqueInput
+    create: XOR<EmployeeCreateWithoutCarInput, EmployeeUncheckedCreateWithoutCarInput>
   }
 
   export type CompanyUpsertWithoutCarsInput = {
@@ -9932,30 +9940,38 @@ export namespace Prisma {
     missions?: MissionUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
-  export type MissionUpsertWithoutCarInput = {
-    update: XOR<MissionUpdateWithoutCarInput, MissionUncheckedUpdateWithoutCarInput>
-    create: XOR<MissionCreateWithoutCarInput, MissionUncheckedCreateWithoutCarInput>
-    where?: MissionWhereInput
+  export type EmployeeUpsertWithoutCarInput = {
+    update: XOR<EmployeeUpdateWithoutCarInput, EmployeeUncheckedUpdateWithoutCarInput>
+    create: XOR<EmployeeCreateWithoutCarInput, EmployeeUncheckedCreateWithoutCarInput>
+    where?: EmployeeWhereInput
   }
 
-  export type MissionUpdateToOneWithWhereWithoutCarInput = {
-    where?: MissionWhereInput
-    data: XOR<MissionUpdateWithoutCarInput, MissionUncheckedUpdateWithoutCarInput>
+  export type EmployeeUpdateToOneWithWhereWithoutCarInput = {
+    where?: EmployeeWhereInput
+    data: XOR<EmployeeUpdateWithoutCarInput, EmployeeUncheckedUpdateWithoutCarInput>
   }
 
-  export type MissionUpdateWithoutCarInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    tour?: TourUpdateOneRequiredWithoutMissionsNestedInput
-    employee?: EmployeeUpdateOneRequiredWithoutMissionsNestedInput
-    company?: CompanyUpdateOneRequiredWithoutMissionsNestedInput
+  export type EmployeeUpdateWithoutCarInput = {
+    lastName?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    mail?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    company?: CompanyUpdateOneRequiredWithoutEmployeesNestedInput
+    missions?: MissionUpdateManyWithoutEmployeeNestedInput
   }
 
-  export type MissionUncheckedUpdateWithoutCarInput = {
+  export type EmployeeUncheckedUpdateWithoutCarInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
-    tourId?: IntFieldUpdateOperationsInput | number
-    employeeId?: IntFieldUpdateOperationsInput | number
+    lastName?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    mail?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     companyId?: IntFieldUpdateOperationsInput | number
+    missions?: MissionUncheckedUpdateManyWithoutEmployeeNestedInput
   }
 
   export type EmployeeCreateWithoutCompanyInput = {
@@ -9966,6 +9982,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: $Enums.Gender | null
     missions?: MissionCreateNestedManyWithoutEmployeeInput
+    car?: CarCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateWithoutCompanyInput = {
@@ -9977,6 +9994,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: $Enums.Gender | null
     missions?: MissionUncheckedCreateNestedManyWithoutEmployeeInput
+    car?: CarUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutCompanyInput = {
@@ -9992,14 +10010,14 @@ export namespace Prisma {
   export type CarCreateWithoutCompanyInput = {
     name: string
     plate: string
-    missions?: MissionCreateNestedOneWithoutCarInput
+    employee?: EmployeeCreateNestedOneWithoutCarInput
   }
 
   export type CarUncheckedCreateWithoutCompanyInput = {
     id?: number
     name: string
     plate: string
-    missions?: MissionUncheckedCreateNestedOneWithoutCarInput
+    employeeId?: number | null
   }
 
   export type CarCreateOrConnectWithoutCompanyInput = {
@@ -10070,7 +10088,6 @@ export namespace Prisma {
     date: Date | string
     tour: TourCreateNestedOneWithoutMissionsInput
     employee: EmployeeCreateNestedOneWithoutMissionsInput
-    car?: CarCreateNestedOneWithoutMissionsInput
   }
 
   export type MissionUncheckedCreateWithoutCompanyInput = {
@@ -10078,7 +10095,6 @@ export namespace Prisma {
     date: Date | string
     tourId: number
     employeeId: number
-    carId?: number | null
   }
 
   export type MissionCreateOrConnectWithoutCompanyInput = {
@@ -10145,6 +10161,7 @@ export namespace Prisma {
     name?: StringFilter<"Car"> | string
     plate?: StringFilter<"Car"> | string
     companyId?: IntFilter<"Car"> | number
+    employeeId?: IntNullableFilter<"Car"> | number | null
   }
 
   export type PatientUpsertWithWhereUniqueWithoutCompanyInput = {
@@ -10227,7 +10244,6 @@ export namespace Prisma {
     date?: DateTimeFilter<"Mission"> | Date | string
     tourId?: IntFilter<"Mission"> | number
     employeeId?: IntFilter<"Mission"> | number
-    carId?: IntNullableFilter<"Mission"> | number | null
     companyId?: IntFilter<"Mission"> | number
   }
 
@@ -10262,7 +10278,6 @@ export namespace Prisma {
   export type MissionCreateWithoutEmployeeInput = {
     date: Date | string
     tour: TourCreateNestedOneWithoutMissionsInput
-    car?: CarCreateNestedOneWithoutMissionsInput
     company: CompanyCreateNestedOneWithoutMissionsInput
   }
 
@@ -10270,7 +10285,6 @@ export namespace Prisma {
     id?: number
     date: Date | string
     tourId: number
-    carId?: number | null
     companyId: number
   }
 
@@ -10282,6 +10296,24 @@ export namespace Prisma {
   export type MissionCreateManyEmployeeInputEnvelope = {
     data: MissionCreateManyEmployeeInput | MissionCreateManyEmployeeInput[]
     skipDuplicates?: boolean
+  }
+
+  export type CarCreateWithoutEmployeeInput = {
+    name: string
+    plate: string
+    company: CompanyCreateNestedOneWithoutCarsInput
+  }
+
+  export type CarUncheckedCreateWithoutEmployeeInput = {
+    id?: number
+    name: string
+    plate: string
+    companyId: number
+  }
+
+  export type CarCreateOrConnectWithoutEmployeeInput = {
+    where: CarWhereUniqueInput
+    create: XOR<CarCreateWithoutEmployeeInput, CarUncheckedCreateWithoutEmployeeInput>
   }
 
   export type CompanyUpsertWithoutEmployeesInput = {
@@ -10334,6 +10366,30 @@ export namespace Prisma {
     data: XOR<MissionUpdateManyMutationInput, MissionUncheckedUpdateManyWithoutEmployeeInput>
   }
 
+  export type CarUpsertWithoutEmployeeInput = {
+    update: XOR<CarUpdateWithoutEmployeeInput, CarUncheckedUpdateWithoutEmployeeInput>
+    create: XOR<CarCreateWithoutEmployeeInput, CarUncheckedCreateWithoutEmployeeInput>
+    where?: CarWhereInput
+  }
+
+  export type CarUpdateToOneWithWhereWithoutEmployeeInput = {
+    where?: CarWhereInput
+    data: XOR<CarUpdateWithoutEmployeeInput, CarUncheckedUpdateWithoutEmployeeInput>
+  }
+
+  export type CarUpdateWithoutEmployeeInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    plate?: StringFieldUpdateOperationsInput | string
+    company?: CompanyUpdateOneRequiredWithoutCarsNestedInput
+  }
+
+  export type CarUncheckedUpdateWithoutEmployeeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    plate?: StringFieldUpdateOperationsInput | string
+    companyId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type TourCreateWithoutMissionsInput = {
     name: string
     patients?: PatientCreateNestedManyWithoutTourInput
@@ -10360,6 +10416,7 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: $Enums.Gender | null
     company: CompanyCreateNestedOneWithoutEmployeesInput
+    car?: CarCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeUncheckedCreateWithoutMissionsInput = {
@@ -10371,29 +10428,12 @@ export namespace Prisma {
     birthday?: Date | string | null
     gender?: $Enums.Gender | null
     companyId: number
+    car?: CarUncheckedCreateNestedOneWithoutEmployeeInput
   }
 
   export type EmployeeCreateOrConnectWithoutMissionsInput = {
     where: EmployeeWhereUniqueInput
     create: XOR<EmployeeCreateWithoutMissionsInput, EmployeeUncheckedCreateWithoutMissionsInput>
-  }
-
-  export type CarCreateWithoutMissionsInput = {
-    name: string
-    plate: string
-    company: CompanyCreateNestedOneWithoutCarsInput
-  }
-
-  export type CarUncheckedCreateWithoutMissionsInput = {
-    id?: number
-    name: string
-    plate: string
-    companyId: number
-  }
-
-  export type CarCreateOrConnectWithoutMissionsInput = {
-    where: CarWhereUniqueInput
-    create: XOR<CarCreateWithoutMissionsInput, CarUncheckedCreateWithoutMissionsInput>
   }
 
   export type CompanyCreateWithoutMissionsInput = {
@@ -10467,6 +10507,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     company?: CompanyUpdateOneRequiredWithoutEmployeesNestedInput
+    car?: CarUpdateOneWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutMissionsInput = {
@@ -10478,30 +10519,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     companyId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CarUpsertWithoutMissionsInput = {
-    update: XOR<CarUpdateWithoutMissionsInput, CarUncheckedUpdateWithoutMissionsInput>
-    create: XOR<CarCreateWithoutMissionsInput, CarUncheckedCreateWithoutMissionsInput>
-    where?: CarWhereInput
-  }
-
-  export type CarUpdateToOneWithWhereWithoutMissionsInput = {
-    where?: CarWhereInput
-    data: XOR<CarUpdateWithoutMissionsInput, CarUncheckedUpdateWithoutMissionsInput>
-  }
-
-  export type CarUpdateWithoutMissionsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    company?: CompanyUpdateOneRequiredWithoutCarsNestedInput
-  }
-
-  export type CarUncheckedUpdateWithoutMissionsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    plate?: StringFieldUpdateOperationsInput | string
-    companyId?: IntFieldUpdateOperationsInput | number
+    car?: CarUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
   export type CompanyUpsertWithoutMissionsInput = {
@@ -10676,7 +10694,6 @@ export namespace Prisma {
   export type MissionCreateWithoutTourInput = {
     date: Date | string
     employee: EmployeeCreateNestedOneWithoutMissionsInput
-    car?: CarCreateNestedOneWithoutMissionsInput
     company: CompanyCreateNestedOneWithoutMissionsInput
   }
 
@@ -10684,7 +10701,6 @@ export namespace Prisma {
     id?: number
     date: Date | string
     employeeId: number
-    carId?: number | null
     companyId: number
   }
 
@@ -10806,6 +10822,7 @@ export namespace Prisma {
     id?: number
     name: string
     plate: string
+    employeeId?: number | null
   }
 
   export type PatientCreateManyCompanyInput = {
@@ -10829,7 +10846,6 @@ export namespace Prisma {
     date: Date | string
     tourId: number
     employeeId: number
-    carId?: number | null
   }
 
   export type EmployeeUpdateWithoutCompanyInput = {
@@ -10840,6 +10856,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     missions?: MissionUpdateManyWithoutEmployeeNestedInput
+    car?: CarUpdateOneWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateWithoutCompanyInput = {
@@ -10851,6 +10868,7 @@ export namespace Prisma {
     birthday?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     missions?: MissionUncheckedUpdateManyWithoutEmployeeNestedInput
+    car?: CarUncheckedUpdateOneWithoutEmployeeNestedInput
   }
 
   export type EmployeeUncheckedUpdateManyWithoutCompanyInput = {
@@ -10866,20 +10884,21 @@ export namespace Prisma {
   export type CarUpdateWithoutCompanyInput = {
     name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
-    missions?: MissionUpdateOneWithoutCarNestedInput
+    employee?: EmployeeUpdateOneWithoutCarNestedInput
   }
 
   export type CarUncheckedUpdateWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
-    missions?: MissionUncheckedUpdateOneWithoutCarNestedInput
+    employeeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type CarUncheckedUpdateManyWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     plate?: StringFieldUpdateOperationsInput | string
+    employeeId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PatientUpdateWithoutCompanyInput = {
@@ -10936,7 +10955,6 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tour?: TourUpdateOneRequiredWithoutMissionsNestedInput
     employee?: EmployeeUpdateOneRequiredWithoutMissionsNestedInput
-    car?: CarUpdateOneWithoutMissionsNestedInput
   }
 
   export type MissionUncheckedUpdateWithoutCompanyInput = {
@@ -10944,7 +10962,6 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tourId?: IntFieldUpdateOperationsInput | number
     employeeId?: IntFieldUpdateOperationsInput | number
-    carId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type MissionUncheckedUpdateManyWithoutCompanyInput = {
@@ -10952,21 +10969,18 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tourId?: IntFieldUpdateOperationsInput | number
     employeeId?: IntFieldUpdateOperationsInput | number
-    carId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type MissionCreateManyEmployeeInput = {
     id?: number
     date: Date | string
     tourId: number
-    carId?: number | null
     companyId: number
   }
 
   export type MissionUpdateWithoutEmployeeInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tour?: TourUpdateOneRequiredWithoutMissionsNestedInput
-    car?: CarUpdateOneWithoutMissionsNestedInput
     company?: CompanyUpdateOneRequiredWithoutMissionsNestedInput
   }
 
@@ -10974,7 +10988,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tourId?: IntFieldUpdateOperationsInput | number
-    carId?: NullableIntFieldUpdateOperationsInput | number | null
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -10982,7 +10995,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     tourId?: IntFieldUpdateOperationsInput | number
-    carId?: NullableIntFieldUpdateOperationsInput | number | null
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -11001,7 +11013,6 @@ export namespace Prisma {
     id?: number
     date: Date | string
     employeeId: number
-    carId?: number | null
     companyId: number
   }
 
@@ -11040,7 +11051,6 @@ export namespace Prisma {
   export type MissionUpdateWithoutTourInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     employee?: EmployeeUpdateOneRequiredWithoutMissionsNestedInput
-    car?: CarUpdateOneWithoutMissionsNestedInput
     company?: CompanyUpdateOneRequiredWithoutMissionsNestedInput
   }
 
@@ -11048,7 +11058,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     employeeId?: IntFieldUpdateOperationsInput | number
-    carId?: NullableIntFieldUpdateOperationsInput | number | null
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -11056,7 +11065,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     employeeId?: IntFieldUpdateOperationsInput | number
-    carId?: NullableIntFieldUpdateOperationsInput | number | null
     companyId?: IntFieldUpdateOperationsInput | number
   }
 

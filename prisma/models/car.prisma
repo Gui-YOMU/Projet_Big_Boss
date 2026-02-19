@@ -4,5 +4,6 @@ model Car {
     plate String @unique
     companyId Int
     company Company @relation(fields:[companyId], references:[id])
-    missions Mission?
+    employeeId Int? @unique
+    employee Employee? @relation(fields:[employeeId], references:[id])
 }

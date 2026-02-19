@@ -12,3 +12,4 @@ carRouter.post("/:id", companyAuthguard, getCarInformation);
 carRouter.post("/:id/delete", companyAuthguard, deleteCar);
 
 carRouter.post("/:id/update", companyAuthguard, updateCar);
+
