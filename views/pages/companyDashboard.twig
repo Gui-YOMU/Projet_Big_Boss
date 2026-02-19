@@ -20,31 +20,33 @@
 				</article>
 			{% endfor %}
 
-			<dialog id="patientModal" class="modal">
-				<button class="closeModal">X</button>
-				<form action="/patients/add" method="post">
-					<label for="lastName">Nom de famille du patient</label>
-					<input type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
-					<label for="firstName">Prénom du patient</label>
-					<input type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
-					<p>Adresse du patient</p>
-					<label for="streetNumber">N°</label>
-					<input type="text" id="streetNumber" name="streetNumber" placeholder="ex: 123">
-					<label for="street">Voie</label>
-					<input type="text" id="street" name="street" placeholder="ex: rue du Paradis">
-					<label for="zipCode">Code postal</label>
-					<input type="text" id="zipCode" name="zipCode" placeholder="ex: 83000">
-					<label for="city">Ville</label>
-					<input type="text" id="city" name="city" placeholder="ex: TOULON">
-					<label for="tourId">Tournée</label>
-					<select name="tourId" id="tourId">
+			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="patientModal" class="modal">
+				<form class="flex flex-col items-center" action="/patients/add" method="post">
+					<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
+					<label class="m-auto" for="lastName">Nom de famille du patient</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
+					<label class="m-auto" for="firstName">Prénom du patient</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
+					<p class="text-lg text-center">Adresse du patient</p>
+					<label class="m-auto" for="streetNumber">N°</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-20 pl-1 shadow-sm shadow-blue-300" type="text" id="streetNumber" name="streetNumber" placeholder="ex: 123">
+					<label class="m-auto" for="street">Voie</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="street" name="street" placeholder="ex: rue du Paradis">
+					<label class="m-auto" for="zipCode">Code postal</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-30 pl-1 shadow-sm shadow-blue-300" type="text" id="zipCode" name="zipCode" placeholder="ex: 83000">
+					<label class="m-auto" for="city">Ville</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="city" name="city" placeholder="ex: TOULON">
+					<label class="m-auto" for="tourId">Tournée</label>
+					<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" name="tourId" id="tourId">
 						<option value="">--Sélectionnez une tournée--</option>
 						{% for tour in company.tours %}
 							<option value="{{tour.id}}">{{ tour.name }}</option>
 						{% endfor %}
 					</select>
-					<button type="reset">Effacer les champs</button>
-					<button>Ajouter le patient</button>
+					<div class="flex justify-center">
+						<button class="m-5 p-2 border rounded-lg w-fit bg-yellow-400 hover:bg-yellow-200 shadow-sm shadow-yellow-600" type="reset">Effacer les champs</button>
+						<button class="m-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Ajouter le patient</button>
+					</div>
 				</form>
 			</dialog>
 		</section>
@@ -62,29 +64,31 @@
 				</article>
 			{% endfor %}
 
-			<dialog id="employeeModal" class="modal">
-				<button class="closeModal">X</button>
-				<form action="/employees/add" method="post">
-					<label for="lastName">Nom de famille de l'employé</label>
-					<input type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
-					<label for="firstName">Prénom de l'employé</label>
-					<input type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
-					<label for="mail">Adresse mail de l'employé</label>
-					<input type="mail" id="mail" name="mail" placeholder="ex: jacques.dupont@gmail.com">
-					<label for="password">Mot de passe initial</label>
+			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="employeeModal" class="modal">
+				<form class="flex flex-col items-center" action="/employees/add" method="post">
+					<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
+					<label class="m-auto" for="lastName">Nom de famille de l'employé</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="lastName" name="lastName" placeholder="ex: DUPONT">
+					<label class="m-auto" for="firstName">Prénom de l'employé</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="firstName" name="firstName" placeholder="ex: Jacques">
+					<label class="m-auto" for="mail">Adresse mail de l'employé</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="mail" id="mail" name="mail" placeholder="ex: jacques.dupont@gmail.com">
+					<label class="m-auto" for="password">Mot de passe initial</label>
 					{# <p>Le mot de passe sera changé par l'employé à sa première connexion.</p> #}
-					<input type="password" id="password" name="password" placeholder="Au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s)">
-					<label for="birthday">Date de naissance de l'employé (facultatif)</label>
-					<input type="date" id="birthday" name="birthday">
-					<label for="gender">Genre de l'employé (facultatif)</label>
-					<select id="gender" name="gender">
-						<option value="">--Votre genre (facultatif)--</option>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="password" id="password" name="password" placeholder="Au moins 12 caractères avec majuscule(s), minuscule(s) et chiffre(s)">
+					<label class="m-auto" for="birthday">Date de naissance de l'employé (facultatif)</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-40 pl-1 shadow-sm shadow-blue-300" type="date" id="birthday" name="birthday">
+					<label class="m-auto" for="gender">Genre de l'employé (facultatif)</label>
+					<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" id="gender" name="gender">
+						<option value="">--Sélectionnez un genre--</option>
 						<option value="male">Homme</option>
 						<option value="female">Femme</option>
 						<option value="other">Autre</option>
 					</select>
-					<button type="reset">Effacer les champs</button>
-					<button>Ajouter l'employé</button>
+					<div class="flex justify-center">
+						<button class="m-5 p-2 border rounded-lg w-fit bg-yellow-400 hover:bg-yellow-200 shadow-sm shadow-yellow-600" type="reset">Effacer les champs</button>
+						<button class="m-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Ajouter l'employé</button>
+					</div>
 				</form>
 			</dialog>
 		</section>
@@ -102,14 +106,17 @@
 				</article>
 			{% endfor %}
 
-			<dialog id="carModal" class="modal">
-				<button class="closeModal">X</button>
-				<form action="/cars/add" method="post">
-					<label for="name">Nom du véhicule</label>
-					<input type="text" id="name" name="name" placeholder="Nom du véhicule">
-					<label for="plate">Immatriculation du véhicule</label>
-					<input type="text" id="plate" name="plate" placeholder="ex : AA123ZZ">
-					<button>Ajouter le véhicule</button>
+			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="carModal" class="modal">
+				<form class="flex flex-col items-center" action="/cars/add" method="post">
+					<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
+					<label class="m-auto" for="name">Nom du véhicule</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="name" name="name" placeholder="Nom du véhicule">
+					<label class="m-auto" for="plate">Immatriculation du véhicule</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-30 pl-1 shadow-sm shadow-blue-300" type="text" id="plate" name="plate" placeholder="ex : AA123ZZ">
+					<div class="flex justify-center">
+						<button class="m-5 p-2 border rounded-lg w-fit bg-yellow-400 hover:bg-yellow-200 shadow-sm shadow-yellow-600" type="reset">Effacer les champs</button>
+						<button class="m-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Ajouter le véhicule</button>
+					</div>
 				</form>
 			</dialog>
 		</section>

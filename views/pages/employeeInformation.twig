@@ -85,9 +85,9 @@
 			<p>{{ error }}</p>
 		{% endif %}
 
-		<dialog class="absolute m-auto w-2xl" id="carModal">
+		<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="carModal">
 			<form class="flex flex-col items-center" action="/employees/{{employee.id}}/give" method="post">
-				<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal">X</button>
+				<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
 				<label class="m-auto" for="carId">Affecter un véhicule</label>
 				<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" name="carId" id="carId">
 					<option value="">--Sélectionnez un véhicule--</option>
@@ -101,9 +101,9 @@
 			</form>
 		</dialog>
 
-		<dialog class="absolute m-auto w-2xl" id="missionModal">
+		<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="missionModal">
 			<form class="flex flex-col items-center" action="/missions/add" method="post">
-				<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal">X</button>
+				<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
 				<label class="m-auto" for="tourId">Affecter une tournée</label>
 				<select class="text-sm m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 pl-1 shadow-sm shadow-blue-300" name="tourId" id="tourId">
 					<option value="">--Sélectionnez une tournée--</option>
