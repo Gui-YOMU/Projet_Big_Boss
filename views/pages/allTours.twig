@@ -22,12 +22,12 @@
 				</article>
 			{% endfor %}
 
-			<dialog id="tourModal">
-				<button class="closeModal">X</button>
-				<form action="/tours/add" method="post">
-					<label for="name">Nom de la tournée</label>
-					<input type="text" id="name" name="name">
-					<button>Créer la tournée</button>
+			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="tourModal">	
+				<form class="flex flex-col items-center" action="/tours/add" method="post">
+				<button class="self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal">X</button>
+					<label class="m-auto" for="name">Nom de la tournée</label>
+					<input class="text-sm m-auto border border-blue-600 rounded-lg w-70 pl-1 shadow-sm shadow-blue-300" type="text" id="name" name="name">
+					<button class="m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Créer la tournée</button>
 				</form>
 			</dialog>
 		</section>
