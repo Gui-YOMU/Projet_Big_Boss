@@ -8,14 +8,15 @@
 				<button class="text-lg font-bold m-5 p-2 border rounded-lg w-10 bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="createTour">+</button>
 			</div>
 
-
 			{% for tour in tours %}
 				<article class="border rounded-lg pl-5 pr-5 pb-5 bg-blue-200">
 					<h3 class="text-lg text-center">{{ tour.name }}</h3>
 					<div class="grid grid-cols-2 gap-2">
 						{% for patient in tour.patients %}
-							<p class="bg-white border border-blue-600 rounded-md h-15 text-center">{{ patient.lastName }}
-								{{ patient.firstName }}</p>
+							<form class="flex flex-col" action="/patients/{{ patient.id }}" method="get">
+								<button class="bg-white border border-blue-600 rounded-md h-15">{{ patient.lastName }}
+									{{ patient.firstName }}</button>
+							</form>
 						{% endfor %}
 					</div>
 				</article>
