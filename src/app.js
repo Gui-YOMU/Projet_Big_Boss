@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import session from "express-session";
+import path from "path";
 import { companyRouter } from "./routers/companyRouter.js";
 import { employeeRouter } from "./routers/employeeRouter.js";
 import { carRouter } from "./routers/carRouter.js";
@@ -11,7 +12,7 @@ import { tourRouter } from "./routers/tourRouter.js";
 const port = process.env.PORT;
 
 const app = express();
-app.use(express.static("./public"));
+app.use('/static', express.static(path.resolve('public')));
 app.use(express.urlencoded({extended: true}));
 app.use(session({
     secret: process.env.SECRET,
