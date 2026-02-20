@@ -70,11 +70,15 @@
 				{% if patient.tourId %}
 					<p class="m-auto md:text-xl 2xl:text-2xl">{{ tour.name }}</p>
 				{% endif %}
-				<button class="2xl:text-2xl font-bold self-center m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="update" value="{{patient.id}}">Modifier</button>
+				{% if company %}
+					<button class="2xl:text-2xl font-bold self-center m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="update" value="{{patient.id}}">Modifier</button>
+				{% endif %}
 			</form>
-			<form class="flex flex-col" action="/patients/{{ patient.id }}/delete" method="post">
-				<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600">Supprimer</button>
-			</form>
+			{% if company %}
+				<form class="flex flex-col" action="/patients/{{ patient.id }}/delete" method="post">
+					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600">Supprimer</button>
+				</form>
+			{% endif %}
 		{% endif %}
 
 		{% if error %}
