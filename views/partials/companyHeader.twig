@@ -23,8 +23,30 @@
 			</ul>
 		</nav>
 	</header>
+{% elseif employee %}
+	<header class="bg-lime-100 relative flex justify-between items-center p-5 md:justify-between">
+		<div class="">
+			<a class="" href="/employees/dashboard">
+				<img class="border rounded-md w-20 object-contain m-auto md:w-25 lg:w-30 xl:w-40 2xl:w-50" src="/static/images/logo.png" alt="logo">
+			</a>
+		</div>
+		<h1 class="text-center text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">{{ employee.firstName }}  {{ employee.lastName }}</h1>
+		<button id="burger" class="md:hidden">
+			<img class="border rounded-md w-10 object-contain m-auto" src="/static/images/menu.jpg" alt="menu">
+		</button>
+		<nav id="nav" class="hidden md:flex pr-5 md:pr-10 2xl:pr-15">
+			<ul class="flex justify-center items-center gap-5">
+				<li>
+					<a class="text-sm lg:text-md xl:text-lg 2xl:text-xl hover:text-blue-600" href="/employees/dashboard">Tableau de bord</a>
+				</li>
+				<li>
+					<a class="text-sm lg:text-md xl:text-lg 2xl:text-xl font-bold text-red-500" href="/employees/logout">Déconnexion</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
 {% else %}
-	<header class="bg-blue-100 p-2 md:p-5">
+	<header class="bg-linear-to-r from-blue-100 to-lime-100 p-2 md:p-5">
 		<div>
 			<div>
 				<a href="/">

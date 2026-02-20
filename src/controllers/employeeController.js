@@ -4,6 +4,7 @@ import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension
 import { hashPasswordExtension } from "../../prisma/extensions/hashPasswordExtension.js";
 import { escapehtml } from "../services/escapehtml.js";
 import { formatDate } from "../services/formatDate.js";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient({ adapter })
   .$extends(checkRegexExtension)
@@ -324,4 +325,28 @@ export async function postEmployeeLogin(req, res) {
       error
     });
   }
+}
+
+export async function getEmployeeDashboard(req, res) {
+  try {
+    console.log(req.employee);
+    
+    res.render("pages/employeeDashboard.twig", {
+      title: "Dashboard",
+      employee: req.employee
+    });
+  } catch (error) {
+    console.error(error);
+    res.render("pages/employeeDashboard.twig", {
+      title: "Dashboard",
+      error
+    });
+  }
+}
+
+export async function getEmployeeLogout(req, res) {
+  if (req.session.employee) {
+    req.session.employee = null;
+  }
+  res.redirect("/employees/login");
 }
