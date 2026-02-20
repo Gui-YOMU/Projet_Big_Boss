@@ -311,8 +311,14 @@
   .table {
     display: table;
   }
+  .h-10 {
+    height: calc(var(--spacing) * 10);
+  }
   .h-15 {
     height: calc(var(--spacing) * 15);
+  }
+  .h-100 {
+    height: calc(var(--spacing) * 100);
   }
   .w-2xl {
     width: var(--container-2xl);

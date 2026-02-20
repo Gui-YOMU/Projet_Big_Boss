@@ -2,6 +2,7 @@ import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
 import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension.js";
 import { escapehtml } from "../services/escapehtml.js";
+import { getCoordinates } from "../services/geocoder.js";
 
 const prisma = new PrismaClient({ adapter }).$extends(checkRegexExtension);
 
@@ -56,6 +57,8 @@ export async function getPatientInformation(req, res) {
         id: parseInt(req.params.id),
       },
     });
+    let address = patient.city
+    const coordinates = await getCoordinates(address)
     let tour;
     if (patient.tourId) {
       tour = await prisma.tour.findUnique({
@@ -75,7 +78,8 @@ export async function getPatientInformation(req, res) {
       patient,
       company: req.company,
       update,
-      tour
+      tour,
+      coordinates
     });
   } catch (error) {
     console.error(error);
