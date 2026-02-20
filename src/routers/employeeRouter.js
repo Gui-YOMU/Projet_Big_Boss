@@ -6,17 +6,17 @@ export const employeeRouter = express.Router();
 
 employeeRouter.post("/add", companyAuthguard, addEmployee);
 
-employeeRouter.get("/:id", companyAuthguard, getEmployeeInformation);
-employeeRouter.post("/:id", companyAuthguard, getEmployeeInformation);
+employeeRouter.get("/employees/:id", companyAuthguard, getEmployeeInformation);
+employeeRouter.post("/employees/:id", companyAuthguard, getEmployeeInformation);
 
-employeeRouter.post("/:id/delete", companyAuthguard, deleteEmployee);
+employeeRouter.post("/employees/:id/delete", companyAuthguard, deleteEmployee);
 
-employeeRouter.post("/:id/update", companyAuthguard, updateEmployee);
+employeeRouter.post("/employees/:id/update", companyAuthguard, updateEmployee);
 
-employeeRouter.post("/:id/mission", companyAuthguard, giveMission);
+employeeRouter.post("/employees/:id/mission", companyAuthguard, giveMission);
 
-employeeRouter.post("/:id/give", companyAuthguard, giveCar);
-employeeRouter.post("/:id/take", companyAuthguard, takeCar);
+employeeRouter.post("/employees/:id/give", companyAuthguard, giveCar);
+employeeRouter.post("/employees/:id/take", companyAuthguard, takeCar);
 
-employeeRouter.get("/login", getEmployeeLogin);
-employeeRouter.post("/login", postEmployeeLogin);
+employeeRouter.get("/employees/login", getEmployeeLogin);
+employeeRouter.post("/employees/login", postEmployeeLogin);

@@ -21,11 +21,11 @@ app.use(session({
 }));
 
 app.use(companyRouter);
-app.use("/employees", employeeRouter);
-app.use("/cars", carRouter);
-app.use("/patients", patientRouter);
-app.use("/tours", tourRouter);
-app.use("/missions", missionRouter);
+app.use(employeeRouter);
+app.use(carRouter);
+app.use(patientRouter);
+app.use(tourRouter);
+app.use(missionRouter);
 
 app.listen(port, (error) => {
     error ? console.error(error) : console.log(`Connecté au serveur sur le port ${port}.`);
