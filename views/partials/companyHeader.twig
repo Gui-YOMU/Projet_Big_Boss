@@ -1,13 +1,13 @@
 {% if company %}
-	<header class="relative flex justify-between items-center p-5 md:justify-between">
-		<div>
+	<header class="bg-blue-100 relative flex justify-between items-center p-5 md:justify-between">
+		<div class="">
 			<a class="" href="/dashboard">
-				<img class="w-20 object-contain m-auto md:w-25 lg:w-30 xl:w-40 2xl:w-50" src="/static/images/logo.png" alt="logo">
+				<img class="border rounded-md w-20 object-contain m-auto md:w-25 lg:w-30 xl:w-40 2xl:w-50" src="/static/images/logo.png" alt="logo">
 			</a>
 		</div>
 		<h1 class="text-center text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">{{ company.name }}</h1>
 		<button id="burger" class="md:hidden">
-			<img class="w-10 object-contain m-auto" src="/static/images/menu.jpg" alt="menu">
+			<img class="border rounded-md w-10 object-contain m-auto" src="/static/images/menu.jpg" alt="menu">
 		</button>
 		<nav id="nav" class="hidden md:flex pr-5 md:pr-10 2xl:pr-15">
 			<ul class="flex justify-center items-center gap-5">
@@ -24,12 +24,14 @@
 		</nav>
 	</header>
 {% else %}
-	<div>
+	<header class="bg-blue-100 p-2 md:p-5">
 		<div>
-			<a class="" href="/">
-				<img class="w-50 object-contain m-auto" src="/static/images/logo.png" alt="logo">
-			</a>
+			<div>
+				<a href="/">
+					<img class="border rounded-md w-50 object-contain m-auto" src="/static/images/logo.png" alt="logo">
+				</a>
+			</div>
+			<h1 class="text-center text-3xl mt-1 md:mt-3">Bienvenue !</h1>
 		</div>
-		<h1 class="text-center text-3xl">Bienvenue !</h1>
-	</div>
+	</header>
 {% endif %}

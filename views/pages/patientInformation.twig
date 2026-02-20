@@ -1,7 +1,7 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	<main class="p-10">
+	<main class="p-10 bg-neutral-100">
 		{% if update %}
 			<form class="flex flex-col md:gap-3" action="/patients/{{patient.id}}/update" method="post">
 				<h2 class="text-2xl text-center pb-5 md:text-3xl 2xl:text-4xl">Modifier les informations du patient sélectionné</h2>

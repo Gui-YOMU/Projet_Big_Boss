@@ -292,3 +292,36 @@ export async function takeCar(req, res) {
     }
   }
 }
+
+export async function getEmployeeLogin(req, res) {
+  res.render("pages/employeeLogin.twig", {
+    title: "Connexion",
+  });
+}
+
+export async function postEmployeeLogin(req, res) {
+  const { mail, password } = req.body;
+  try {
+    const employee = await prisma.employee.findUnique({
+      where: {
+        mail: mail,
+      },
+    });
+    if (employee) {
+      if (bcrypt.compare(password, employee.password)) {
+        req.session.employee = employee.id;
+        res.redirect("/employees/dashboard");
+      } else {
+        throw new Error("Mot de passe incorrect.");
+      }
+    } else {
+      throw new Error("Cet employé n'existe pas en base de données.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.render("pages/employeeLogin.twig", {
+      title: "Connexion",
+      error
+    });
+  }
+}
