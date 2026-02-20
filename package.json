@@ -27,6 +27,8 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
+    "leaflet": "^1.9.4",
+    "node-geocoder": "^4.4.1",
     "nodemailer": "^8.0.1",
     "tailwindcss": "^4.1.18",
     "twig": "^1.17.1"
