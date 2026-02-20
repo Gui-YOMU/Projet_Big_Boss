@@ -1,6 +1,6 @@
 import express from "express";
 import { companyAuthguard } from "../services/companyAuthguard.js";
-import { addEmployee, deleteEmployee, getEmployeeDashboard, getEmployeeInformation, getEmployeeLogin, getEmployeeLogout, giveCar, giveMission, postEmployeeLogin, takeCar, updateEmployee } from "../controllers/employeeController.js";
+import { addEmployee, deleteEmployee, getEmployeeDashboard, getEmployeeInformation, getEmployeeLogin, getEmployeeLogout, getResetPassword, giveCar, giveMission, postEmployeeLogin, postResetPassword, takeCar, updateEmployee } from "../controllers/employeeController.js";
 import { employeeAuthguard } from "../services/employeeAuthguard.js";
 
 export const employeeRouter = express.Router();
@@ -9,6 +9,9 @@ employeeRouter.post("/employees/add", companyAuthguard, addEmployee);
 
 employeeRouter.get("/employees/login", getEmployeeLogin);
 employeeRouter.post("/employees/login", postEmployeeLogin);
+
+employeeRouter.get("/employees/reset", getResetPassword);
+employeeRouter.post("/employees/reset", postResetPassword);
 
 employeeRouter.get("/employees/logout", getEmployeeLogout);
 

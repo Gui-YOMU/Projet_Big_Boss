@@ -7,13 +7,14 @@
 		{% endif %}
 		<section class="border rounded-lg p-5 bg-green-600">
 			<h2 class="text-xl text-center 2xl:text-3xl mb-5">Mon véhicule</h2>
+			{% if employee.car %}
+				<p class="text-center md:text-xl 2xl:text-2xl">{{ employee.car.name }}
+					({{ employee.car.plate }})</p>
 
-			<p class="text-center md:text-xl 2xl:text-2xl">{{ employee.car.name }}
-				({{ employee.car.plate }})</p>
-
-			<form class="flex flex-col mt-2" action="/cars/{{ employee.car.id }}" method="get">
-				<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-green-400 hover:bg-green-200 shadow-sm shadow-green-600">Consulter</button>
-			</form>
+				<form class="flex flex-col mt-2" action="/cars/{{ employee.car.id }}" method="get">
+					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-green-400 hover:bg-green-200 shadow-sm shadow-green-600">Consulter</button>
+				</form>
+			{% endif %}
 		</section>
 
 		<section class="border rounded-lg p-5 bg-lime-200">

@@ -8,7 +8,10 @@ export const hashPasswordExtension = Prisma.defineExtension({
     company: {
       create: async ({ args, query }) => {
         try {
-          const hashedPassword = await bcrypt.hash(escapehtml(args.data.password), 10);
+          const hashedPassword = await bcrypt.hash(
+            escapehtml(args.data.password),
+            10,
+          );
           args.data.password = hashedPassword;
           return query(args);
         } catch (error) {
@@ -20,12 +23,30 @@ export const hashPasswordExtension = Prisma.defineExtension({
     employee: {
       create: async ({ args, query }) => {
         try {
-          const hashedPassword = await bcrypt.hash(escapehtml(args.data.password), 10);
+          const hashedPassword = await bcrypt.hash(
+            escapehtml(args.data.password),
+            10,
+          );
           args.data.password = hashedPassword;
           return query(args);
         } catch (error) {
           console.error(error);
           throw error;
+        }
+      },
+      update: async ({ args, query }) => {
+        if (args.data.password) {
+          try {
+            const hashedPassword = await bcrypt.hash(
+              escapehtml(args.data.password),
+              10,
+            );
+            args.data.password = hashedPassword;
+            return query(args);
+          } catch (error) {
+            console.error(error);
+            throw error;
+          }
         }
       },
     },

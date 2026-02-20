@@ -353,6 +353,9 @@
   .w-full {
     width: 100%;
   }
+  .w-xs {
+    width: var(--container-xs);
+  }
   .border-collapse {
     border-collapse: collapse;
   }
