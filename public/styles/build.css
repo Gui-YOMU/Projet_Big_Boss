@@ -809,6 +809,11 @@
       line-height: var(--tw-leading, var(--text-xl--line-height));
     }
   }
+  .lg\:grid {
+    @media (width >= 64rem) {
+      display: grid;
+    }
+  }
   .lg\:w-30 {
     @media (width >= 64rem) {
       width: calc(var(--spacing) * 30);
@@ -835,9 +840,19 @@
       display: flex;
     }
   }
+  .xl\:grid {
+    @media (width >= 80rem) {
+      display: grid;
+    }
+  }
   .xl\:w-40 {
     @media (width >= 80rem) {
       width: calc(var(--spacing) * 40);
+    }
+  }
+  .xl\:grid-cols-3 {
+    @media (width >= 80rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   .xl\:grid-cols-5 {
@@ -877,6 +892,26 @@
     @media (width >= 80rem) {
       font-size: var(--text-lg);
       line-height: var(--tw-leading, var(--text-lg--line-height));
+    }
+  }
+  .\32 xl\:col-span-2 {
+    @media (width >= 96rem) {
+      grid-column: span 2 / span 2;
+    }
+  }
+  .\32 xl\:row-span-2 {
+    @media (width >= 96rem) {
+      grid-row: span 2 / span 2;
+    }
+  }
+  .\32 xl\:row-span-4 {
+    @media (width >= 96rem) {
+      grid-row: span 4 / span 4;
+    }
+  }
+  .\32 xl\:grid {
+    @media (width >= 96rem) {
+      display: grid;
     }
   }
   .\32 xl\:w-2xl {
@@ -929,9 +964,24 @@
       width: calc(var(--spacing) * 120);
     }
   }
+  .\32 xl\:grid-cols-3 {
+    @media (width >= 96rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .\32 xl\:grid-cols-4 {
+    @media (width >= 96rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
   .\32 xl\:grid-cols-8 {
     @media (width >= 96rem) {
       grid-template-columns: repeat(8, minmax(0, 1fr));
+    }
+  }
+  .\32 xl\:grid-rows-4 {
+    @media (width >= 96rem) {
+      grid-template-rows: repeat(4, minmax(0, 1fr));
     }
   }
   .\32 xl\:pr-15 {
