@@ -1,8 +1,12 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	<main class="p-10">
-		<a class="w-full flex justify-center" href="/login">Je suis directeur d'établissement.</a>
-		{# <a href="/employee/login">Je suis employé d'établissement.</a> #}
+	<main class="p-10 bg-neutral-100">
+		<form class="w-fit m-auto" action="/login" method="get">
+			<button class="2xl:text-2xl font-bold m-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Je suis directeur d'établissement.</button>
+		</form>
+		<form class="w-fit m-auto" action="/employees/login" method="get">
+			<button class="2xl:text-2xl font-bold m-5 p-2 border rounded-lg w-fit bg-lime-400 hover:bg-lime-200 shadow-sm shadow-lime-600">Je suis employé d'établissement.</button>
+		</form>
 	</main>
 {% endblock %}

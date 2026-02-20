@@ -202,6 +202,10 @@ exports.Prisma.EmployeeOrderByRelevanceFieldEnum = {
   password: 'password'
 };
 
+exports.Prisma.MissionOrderByRelevanceFieldEnum = {
+  date: 'date'
+};
+
 exports.Prisma.PatientOrderByRelevanceFieldEnum = {
   lastName: 'lastName',
   firstName: 'firstName',

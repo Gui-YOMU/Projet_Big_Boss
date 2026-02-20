@@ -2,11 +2,14 @@ import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
 import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension.js";
 import { hashPasswordExtension } from "../../prisma/extensions/hashPasswordExtension.js";
+import { sendMailExtension } from "../../prisma/extensions/sendMailExtension.js";
 import { escapehtml } from "../services/escapehtml.js";
 import { formatDate } from "../services/formatDate.js";
+import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient({ adapter })
   .$extends(checkRegexExtension)
+  .$extends(sendMailExtension)
   .$extends(hashPasswordExtension);
 
 export async function addEmployee(req, res) {
@@ -290,5 +293,174 @@ export async function takeCar(req, res) {
         error: "Erreur lors de la désaffectation du véhicule.",
       });
     }
+  }
+}
+
+export async function getEmployeeLogin(req, res) {
+  res.render("pages/employeeLogin.twig", {
+    title: "Connexion",
+  });
+}
+
+export async function postEmployeeLogin(req, res) {
+  const { mail, password } = req.body;
+  try {
+    const employee = await prisma.employee.findUnique({
+      where: {
+        mail: mail,
+      },
+    });
+    if (employee) {
+      if (await bcrypt.compare(password, employee.password)) {
+        req.session.employee = employee.id;
+        res.redirect("/employees/dashboard");
+      } else {
+        throw new Error("Mot de passe incorrect.");
+      }
+    } else {
+      throw new Error("Cet employé n'existe pas en base de données.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.render("pages/employeeLogin.twig", {
+      title: "Connexion",
+      error,
+    });
+  }
+}
+
+export async function getEmployeeDashboard(req, res) {
+  try {
+    let mission;
+    if (req.body) {
+      const { date } = req.body;
+      try {
+        mission = await prisma.mission.findUnique({
+          where: {
+            employeeId_date: {
+              employeeId: req.employee.id,
+              date: date,
+            },
+          },
+        });
+      } catch (error) {
+        console.error(error);
+        res.render("pages/employeeDashboard.twig", {
+          title: "Dashboard",
+          error: "Erreur lors du changement de date de mission.",
+        });
+      }
+    } else {
+      let currentDate = new Date();
+      currentDate = formatDate(currentDate);
+      try {
+        mission = await prisma.mission.findUnique({
+          where: {
+            employeeId_date: {
+              employeeId: req.employee.id,
+              date: currentDate,
+            },
+          },
+        });
+      } catch (error) {
+        console.error(error);
+        res.render("pages/employeeDashboard.twig", {
+          title: "Dashboard",
+          error: "Erreur lors de l'affichage de la mission.",
+        });
+      }
+    }
+    let tour;
+    if (mission) {
+      mission.date = new Date(mission.date);
+      mission.date = mission.date.toLocaleDateString();
+      tour = await prisma.tour.findUnique({
+        where: {
+          id: mission.tourId,
+        },
+        select: {
+          id: true,
+          name: true,
+          patients: {
+            select: {
+              id: true,
+              lastName: true,
+              firstName: true,
+            },
+          },
+        },
+      });
+    }
+    res.render("pages/employeeDashboard.twig", {
+      title: "Dashboard",
+      employee: req.employee,
+      mission,
+      tour,
+    });
+  } catch (error) {
+    console.error(error);
+    res.render("pages/employeeDashboard.twig", {
+      title: "Dashboard",
+      error,
+    });
+  }
+}
+
+export async function getEmployeeLogout(req, res) {
+  if (req.session.employee) {
+    req.session.employee = null;
+  }
+  res.redirect("/employees/login");
+}
+
+export async function getResetPassword(req, res) {
+  res.render("pages/resetEmployeePassword.twig", {
+    title: "Reset",
+  });
+}
+
+export async function postResetPassword(req, res) {
+  const { mail, initialPassword, newPassword, confirmPassword } = req.body;
+  try {
+    if (newPassword === confirmPassword) {
+      const employee = await prisma.employee.findUnique({
+        where: {
+          mail: mail,
+        },
+      });
+      if (employee) {
+        if (bcrypt.compare(initialPassword, employee.password)) {
+          try {
+            await prisma.employee.update({
+              where: {
+                id: employee.id,
+              },
+              data: {
+                password: newPassword,
+              },
+            });
+            res.redirect("/employees/login");
+          } catch (error) {
+            console.error(error);
+            res.render("pages/resetEmployeePassword.twig", {
+              title: "Reset",
+              error: "Erreur lors du changement de mot de passe.",
+            });
+          }
+        } else {
+          throw new Error("Mot de passe initial incorrect.");
+        }
+      } else {
+        throw new Error("Cet employé n'existe pas en base de données.");
+      }
+    } else {
+      throw new Error("Erreur dans la confirmation du mot de passe.");
+    }
+  } catch (error) {
+    console.error(error);
+    res.render("pages/resetEmployeePassword.twig", {
+      title: "Reset",
+      error,
+    });
   }
 }

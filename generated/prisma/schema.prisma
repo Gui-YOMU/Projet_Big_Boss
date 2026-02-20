@@ -44,13 +44,15 @@ enum Gender {
 
 model Mission {
   id         Int      @id @default(autoincrement())
-  date       DateTime @db.Date
+  date       String
   tourId     Int
   tour       Tour     @relation(fields: [tourId], references: [id])
   employeeId Int
   employee   Employee @relation(fields: [employeeId], references: [id])
   companyId  Int
   company    Company  @relation(fields: [companyId], references: [id])
+
+  @@unique([employeeId, date])
 }
 
 model Patient {

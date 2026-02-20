@@ -1,0 +1,41 @@
+{% extends "../layouts/company.twig" %}
+
+{% block main %}
+	<main class="p-10 flex flex-col gap-10 bg-neutral-100">
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
+		<section class="border rounded-lg p-5 bg-green-600">
+			<h2 class="text-xl text-center 2xl:text-3xl mb-5">Mon véhicule</h2>
+			{% if employee.car %}
+				<p class="text-center md:text-xl 2xl:text-2xl">{{ employee.car.name }}
+					({{ employee.car.plate }})</p>
+
+				<form class="flex flex-col mt-2" action="/cars/{{ employee.car.id }}" method="get">
+					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-green-400 hover:bg-green-200 shadow-sm shadow-green-600">Consulter</button>
+				</form>
+			{% endif %}
+		</section>
+
+		<section class="border rounded-lg p-5 bg-lime-200">
+			<div class="flex flex-col gap-5 mb-3">
+				<h2 class="text-xl text-center 2xl:text-3xl">Mission du
+					{{ mission.date }}</h2>
+				<form class="flex flex-col" action="/employees/dashboard" method="post">
+					<input class="bg-white text-sm md:text-lg 2xl:text-2xl m-auto border border-lime-600 rounded-lg w-40 md:w-60 2xl:w-80 pl-1 shadow-sm shadow-lime-300" type="date" id="date" name="date">
+					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-lime-400 hover:bg-lime-200 shadow-sm shadow-lime-600">Modifier</button>
+				</form>
+			</div>
+
+			<h3 class="text-center md:text-xl 2xl:text-2xl mb-3">{{ tour.name }}</h3>
+			<div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:flex">
+				{% for patient in tour.patients %}
+					<form class="flex flex-col w-50 m-auto gap-5" action="/patients/{{ patient.id }}" method="get">
+						<button class="font-bold bg-white border border-lime-600 rounded-md h-15">{{ patient.lastName }}
+							{{ patient.firstName }}</button>
+					</form>
+				{% endfor %}
+			</div>
+		</section>
+	</main>
+{% endblock %}

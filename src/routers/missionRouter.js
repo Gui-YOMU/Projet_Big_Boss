@@ -4,4 +4,4 @@ import { giveMission} from "../controllers/missionController.js";
 
 export const missionRouter = express.Router();
 
-missionRouter.post("/add", companyAuthguard, giveMission);
+missionRouter.post("/missions/add", companyAuthguard, giveMission);

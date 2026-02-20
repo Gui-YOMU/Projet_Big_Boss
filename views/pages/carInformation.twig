@@ -1,7 +1,7 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	<main class="p-10">
+	<main class="p-10 bg-neutral-100">
 		{% if update %}
 			<form class="flex flex-col md:gap-3" action="/cars/{{car.id}}/update" method="post">
 				<h2 class="text-2xl text-center pb-5 md:text-3xl 2xl:text-4xl">Modifier les informations du véhicule sélectionné</h2>
@@ -25,36 +25,41 @@
 				<p class="m-auto md:text-xl 2xl:text-2xl">{{ car.name }}</p>
 				<h3 class="font-bold m-auto md:text-2xl 2xl:text-3xl">Immatriculation du véhicule :</h3>
 				<p class="m-auto md:text-xl 2xl:text-2xl">{{ car.plate }}</p>
-				<button class="2xl:text-2xl font-bold self-center m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="update" value="{{car.id}}">Modifier</button>
+				{% if company %}
+					<button class="2xl:text-2xl font-bold self-center m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" name="update" value="{{car.id}}">Modifier</button>
+				{% endif %}
 			</form>
-			<form class="flex flex-col" action="/cars/{{ car.id }}/delete" method="post">
-				<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600">Supprimer</button>
-			</form>
+			{% if company %}
+				<form class="flex flex-col" action="/cars/{{ car.id }}/delete" method="post">
+					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600">Supprimer</button>
+				</form>
+			{% endif %}
 		{% endif %}
 
 		{% if error %}
 			<p>{{ error }}</p>
 		{% endif %}
 
-		<section class="flex flex-col">
-		<h2 class="mt-5 text-2xl text-center md:text-3xl 2xl:text-4xl">Ce véhicule est actuellement affecté à :
+		{% if company %}
+			<section class="flex flex-col">
+				<h2 class="mt-5 text-2xl text-center md:text-3xl 2xl:text-4xl">Ce véhicule est actuellement affecté à :
 				</h2>
-			{% if car.employeeId %}
-				<p class="text-center md:text-xl 2xl:text-2xl">{{ employee.lastName }}
-					{{ employee.firstName }}</p>
-				<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveEmployee">Attribuer à un autre employé</button>
-				<form class="flex flex-col" action="/employees/{{employee.id}}/take" method="post">
-					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600" name="car" value="{{ car.id }}">Retirer de l'employé</button>
-				</form>
-			{% else %}
-				<button class="2xl:text-2xl font-bold m-auto mt-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveEmployee">Attribuer à un employé</button>
-			{% endif %}
-		</section>
-
+				{% if car.employeeId %}
+					<p class="text-center md:text-xl 2xl:text-2xl">{{ employee.lastName }}
+						{{ employee.firstName }}</p>
+					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveEmployee">Attribuer à un autre employé</button>
+					<form class="flex flex-col" action="/employees/{{employee.id}}/take" method="post">
+						<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600" name="car" value="{{ car.id }}">Retirer de l'employé</button>
+					</form>
+				{% else %}
+					<button class="2xl:text-2xl font-bold m-auto mt-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveEmployee">Attribuer à un employé</button>
+				{% endif %}
+			</section>
+		{% endif %}
 
 		<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="employeeModal">
 			<form class="flex flex-col items-center md:gap-3" action="/cars/{{car.id}}/give" method="post">
-			<button class="2xl:text-2xl font-bold self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
+				<button class="2xl:text-2xl font-bold self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 closeModal" type="button">X</button>
 				<label class="m-auto md:text-lg 2xl:text-3xl" for="employeeId">Attribuer à un employé</label>
 				<select class="text-sm md:text-lg 2xl:text-2xl m-auto mt-2 mb-2 border border-blue-600 rounded-lg w-60 md:w-80 2xl:w-100 pl-1 shadow-sm shadow-blue-300" name="employeeId" id="employeeId">
 					<option value="">--Sélectionnez un employé--</option>

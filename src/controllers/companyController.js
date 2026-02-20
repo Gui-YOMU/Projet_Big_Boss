@@ -59,7 +59,7 @@ export async function postCompanyLogin(req, res) {
       },
     });
     if (company) {
-      if (bcrypt.compare(password, company.password)) {
+      if (await bcrypt.compare(password, company.password)) {
         req.session.company = company.id;
         res.redirect("/dashboard");
       } else {

@@ -1,7 +1,7 @@
 {% extends "../layouts/company.twig" %}
 
 {% block main %}
-	<main class="p-5 md:p-10">
+	<main class="p-5 md:p-10 bg-neutral-100">
 		<h2 class="text-center pb-5 md:text-2xl 2xl:text-4xl">Inscrivez votre établissement !</h2>
 		<form class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 m-auto p-5 w-2xs flex flex-col md:gap-4 md:w-md 2xl:w-2xl" action="/signin" method="post">
 			<div class="flex flex-col">
@@ -22,12 +22,12 @@
 			<div class="flex flex-col">
 				<label class="m-auto md:text-xl 2xl:text-2xl" for="password">Mot de passe :
 				</label>
-				<input class="text-sm md:text-lg 2xl:text-2xl m-auto border border-blue-600 rounded-lg w-50 md:w-80 2xl:w-120 pl-1 shadow-sm shadow-blue-300" type="password" id="password" name="password" placeholder="12+ majuscule(s), minuscule(s) et chiffre(s)">
+				<input class="text-sm md:text-lg 2xl:text-2xl m-auto border border-blue-600 rounded-lg w-60 md:w-90 2xl:w-120 pl-1 shadow-sm shadow-blue-300" type="password" id="password" name="password" placeholder="12+ majuscule(s), minuscule(s) et chiffre(s)">
 			</div>
 			<div class="flex flex-col">
 				<label class="m-auto md:text-xl 2xl:text-2xl" for="confirmPassword">Confirmez votre mot de passe :
 				</label>
-				<input class="text-sm md:text-lg 2xl:text-2xl m-auto border border-blue-600 rounded-lg w-50 md:w-80 2xl:w-120 pl-1 shadow-sm shadow-blue-300" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe">
+				<input class="text-sm md:text-lg 2xl:text-2xl m-auto border border-blue-600 rounded-lg w-60 md:w-90 2xl:w-120 pl-1 shadow-sm shadow-blue-300" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe">
 			</div>
 			<button class="2xl:text-2xl font-bold m-auto mt-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">S'inscrire</button>
 		</form>
