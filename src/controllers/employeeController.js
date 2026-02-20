@@ -322,24 +322,81 @@ export async function postEmployeeLogin(req, res) {
     console.error(error);
     res.render("pages/employeeLogin.twig", {
       title: "Connexion",
-      error
+      error,
     });
   }
 }
 
 export async function getEmployeeDashboard(req, res) {
   try {
-    console.log(req.employee);
-    
+    let mission;
+    if (req.body) {
+      const { date } = req.body;
+      try {
+        mission = await prisma.mission.findUnique({
+          where: {
+            employeeId_date: {
+              employeeId: req.employee.id,
+              date: date,
+            },
+          },
+        });
+      } catch (error) {
+        console.error(error);
+        res.render("pages/employeeDashboard.twig", {
+          title: "Dashboard",
+          error: "Erreur lors du changement de date de mission.",
+        });
+      }
+    } else {
+      let currentDate = new Date();
+      currentDate = formatDate(currentDate);
+      try {
+        mission = await prisma.mission.findUnique({
+          where: {
+            employeeId_date: {
+              employeeId: req.employee.id,
+              date: currentDate,
+            },
+          },
+        });
+      } catch (error) {
+        console.error(error);
+        res.render("pages/employeeDashboard.twig", {
+          title: "Dashboard",
+          error: "Erreur lors de l'affichage de la mission.",
+        });
+      }
+    }
+    mission.date = new Date(mission.date);
+    mission.date = mission.date.toLocaleDateString();
+    const tour = await prisma.tour.findUnique({
+      where: {
+        id: mission.tourId,
+      },
+      select: {
+        id: true,
+        name: true,
+        patients: {
+          select: {
+            id: true,
+            lastName: true,
+            firstName: true
+          }
+        }
+      }
+    });
     res.render("pages/employeeDashboard.twig", {
       title: "Dashboard",
-      employee: req.employee
+      employee: req.employee,
+      mission,
+      tour,
     });
   } catch (error) {
     console.error(error);
     res.render("pages/employeeDashboard.twig", {
       title: "Dashboard",
-      error
+      error,
     });
   }
 }

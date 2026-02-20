@@ -13,6 +13,7 @@ employeeRouter.post("/employees/login", postEmployeeLogin);
 employeeRouter.get("/employees/logout", getEmployeeLogout);
 
 employeeRouter.get("/employees/dashboard", employeeAuthguard, getEmployeeDashboard);
+employeeRouter.post("/employees/dashboard", employeeAuthguard, getEmployeeDashboard);
 
 employeeRouter.get("/employees/:id", companyAuthguard, getEmployeeInformation);
 employeeRouter.post("/employees/:id", companyAuthguard, getEmployeeInformation);

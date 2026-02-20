@@ -4600,7 +4600,7 @@ export namespace Prisma {
 
   export type MissionMinAggregateOutputType = {
     id: number | null
-    date: Date | null
+    date: string | null
     tourId: number | null
     employeeId: number | null
     companyId: number | null
@@ -4608,7 +4608,7 @@ export namespace Prisma {
 
   export type MissionMaxAggregateOutputType = {
     id: number | null
-    date: Date | null
+    date: string | null
     tourId: number | null
     employeeId: number | null
     companyId: number | null
@@ -4751,7 +4751,7 @@ export namespace Prisma {
 
   export type MissionGroupByOutputType = {
     id: number
-    date: Date
+    date: string
     tourId: number
     employeeId: number
     companyId: number
@@ -4813,7 +4813,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      date: Date
+      date: string
       tourId: number
       employeeId: number
       companyId: number
@@ -5190,7 +5190,7 @@ export namespace Prisma {
    */
   interface MissionFieldRefs {
     readonly id: FieldRef<"Mission", 'Int'>
-    readonly date: FieldRef<"Mission", 'DateTime'>
+    readonly date: FieldRef<"Mission", 'String'>
     readonly tourId: FieldRef<"Mission", 'Int'>
     readonly employeeId: FieldRef<"Mission", 'Int'>
     readonly companyId: FieldRef<"Mission", 'Int'>
@@ -7729,6 +7729,13 @@ export namespace Prisma {
   export type EmployeeOrderByRelevanceFieldEnum = (typeof EmployeeOrderByRelevanceFieldEnum)[keyof typeof EmployeeOrderByRelevanceFieldEnum]
 
 
+  export const MissionOrderByRelevanceFieldEnum: {
+    date: 'date'
+  };
+
+  export type MissionOrderByRelevanceFieldEnum = (typeof MissionOrderByRelevanceFieldEnum)[keyof typeof MissionOrderByRelevanceFieldEnum]
+
+
   export const PatientOrderByRelevanceFieldEnum: {
     lastName: 'lastName',
     firstName: 'firstName',
@@ -8005,7 +8012,7 @@ export namespace Prisma {
     OR?: MissionWhereInput[]
     NOT?: MissionWhereInput | MissionWhereInput[]
     id?: IntFilter<"Mission"> | number
-    date?: DateTimeFilter<"Mission"> | Date | string
+    date?: StringFilter<"Mission"> | string
     tourId?: IntFilter<"Mission"> | number
     employeeId?: IntFilter<"Mission"> | number
     companyId?: IntFilter<"Mission"> | number
@@ -8023,21 +8030,23 @@ export namespace Prisma {
     tour?: TourOrderByWithRelationInput
     employee?: EmployeeOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
+    _relevance?: MissionOrderByRelevanceInput
   }
 
   export type MissionWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    employeeId_date?: MissionEmployeeIdDateCompoundUniqueInput
     AND?: MissionWhereInput | MissionWhereInput[]
     OR?: MissionWhereInput[]
     NOT?: MissionWhereInput | MissionWhereInput[]
-    date?: DateTimeFilter<"Mission"> | Date | string
+    date?: StringFilter<"Mission"> | string
     tourId?: IntFilter<"Mission"> | number
     employeeId?: IntFilter<"Mission"> | number
     companyId?: IntFilter<"Mission"> | number
     tour?: XOR<TourScalarRelationFilter, TourWhereInput>
     employee?: XOR<EmployeeScalarRelationFilter, EmployeeWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-  }, "id">
+  }, "id" | "employeeId_date">
 
   export type MissionOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8057,7 +8066,7 @@ export namespace Prisma {
     OR?: MissionScalarWhereWithAggregatesInput[]
     NOT?: MissionScalarWhereWithAggregatesInput | MissionScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Mission"> | number
-    date?: DateTimeWithAggregatesFilter<"Mission"> | Date | string
+    date?: StringWithAggregatesFilter<"Mission"> | string
     tourId?: IntWithAggregatesFilter<"Mission"> | number
     employeeId?: IntWithAggregatesFilter<"Mission"> | number
     companyId?: IntWithAggregatesFilter<"Mission"> | number
@@ -8404,7 +8413,7 @@ export namespace Prisma {
   }
 
   export type MissionCreateInput = {
-    date: Date | string
+    date: string
     tour: TourCreateNestedOneWithoutMissionsInput
     employee: EmployeeCreateNestedOneWithoutMissionsInput
     company: CompanyCreateNestedOneWithoutMissionsInput
@@ -8412,14 +8421,14 @@ export namespace Prisma {
 
   export type MissionUncheckedCreateInput = {
     id?: number
-    date: Date | string
+    date: string
     tourId: number
     employeeId: number
     companyId: number
   }
 
   export type MissionUpdateInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tour?: TourUpdateOneRequiredWithoutMissionsNestedInput
     employee?: EmployeeUpdateOneRequiredWithoutMissionsNestedInput
     company?: CompanyUpdateOneRequiredWithoutMissionsNestedInput
@@ -8427,7 +8436,7 @@ export namespace Prisma {
 
   export type MissionUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tourId?: IntFieldUpdateOperationsInput | number
     employeeId?: IntFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
@@ -8435,19 +8444,19 @@ export namespace Prisma {
 
   export type MissionCreateManyInput = {
     id?: number
-    date: Date | string
+    date: string
     tourId: number
     employeeId: number
     companyId: number
   }
 
   export type MissionUpdateManyMutationInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
   }
 
   export type MissionUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tourId?: IntFieldUpdateOperationsInput | number
     employeeId?: IntFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
@@ -8939,17 +8948,6 @@ export namespace Prisma {
     _max?: NestedEnumGenderNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type TourScalarRelationFilter = {
     is?: TourWhereInput
     isNot?: TourWhereInput
@@ -8958,6 +8956,17 @@ export namespace Prisma {
   export type EmployeeScalarRelationFilter = {
     is?: EmployeeWhereInput
     isNot?: EmployeeWhereInput
+  }
+
+  export type MissionOrderByRelevanceInput = {
+    fields: MissionOrderByRelevanceFieldEnum | MissionOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type MissionEmployeeIdDateCompoundUniqueInput = {
+    employeeId: number
+    date: string
   }
 
   export type MissionCountOrderByAggregateInput = {
@@ -8996,20 +9005,6 @@ export namespace Prisma {
     tourId?: SortOrder
     employeeId?: SortOrder
     companyId?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type TourNullableScalarRelationFilter = {
@@ -9485,10 +9480,6 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type TourUpdateOneRequiredWithoutMissionsNestedInput = {
     create?: XOR<TourCreateWithoutMissionsInput, TourUncheckedCreateWithoutMissionsInput>
     connectOrCreate?: TourCreateOrConnectWithoutMissionsInput
@@ -9825,31 +9816,6 @@ export namespace Prisma {
     _max?: NestedEnumGenderNullableFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type CompanyCreateWithoutCarsInput = {
     name: string
     siret: string
@@ -10085,14 +10051,14 @@ export namespace Prisma {
   }
 
   export type MissionCreateWithoutCompanyInput = {
-    date: Date | string
+    date: string
     tour: TourCreateNestedOneWithoutMissionsInput
     employee: EmployeeCreateNestedOneWithoutMissionsInput
   }
 
   export type MissionUncheckedCreateWithoutCompanyInput = {
     id?: number
-    date: Date | string
+    date: string
     tourId: number
     employeeId: number
   }
@@ -10241,7 +10207,7 @@ export namespace Prisma {
     OR?: MissionScalarWhereInput[]
     NOT?: MissionScalarWhereInput | MissionScalarWhereInput[]
     id?: IntFilter<"Mission"> | number
-    date?: DateTimeFilter<"Mission"> | Date | string
+    date?: StringFilter<"Mission"> | string
     tourId?: IntFilter<"Mission"> | number
     employeeId?: IntFilter<"Mission"> | number
     companyId?: IntFilter<"Mission"> | number
@@ -10276,14 +10242,14 @@ export namespace Prisma {
   }
 
   export type MissionCreateWithoutEmployeeInput = {
-    date: Date | string
+    date: string
     tour: TourCreateNestedOneWithoutMissionsInput
     company: CompanyCreateNestedOneWithoutMissionsInput
   }
 
   export type MissionUncheckedCreateWithoutEmployeeInput = {
     id?: number
-    date: Date | string
+    date: string
     tourId: number
     companyId: number
   }
@@ -10692,14 +10658,14 @@ export namespace Prisma {
   }
 
   export type MissionCreateWithoutTourInput = {
-    date: Date | string
+    date: string
     employee: EmployeeCreateNestedOneWithoutMissionsInput
     company: CompanyCreateNestedOneWithoutMissionsInput
   }
 
   export type MissionUncheckedCreateWithoutTourInput = {
     id?: number
-    date: Date | string
+    date: string
     employeeId: number
     companyId: number
   }
@@ -10843,7 +10809,7 @@ export namespace Prisma {
 
   export type MissionCreateManyCompanyInput = {
     id?: number
-    date: Date | string
+    date: string
     tourId: number
     employeeId: number
   }
@@ -10952,48 +10918,48 @@ export namespace Prisma {
   }
 
   export type MissionUpdateWithoutCompanyInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tour?: TourUpdateOneRequiredWithoutMissionsNestedInput
     employee?: EmployeeUpdateOneRequiredWithoutMissionsNestedInput
   }
 
   export type MissionUncheckedUpdateWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tourId?: IntFieldUpdateOperationsInput | number
     employeeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type MissionUncheckedUpdateManyWithoutCompanyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tourId?: IntFieldUpdateOperationsInput | number
     employeeId?: IntFieldUpdateOperationsInput | number
   }
 
   export type MissionCreateManyEmployeeInput = {
     id?: number
-    date: Date | string
+    date: string
     tourId: number
     companyId: number
   }
 
   export type MissionUpdateWithoutEmployeeInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tour?: TourUpdateOneRequiredWithoutMissionsNestedInput
     company?: CompanyUpdateOneRequiredWithoutMissionsNestedInput
   }
 
   export type MissionUncheckedUpdateWithoutEmployeeInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tourId?: IntFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
   export type MissionUncheckedUpdateManyWithoutEmployeeInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     tourId?: IntFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
   }
@@ -11011,7 +10977,7 @@ export namespace Prisma {
 
   export type MissionCreateManyTourInput = {
     id?: number
-    date: Date | string
+    date: string
     employeeId: number
     companyId: number
   }
@@ -11049,21 +11015,21 @@ export namespace Prisma {
   }
 
   export type MissionUpdateWithoutTourInput = {
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     employee?: EmployeeUpdateOneRequiredWithoutMissionsNestedInput
     company?: CompanyUpdateOneRequiredWithoutMissionsNestedInput
   }
 
   export type MissionUncheckedUpdateWithoutTourInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     employeeId?: IntFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
   }
 
   export type MissionUncheckedUpdateManyWithoutTourInput = {
     id?: IntFieldUpdateOperationsInput | number
-    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    date?: StringFieldUpdateOperationsInput | string
     employeeId?: IntFieldUpdateOperationsInput | number
     companyId?: IntFieldUpdateOperationsInput | number
   }

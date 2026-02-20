@@ -5,10 +5,12 @@ const prisma = new PrismaClient({ adapter });
 
 export async function giveMission(req, res) {
   const { date, tourId, employeeId } = req.body;
+  console.log(date);
+  
   try {
     await prisma.mission.create({
       data: {
-        date: new Date(date),
+        date: date,
         tourId: parseInt(tourId),
         employeeId: parseInt(employeeId),
         companyId: req.company.id,
