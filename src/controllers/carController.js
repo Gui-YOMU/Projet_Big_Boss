@@ -69,6 +69,8 @@ export async function getCarInformation(req, res) {
     } else {
       update = null;
     }
+    console.log(req.company);
+    
     res.render("pages/carInformation.twig", {
       title: "Véhicule",
       employee,

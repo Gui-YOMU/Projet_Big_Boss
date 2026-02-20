@@ -16,14 +16,16 @@ export async function companyAuthguard(req, res, next) {
                         select: {
                             id: true,
                             lastName: true,
-                            firstName: true
+                            firstName: true,
+                            car: true
                         }
                     },
                     cars: {
                         select: {
                             id: true,
                             name: true,
-                            plate: true
+                            plate: true,
+                            employeeId: true
                         }
                     },
                     patients: {
