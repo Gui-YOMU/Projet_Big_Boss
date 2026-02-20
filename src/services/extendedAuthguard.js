@@ -20,6 +20,20 @@ export async function extendedAuthguard(req, res, next) {
         where: {
           id: req.session.company,
         },
+        select: {
+          id: true,
+          name: true,
+          siret: true,
+          ceo: true,
+          employees: {
+            select: {
+              id: true,
+              lastName: true,
+              firstName: true,
+              car: true,
+            },
+          },
+        },
       });
       if (company) {
         req.company = company;
