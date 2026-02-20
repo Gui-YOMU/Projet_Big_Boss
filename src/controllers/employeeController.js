@@ -2,12 +2,14 @@ import { PrismaClient } from "../../generated/prisma/client.js";
 import { adapter } from "../../prisma/adapter.js";
 import { checkRegexExtension } from "../../prisma/extensions/checkRegexExtension.js";
 import { hashPasswordExtension } from "../../prisma/extensions/hashPasswordExtension.js";
+import { sendMailExtension } from "../../prisma/extensions/sendMailExtension.js";
 import { escapehtml } from "../services/escapehtml.js";
 import { formatDate } from "../services/formatDate.js";
 import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient({ adapter })
   .$extends(checkRegexExtension)
+  .$extends(sendMailExtension)
   .$extends(hashPasswordExtension);
 
 export async function addEmployee(req, res) {

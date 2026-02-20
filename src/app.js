@@ -8,17 +8,24 @@ import { carRouter } from "./routers/carRouter.js";
 import { patientRouter } from "./routers/patientRouter.js";
 import { missionRouter } from "./routers/missionRouter.js";
 import { tourRouter } from "./routers/tourRouter.js";
+import { transporter } from "./transporter.js";
 
 const port = process.env.PORT;
 
 const app = express();
-app.use('/static', express.static(path.resolve('public')));
-app.use(express.urlencoded({extended: true}));
-app.use(session({
+app.use("/static", express.static(path.resolve("public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
     secret: process.env.SECRET,
     resave: true,
-    saveUninitialized: true
-}));
+    saveUninitialized: true,
+  }),
+);
+
+transporter.verify((error) => {
+  error ? console.error(error) : console.log("Serveur prêt pour les mails.");
+});
 
 app.use(companyRouter);
 app.use(employeeRouter);
@@ -28,5 +35,7 @@ app.use(tourRouter);
 app.use(missionRouter);
 
 app.listen(port, (error) => {
-    error ? console.error(error) : console.log(`Connecté au serveur sur le port ${port}.`);
-})
+  error
+    ? console.error(error)
+    : console.log(`Connecté au serveur sur le port ${port}.`);
+});
