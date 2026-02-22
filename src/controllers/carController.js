@@ -180,9 +180,7 @@ export async function takeCar(req, res) {
   try {
     await prisma.car.update({
       data: {
-        employeeId: {
-          disconnect: true,
-        },
+        employeeId: null
       },
       where: {
         id: parseInt(req.params.id),
