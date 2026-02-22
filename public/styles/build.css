@@ -217,6 +217,9 @@
   .static {
     position: static;
   }
+  .top-2 {
+    top: calc(var(--spacing) * 2);
+  }
   .top-20 {
     top: calc(var(--spacing) * 20);
   }
