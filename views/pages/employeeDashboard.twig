@@ -3,8 +3,9 @@
 {% block main %}
 	<main class="p-10 flex flex-col gap-10 bg-neutral-100">
 		{% if error %}
-			<p>{{ error }}</p>
+			<p class="w-fit text-center mb-5 m-auto border border-red-600 bg-white text-red-600 font-bold">{{ error }}</p>
 		{% endif %}
+
 		<section class="border rounded-lg p-5 bg-green-600">
 			<h2 class="text-xl text-center 2xl:text-3xl mb-5">Mon véhicule</h2>
 			{% if employee.car %}

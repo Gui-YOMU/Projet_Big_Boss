@@ -2,6 +2,10 @@
 
 {% block main %}
 	<main class="p-10 bg-neutral-100">
+		{% if error %}
+			<p class="w-fit text-center mb-5 m-auto border border-red-600 bg-white text-red-600 font-bold">{{ error }}</p>
+		{% endif %}
+
 		<h2 class="text-center pb-5 md:text-2xl 2xl:text-4xl">Connectez-vous pour accéder à votre dashboard !</h2>
 		<form class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 m-auto p-10 w-2xs flex flex-col md:gap-4 md:w-md 2xl:w-2xl" action="/login" method="post">
 			<div class="flex flex-col">
@@ -16,9 +20,6 @@
 			</div>
 			<button class="2xl:text-2xl font-bold m-auto mt-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Se connecter</button>
 		</form>
-		{% if error %}
-			<p>{{ error }}</p>
-		{% endif %}
 
 		<p class="pt-5 text-center md:text-xl 2xl:text-2xl">Pas encore inscrit ? Cliquez
 			<a class="font-bold text-blue-500 underline" href="/signin">ici</a>

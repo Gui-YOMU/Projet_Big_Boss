@@ -2,6 +2,10 @@
 
 {% block main %}
 	<main class="p-10 bg-neutral-100">
+		{% if error %}
+			<p class="w-fit text-center mb-5 m-auto border border-red-600 bg-white text-red-600 font-bold">{{ error }}</p>
+		{% endif %}
+
 		{% if update %}
 			<form class="flex flex-col md:gap-3" action="/cars/{{car.id}}/update" method="post">
 				<h2 class="text-2xl text-center pb-5 md:text-3xl 2xl:text-4xl">Modifier les informations du véhicule sélectionné</h2>
@@ -34,10 +38,6 @@
 					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600">Supprimer</button>
 				</form>
 			{% endif %}
-		{% endif %}
-
-		{% if error %}
-			<p>{{ error }}</p>
 		{% endif %}
 
 		{% if company %}
