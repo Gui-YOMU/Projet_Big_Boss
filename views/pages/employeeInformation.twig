@@ -74,8 +74,7 @@
 			{% if employee.car %}
 				<p class="text-center md:text-xl 2xl:text-2xl">{{ employee.car.name }}
 					({{ employee.car.plate }})</p>
-				<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveCar">Attribuer un autre véhicule</button>
-				<form class="flex flex-col" action="/employees/{{employee.id}}/take" method="post">
+				<form class="flex flex-col" action="/cars/{{employee.car.id}}/take" method="post">
 					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600" name="employee" value="{{employee.id}}">Retirer le véhicule</button>
 				</form>
 			{% else %}
