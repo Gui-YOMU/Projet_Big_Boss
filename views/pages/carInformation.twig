@@ -48,7 +48,7 @@
 					<p class="text-center md:text-xl 2xl:text-2xl">{{ employee.lastName }}
 						{{ employee.firstName }}</p>
 					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveEmployee">Attribuer à un autre employé</button>
-					<form class="flex flex-col" action="/employees/{{employee.id}}/take" method="post">
+					<form class="flex flex-col" action="/cars/{{car.id}}/take" method="post">
 						<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600" name="car" value="{{ car.id }}">Retirer de l'employé</button>
 					</form>
 				{% else %}
