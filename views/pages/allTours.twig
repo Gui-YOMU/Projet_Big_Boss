@@ -2,6 +2,10 @@
 
 {% block main %}
 	<main class="p-10 bg-neutral-100">
+		{% if error %}
+			<p class="absolute border border-red-600 bg-white text-red-600 font-bold">{{ error }}</p>
+		{% endif %}
+
 		<section class="flex flex-col gap-5">
 			<div class="flex justify-center items-center">
 				<h2 class="text-xl text-center 2xl:text-3xl">Liste des tournées</h2>
@@ -21,9 +25,9 @@
 				</article>
 			{% endfor %}
 
-			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="tourModal">	
+			<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="tourModal">
 				<form class="flex flex-col items-center md:gap-3" action="/tours/add" method="post">
-				<button class="2xl:text-2xl self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 font-bold closeModal">X</button>
+					<button class="2xl:text-2xl self-end border rounded-md w-8 mt-2 mr-2 bg-red-400 hover:bg-red-200 shadow-sm shadow-red-600 font-bold closeModal">X</button>
 					<label class="m-auto md:text-lg 2xl:text-3xl" for="name">Nom de la tournée</label>
 					<input class="text-sm md:text-lg 2xl:text-2xl m-auto border border-blue-600 rounded-lg w-70 md:w-90 2xl:w-100 pl-1 shadow-sm shadow-blue-300" type="text" id="name" name="name">
 					<button class="2xl:text-2xl font-bold m-auto mt-2 mb-2 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">Créer la tournée</button>

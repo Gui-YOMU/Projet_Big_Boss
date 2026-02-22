@@ -2,6 +2,10 @@
 
 {% block main %}
 	<main class="p-5 md:p-10 bg-neutral-100">
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
+
 		<h2 class="text-center pb-5 md:text-2xl 2xl:text-4xl">Inscrivez votre établissement !</h2>
 		<form class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 m-auto p-5 w-2xs flex flex-col md:gap-4 md:w-md 2xl:w-2xl" action="/signin" method="post">
 			<div class="flex flex-col">
@@ -31,9 +35,6 @@
 			</div>
 			<button class="2xl:text-2xl font-bold m-auto mt-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600">S'inscrire</button>
 		</form>
-		{% if error %}
-			<p>{{ error }}</p>
-		{% endif %}
 
 		<p class="pt-5 text-center md:text-xl 2xl:text-2xl">Déjà inscrit ? Cliquez
 			<a class="font-bold text-blue-500 underline" href="/login">ici</a>

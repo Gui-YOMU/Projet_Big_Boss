@@ -2,6 +2,9 @@
 
 {% block main %}
 	<main class="p-10 bg-neutral-100">
+		{% if error %}
+			<p>{{ error }}</p>
+		{% endif %}
 
 		{% if update %}
 			<form class="flex flex-col md:gap-3" action="/employees/{{employee.id}}/update" method="post">
@@ -81,10 +84,6 @@
 				<button class="2xl:text-2xl font-bold m-auto mt-5 p-2 border rounded-lg w-fit bg-blue-400 hover:bg-blue-200 shadow-sm shadow-blue-600" id="giveCar">Attribuer un véhicule</button>
 			{% endif %}
 		</section>
-
-		{% if error %}
-			<p>{{ error }}</p>
-		{% endif %}
 
 		<dialog class="border border-blue-600 rounded-lg shadow-sm shadow-blue-300 absolute m-auto w-2xl" id="carModal">
 			<form class="flex flex-col items-center md:gap-3" action="/employees/{{employee.id}}/give" method="post">
